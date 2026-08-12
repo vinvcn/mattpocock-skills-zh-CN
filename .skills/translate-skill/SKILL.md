@@ -112,6 +112,8 @@ consistent with existing repo tone
 
 Keep common engineering terms in English when the English term is standard among developers or when translating it would reduce clarity.
 
+The per-term ruling (keep English vs translate) for every recurring term is registered in the top-level [`TRANSLATE_GLOSSARY.md`](../../TRANSLATE_GLOSSARY.md). Before translating, consult it and render each term exactly as it rules, so the same term is never written differently across files. If you meet a recurring term the glossary does not yet cover, keep the keep-English default and flag it so it can be registered.
+
 ## Workflow for a single file
 
 When translating one file:
