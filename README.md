@@ -18,11 +18,10 @@
 
 ## 参与改进翻译（Contributing）
 
-欢迎帮忙提升翻译质量。本仓库会持续从上游同步，你沉淀的**术语裁决、翻译约定和既有译文会在每次未来同步中复用**——贡献不是一次性的。三种参与方式：
+欢迎帮忙提升翻译质量。本仓库会持续从上游同步，你沉淀的**术语裁决、翻译约定和既有译文会在每次未来同步中复用**——贡献不是一次性的。两种参与方式：
 
 - **扩充术语表**：在 [`TRANSLATE_GLOSSARY.md`](./TRANSLATE_GLOSSARY.md) 为 recurring 术语登记译法裁决（最高杠杆，也是最好的 good-first-issue）。
-- **翻译同步增量**：用 `node scripts/sync-worklist.mjs <上次同步SHA> upstream/main` 生成只含变更内容的工作清单，认领条目翻译。
-- **审计翻漏**：用 `node scripts/audit-coverage.mjs` 定位正文残留的英文句子与未登记术语，并修复。
+- **翻译同步增量**：用 `node scripts/sync-worklist.mjs` 生成只含上游变更内容的工作清单（上次同步点记录在 `.upstream-sha`），认领条目翻译。
 
 完整指南见 [`CONTRIBUTING.md`](./CONTRIBUTING.md)；可认领的任务见带 `translation` label 的 issues。
 
