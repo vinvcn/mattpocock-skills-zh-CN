@@ -16,6 +16,16 @@
 
 本仓库的最近一次同步翻译由 Claude（Anthropic）执行，并由仓库维护者通过 PR 纳入 `main`。翻译策略是 **skill-guided content localization**：把上游 `mattpocock/skills` 当作英文内容来源，只翻译自然语言说明，保留目录名、skill name、frontmatter key、命令、代码块、路径、URL、package/tool/API identifiers 和行为关键 labels。用户可见的安装路径统一保持为 `vinvcn/mattpocock-skills-zh-CN`。
 
+## 参与改进翻译（Contributing）
+
+欢迎帮忙提升翻译质量。本仓库会持续从上游同步，你沉淀的**术语裁决、翻译约定和既有译文会在每次未来同步中复用**——贡献不是一次性的。三种参与方式：
+
+- **扩充术语表**：在 [`TRANSLATE_GLOSSARY.md`](./TRANSLATE_GLOSSARY.md) 为 recurring 术语登记译法裁决（最高杠杆，也是最好的 good-first-issue）。
+- **翻译同步增量**：用 `node scripts/sync-worklist.mjs <上次同步SHA> upstream/main` 生成只含变更内容的工作清单，认领条目翻译。
+- **审计翻漏**：用 `node scripts/audit-coverage.mjs` 定位正文残留的英文句子与未登记术语，并修复。
+
+完整指南见 [`CONTRIBUTING.md`](./CONTRIBUTING.md)；可认领的任务见带 `translation` label 的 issues。
+
 ## 30 秒安装
 
 ```bash
