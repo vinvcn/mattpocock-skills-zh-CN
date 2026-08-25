@@ -31,7 +31,7 @@ node scripts/audit-english.mjs
 git diff --check
 ```
 
-确认结果后，更新 `.skills/upstream-sync.json` 的 `lastSyncedUpstreamCommit`、`lastSyncDate` 和 `lastLocalCommit`，再创建 `codex/sync-upstream-<short-sha>` 分支并提交。默认只提交本地 branch；是否 push 或创建 PR 由维护者决定，不自动合并。
+确认结果后，更新 `.skills/upstream-sync.json` 的 `lastSyncedUpstreamCommit`、`lastSyncDate` 和 `lastLocalCommit`，再创建 `codex/sync-upstream-<short-sha>` 分支并提交。将分支推送到有权限的 fork，并向 `vinvcn/mattpocock-skills-zh-CN` 的 `main` 创建 PR；自动流程不直接修改目标仓库的 `main`，也不自动合并。
 
 ## 本地安装副本
 
@@ -42,3 +42,5 @@ node scripts/install-local-skills.mjs
 ```
 
 脚本会先备份 `/Users/hcc/.agents/skills`，只同步本仓库对应的 skill，保留其他个人 skills，并把 `.agents/.skill-lock.json` 的这些条目改为中文版维护副本的 `local` 来源。预览可用 `node scripts/install-local-skills.mjs --dry-run`。
+
+当前 PR 流程使用 `HCC06/mattpocock-skills-zh-CN` fork，目标为 `vinvcn/mattpocock-skills-zh-CN`。如果未来更换 GitHub 账号或获得目标仓库直接写权限，只需调整 remote 和自动任务提示，不改变翻译流程。

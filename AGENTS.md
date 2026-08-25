@@ -22,4 +22,4 @@ Skills 按 bucket folder 组织在 `skills/` 下：
 
 从 `mattpocock/skills` 刷新上游内容时，改文件前先使用 `.skills/translate-skill/SKILL.md`。本仓库采用 skill-guided content localization，不做 Git fork-sync：保留简体中文本地化身份，安装命令保持指向 `vinvcn/mattpocock-skills-zh-CN`，不要导入上游 repository-management state。
 
-日常同步从 `docs/maintenance/codex-sync.md` 开始，先运行 `node scripts/sync-upstream.mjs`，再由 Codex 翻译变更并运行 `scripts/check-translation.mjs`、`scripts/audit-english.mjs` 和 `git diff --check`。同步状态记录在 `.skills/upstream-sync.json`。验证通过后，用 `node scripts/install-local-skills.mjs` 更新全局本地副本；该脚本会先备份目标目录。
+日常同步从 `docs/maintenance/codex-sync.md` 开始，先运行 `node scripts/sync-upstream.mjs`，再由 Codex 翻译变更并运行 `scripts/check-translation.mjs`、`scripts/audit-english.mjs` 和 `git diff --check`。同步状态记录在 `.skills/upstream-sync.json`。验证通过后推送 fork 分支并创建 PR，不自动合并；同时用 `node scripts/install-local-skills.mjs` 更新全局本地副本，该脚本会先备份目标目录。
