@@ -8,7 +8,7 @@ disable-model-invocation: true
 
 把 plan、spec 或 conversation 拆成一组 **tickets**：tracer-bullet vertical slices，每个 ticket 都声明 **block** 它的 tickets。
 
-Issue tracker 和 triage label vocabulary 应该已经提供；如果没有，运行 `/setup-matt-pocock-skills`。
+Issue tracker 和 triage label vocabulary 应该已经提供；如果没有，请让用户运行 `/setup-matt-pocock-skills`。
 
 ## Process
 

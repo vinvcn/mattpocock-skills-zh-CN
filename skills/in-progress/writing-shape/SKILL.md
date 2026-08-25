@@ -1,6 +1,6 @@
 ---
 name: writing-shape
-description: Writing, exploit——把原始素材塑造成文章，一段一段地推进。
+description: "Writing, exploit：把原始素材塑造成文章，一段一段地推进。"
 disable-model-invocation: true
 ---
 

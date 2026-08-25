@@ -10,7 +10,7 @@ disable-model-invocation: true
 
 这个命令由项目的 domain model 提供信息，并建立在共享 design vocabulary 上：
 
-- 运行 `/codebase-design` skill，获取 architecture vocabulary（**module**、**interface**、**depth**、**seam**、**adapter**、**leverage**、**locality**）及其 principles（deletion test、"the interface is the test surface"、"one adapter = hypothetical seam, two = real"）。每条建议都准确使用这些术语，不要漂移到 "component"、"service"、"API" 或 "boundary"。
+- 调用 Skill 工具并指定 `codebase-design`，获取 architecture vocabulary（**module**、**interface**、**depth**、**seam**、**adapter**、**leverage**、**locality**）及其 principles（deletion test、"the interface is the test surface"、"one adapter = hypothetical seam, two = real"）。每条建议都准确使用这些术语，不要漂移到 "component"、"service"、"API" 或 "boundary"。
 - `CONTEXT.md` 中的 domain language 会为好的 seams 命名；`docs/adr/` 中的 ADRs 记录这个命令不应重新争论的 decisions。
 
 ## Process
@@ -61,11 +61,11 @@ Report 末尾包含 **Top recommendation** section：你会先处理哪个 candi
 
 ### 3. Grilling loop
 
-用户选中 candidate 后，运行 `/grilling` skill，与用户走完 decision tree：constraints、dependencies、deepened module 的形状、seam 后面放什么、哪些 tests 能保留。
+用户选中 candidate 后，调用 Skill 工具并指定 `grilling`，与用户走完 decision tree：constraints、dependencies、deepened module 的形状、seam 后面放什么、哪些 tests 能保留。
 
-Side effects 随 decisions 成形而内联发生；运行 `/domain-modeling` skill，让 domain model 保持最新：
+Side effects 随 decisions 成形而内联发生；调用 Skill 工具并指定 `domain-modeling`，让 domain model 保持最新：
 
 - **要用 `CONTEXT.md` 中不存在的概念命名 deepened module？** 把 term 加入 `CONTEXT.md`。若文件不存在，按需创建。
 - **对话中打磨了 fuzzy term？** 立即更新 `CONTEXT.md`。
 - **用户以 load-bearing reason 拒绝了 candidate？** 提议写 ADR，表述为：_"Want me to record this as an ADR so future architecture reviews don't re-suggest it?"_ 只有当未来 explorer 确实需要该 reason 以避免再次提出同样建议时才提议；跳过临时原因（"not worth it right now"）和显而易见原因。
-- **想探索 deepened module 的 alternative interfaces？** 运行 `/codebase-design` skill，并使用其中的 design-it-twice parallel sub-agent pattern。
+- **想探索 deepened module 的 alternative interfaces？** 调用 Skill 工具并指定 `codebase-design`，并使用其中的 design-it-twice parallel sub-agent pattern。

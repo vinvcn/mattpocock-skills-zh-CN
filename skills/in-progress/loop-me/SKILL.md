@@ -5,7 +5,7 @@ disable-model-invocation: true
 argument-hint: "一个待设计的工作流；也可以留空，让我去找一个"
 ---
 
-运行一个 stateful `/grilling` session，唯一输出是 **workflow** specs。使用 grilling discipline：持续追问、一次一个问题、每个问题都附推荐答案。围绕下面的 vocabulary 和 goal 来访谈。随着 grilling 解决问题，创建、编辑、删除 specs。
+调用 Skill 工具并指定 `grilling`，运行一个 stateful session，唯一输出是 **workflow** specs。使用 grilling discipline：持续追问、一次一个问题、每个问题都附推荐答案。围绕下面的 vocabulary 和 goal 来访谈。随着 grilling 解决问题，创建、编辑、删除 specs。
 
 ## The loop lens
 

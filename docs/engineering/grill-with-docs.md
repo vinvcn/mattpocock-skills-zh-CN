@@ -40,12 +40,6 @@
 
 glossary 才是重点。Domain language 才是这个 skill 真正在构建的东西——项目自己的词，一次性达成共识，这样你、agent 和你的同事就不再需要反复付出代价去重新推导它们。值得说明的是，并非所有人都同意这能换来 agent 的性能：最尖锐的公开反驳是，一个术语和它的平白英文展开式对 [model](https://www.aihero.dev/ai-coding-dictionary/model) 来说得到同样的结果，而这套词汇真正压缩的是共享它的那些人类之间的沟通。这种解读仍然让 glossary 有价值；它只是挪动了价值所在。
 
-## It assumes one writer
-
-这些有状态的输出假设由单一个人来策展。一个两人开发团队在同一个 repo 里跑了四个月，报告称在抽样的已合并 PR 中约有 20% 出现 state drift，其中 ADR 引用和 README 声明是漂移最严重的面——刻意人工策展的文档比 agent 的记忆漂移得更厉害。修剪过期文档并没有坚持住；同一轮清扫没几天就又过期了。真正有效的是彻底删除 shadow state，并在 CI 里加一个确定性的引用与链接 linter。
-
-相关：在同一个 repo 里跨无关变更反复运行这个 skill，往往会积累出混杂主题的文档，因为没有任何东西把一次 session 的输出与另一次的分开。这两点目前都未在 skill 中修复。
-
 ## Common questions
 
 **我应该用这个还是 `/wayfinder`？**

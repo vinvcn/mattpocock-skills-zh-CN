@@ -1,6 +1,6 @@
 ---
 name: writing-fragments
-description: Writing, explore——挖掘原始 fragments，暂不施加任何结构。
+description: "Writing, explore：挖掘原始 fragments，暂不施加任何结构。"
 disable-model-invocation: true
 ---
 
