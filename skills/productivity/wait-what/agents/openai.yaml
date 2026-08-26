@@ -1,5 +1,5 @@
 interface:
-  display_name: "等一下"
+  display_name: "Wait What"
   short_description: "重新表述一遍——更简单，带上我缺失的 context"
 policy:
   allow_implicit_invocation: false

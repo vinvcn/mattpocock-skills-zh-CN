@@ -1,5 +1,5 @@
 interface:
-  display_name: "分诊"
+  display_name: "Triage"
   short_description: "按 triage roles 推进 issues"
 policy:
   allow_implicit_invocation: false

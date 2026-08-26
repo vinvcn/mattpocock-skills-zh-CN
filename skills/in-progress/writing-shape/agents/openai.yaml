@@ -1,5 +1,5 @@
 interface:
-  display_name: "塑造文章"
+  display_name: "Writing Shape"
   short_description: "把原始素材塑造成文章"
 policy:
   allow_implicit_invocation: false

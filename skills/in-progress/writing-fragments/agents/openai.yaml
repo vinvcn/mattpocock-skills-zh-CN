@@ -1,5 +1,5 @@
 interface:
-  display_name: "写作片段"
+  display_name: "Writing Fragments"
   short_description: "挖掘原始写作片段"
 policy:
   allow_implicit_invocation: false
