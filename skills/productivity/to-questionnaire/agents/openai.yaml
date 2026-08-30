@@ -1,5 +1,5 @@
 interface:
-  display_name: "转为 Questionnaire"
+  display_name: "To Questionnaire"
   short_description: "把问题预先整理成供他人回答的文档"
 policy:
   allow_implicit_invocation: false

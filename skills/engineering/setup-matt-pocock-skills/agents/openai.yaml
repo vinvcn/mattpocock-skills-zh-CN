@@ -1,5 +1,5 @@
 interface:
-  display_name: "配置 Matt Pocock Skills"
+  display_name: "Setup Matt Pocock Skills"
   short_description: "为 skills 配置仓库"
 policy:
   allow_implicit_invocation: false

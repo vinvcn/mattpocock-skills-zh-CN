@@ -1,3 +1,3 @@
 interface:
-  display_name: "持续追问"
+  display_name: "Grilling"
   short_description: "每次一轮问题地对思路做压力测试"

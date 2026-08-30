@@ -1,5 +1,5 @@
 interface:
-  display_name: "写作节拍"
+  display_name: "Writing Beats"
   short_description: "把原始素材组装成节拍"
 policy:
   allow_implicit_invocation: false

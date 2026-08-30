@@ -1,3 +1,3 @@
 interface:
-  display_name: "为 agent 写作"
+  display_name: "Writing for Agents"
   short_description: "编写 agent 消费的文档"

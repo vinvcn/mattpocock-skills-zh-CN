@@ -1,5 +1,5 @@
 interface:
-  display_name: "循环访谈我"
+  display_name: "Loop Me"
   short_description: "为你要构建的 workflows 编写 spec"
 policy:
   allow_implicit_invocation: false

@@ -1,5 +1,5 @@
 interface:
-  display_name: "带文档追问"
+  display_name: "Grill with Docs"
   short_description: "追问设计并编写相关文档"
 policy:
   allow_implicit_invocation: false
