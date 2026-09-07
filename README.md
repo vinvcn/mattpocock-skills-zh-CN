@@ -18,10 +18,11 @@
 
 ## 参与改进翻译（Contributing）
 
-欢迎帮忙提升翻译质量。本仓库会持续从上游同步，你沉淀的**术语裁决、翻译约定和既有译文会在每次未来同步中复用**——贡献不是一次性的。两种参与方式：
+欢迎帮忙提升翻译质量。本仓库会持续从上游同步，你沉淀的**术语裁决、翻译约定和既有译文会在每次未来同步中复用**——贡献不是一次性的。一致性底线是二元的：[`TRANSLATE_GLOSSARY.md`](./TRANSLATE_GLOSSARY.md) 表内术语保留英文、表外一律翻译，没有中间态。参与方式：
 
-- **扩充术语表**：在 [`TRANSLATE_GLOSSARY.md`](./TRANSLATE_GLOSSARY.md) 为 recurring 术语登记译法裁决（最高杠杆，也是最好的 good-first-issue）。
-- **翻译同步增量**：用 `node scripts/sync-worklist.mjs` 生成只含上游变更内容的工作清单（上次同步点记录在 `.upstream-sha`），认领条目翻译。
+- **提交翻译请求**：上游同步增量（`node scripts/sync-worklist.mjs` 生成工作清单，上次同步点记录在 `.upstream-sha`），或正文残留的未翻译片段；提交后变成 `translation` ticket。
+- **承接翻译 ticket**：翻译中遇到需保留英文的 recurring 术语，登记进术语表并**由 owner 批准**（术语表门禁）。
+- **提出 / 执行移除术语**：移除某词会触发全仓库扫描、把每个出现处都翻译掉；只要不引发 scope creep，owner 可批准。
 
 完整指南见 [`CONTRIBUTING.md`](./CONTRIBUTING.md)；可认领的任务见带 `translation` label 的 issues。
 
