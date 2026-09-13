@@ -1,0 +1,26 @@
+{
+  "name": "@vinvcn/dsh-mattpocock-skills-zh",
+  "version": "1.2.3",
+  "description": "Matt Pocock skills 中文本地化的 DeepSeek Harness 插件包：以 zh- 前缀暴露全部 35 个可用技能。",
+  "private": false,
+  "publishConfig": { "access": "public" },
+  "type": "module",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js",
+    "./package.json": "./package.json"
+  },
+  "files": ["index.js", "cordis.patch.yml", "LICENSE", "README.md", "skills"],
+  "engines": { "node": "^22.19.0 || >=24" },
+  "license": "MIT",
+  "repository": { "type": "git", "url": "git+https://github.com/vinvcn/mattpocock-skills-zh-CN.git", "directory": "dsh-plugin" },
+  "dsh": { "bundle": { "patch": "./cordis.patch.yml" } },
+  "dependencies": { "yaml": "^2.4.2" },
+  "scripts": {
+    "build": "node scripts/copy-skills.mjs",
+    "verify": "node scripts/verify.mjs",
+    "test": "node --test",
+    "version:check": "node scripts/verify-version-sync.mjs",
+    "prepack": "npm run version:check && npm run build && npm test && npm run verify"
+  }
+}
