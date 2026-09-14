@@ -47,12 +47,27 @@ dsh --profile web --dump-config | grep 'id: mattpocock-skills-zh'
 
 ## 维护者发布
 
+发布前先登录 npm（账号需有权发布 `@vinvcn` scope）：
+
+```sh
+npm login
+npm whoami
 ```
-npm --prefix dsh-plugin run build
-npm --prefix dsh-plugin publish
+
+然后构建并发布：
+
+```sh
+(cd dsh-plugin && npm run build)
+(cd dsh-plugin && npm publish)
 ```
 
 `private:false` 与 `publishConfig.access: public` 使该包可以公开发布。
+
+发布成功后无需 tarball，直接安装：
+
+```sh
+dsh plugin --profile web add @vinvcn/dsh-mattpocock-skills-zh
+```
 
 ## 局限
 
