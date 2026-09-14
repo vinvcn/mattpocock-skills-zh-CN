@@ -31,6 +31,21 @@ npx skills@latest add vinvcn/mattpocock-skills-zh-CN
 /plugin install mattpocock-skills@mattpocock
 ```
 
+或者在 **DeepSeek Harness（dsh）** 中安装为插件：
+
+```sh
+dsh plugin --profile web add @vinvcn/dsh-mattpocock-skills-zh
+```
+
+该包尚未发布到 npm 时，先用打包出的 tarball 安装：
+
+```sh
+(cd dsh-plugin && npm pack)
+dsh plugin --profile web add "$PWD/dsh-plugin/vinvcn-dsh-mattpocock-skills-zh-1.2.3.tgz"
+```
+
+安装后以 `/zh-<name>` 调用任意技能，例如 `/zh-grilling`。详见 [`dsh-plugin/README.md`](./dsh-plugin/README.md)。
+
 [![skills.sh](https://skills.sh/b/vinvcn/mattpocock-skills-zh-CN)](https://skills.sh/vinvcn/mattpocock-skills-zh-CN)
 
 <p>
