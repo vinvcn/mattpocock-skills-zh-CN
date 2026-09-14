@@ -6,13 +6,36 @@
 
 技能以 `zh-<name>` 命名，并以 `/zh-<name>` 调用，例如 `/zh-grilling`。
 
-## 安装
+## 30 秒安装
 
-```
-dsh plugin --profile web add @vinvcn/dsh-mattpocock-skills-zh
-```
+前提：机器上已能运行 dsh（`dsh --version` 有输出）。尚未安装时，先用 `npx @deepseek-ai/dsh web` 启动一次。
 
-安装后即可在会话中调用全部技能。
+1. 把插件装进 web profile：
+
+   ```sh
+   dsh plugin --profile web add @vinvcn/dsh-mattpocock-skills-zh
+   ```
+
+   该包尚未发布到 npm 之前，用打包出的 tarball 绝对路径代替包名：
+
+   ```sh
+   (cd dsh-plugin && npm pack)
+   dsh plugin --profile web add "$PWD/dsh-plugin/vinvcn-dsh-mattpocock-skills-zh-1.2.3.tgz"
+   ```
+
+2. 启动 dsh：
+
+   ```sh
+   dsh web
+   ```
+
+3. 在会话中输入 `/zh-grilling`（或任意 `/zh-<name>`）即可调用。
+
+确认插件已挂载：
+
+```sh
+dsh --profile web --dump-config | grep 'id: mattpocock-skills-zh'
+```
 
 ## 构建期改写
 
