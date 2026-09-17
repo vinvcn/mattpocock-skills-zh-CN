@@ -1,12 +1,12 @@
 ---
 name: to-spec
-description: 把当前对话转成 spec 并发布到项目 issue tracker——不做访谈，只综合已经讨论的内容。
+description: "把当前对话转成 spec 并发布到项目 issue tracker——不做访谈，只综合已经讨论的内容。"
 disable-model-invocation: true
 ---
 
 这个 skill 使用当前 conversation context 和 codebase understanding 产出 spec。**不要**访谈用户，只综合你已经知道的内容。
 
-Issue tracker 和 triage label vocabulary 应该已经提供给你；如果没有，运行 `/setup-matt-pocock-skills`。
+Issue tracker 和 triage label vocabulary 应该已经提供给你；如果没有，请让用户运行 `/setup-matt-pocock-skills`。
 
 ## Process
 

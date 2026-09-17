@@ -1,0 +1,8 @@
+{
+  "upstreamRepo": "https://github.com/mattpocock/skills.git",
+  "remote": "upstream",
+  "ref": "main",
+  "lastSyncedUpstreamCommit": "959a8e9f1edc3adbe2f7e3054bb6fbefa6696260",
+  "lastSyncDate": "2026-09-17",
+  "lastLocalCommit": "fb3bd36"
+}

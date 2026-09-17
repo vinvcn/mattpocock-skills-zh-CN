@@ -22,7 +22,7 @@ skill 说重新讲一遍**那个**，不是"刚才那条消息"。让你迷失�
 
 正文复用了你全局 `CLAUDE.md` 和项目 `CONTEXT.md` 里已有的 leading words。ASD-STE100 Simplified Technical English 设定语域。ubiquitous language 提供名词。skill、`CLAUDE.md` 和 `CONTEXT.md` 抓取的是同一批 [tokens](https://www.aihero.dev/ai-coding-dictionary/token)，所以调用它并不是一条新指令。它是对 agent 早已同意的一条指令的提醒。
 
-如果你没有 `CONTEXT.md`，skill 仍然有效。你只是失去领域词汇那一半。
+如果你没有 `CONTEXT.md`，或者没有由 `CONTEXT-MAP.md` 指向正确 context 的文件，skill 仍然有效。你只是失去领域词汇那一半。
 
 ## It's working if
 

@@ -8,7 +8,7 @@ disable-model-invocation: true
 
 让 repo 中每个 package 成为 **deep module**：用小 interface 隐藏大量 behaviour。Package 的 public surface 是其 **entry points**（package root 中的 files），所有 subfolders 都隐藏。这个 skill 会安装 [dependency-cruiser](https://github.com/sverweij/dependency-cruiser)，加入强制只能通过 entry points 访问的 rules，并证明这些 rules 确实会拦截违规。
 
-Vocabulary（deep module、interface、seam、depth）来自 `/codebase-design` skill；整个过程都使用它的语言。
+Vocabulary（deep module、interface、seam、depth）来自调用 Skill 工具并指定 `codebase-design`；整个过程都使用它的语言。
 
 ## The shape this enforces
 

@@ -22,7 +22,7 @@ Map 是这个 repo issue tracker 上一个带 `wayfinder:map` label 的单独 is
 
 Map 是 **index**，不是 store。它列出已经做出的 decisions，并指向保存细节的 tickets；一个 decision 只存在一个地方，也就是它的 ticket。因此 map 不复述细节，只给 gist 和 link。
 
-**Map、child tickets、blocking 和 frontier queries 的物理表达方式取决于 tracker。** Issue tracker 应该已经提供；如果没有，运行 `/setup-matt-pocock-skills`。查阅 tracker doc 的 "Wayfinding operations" section，了解这个 repo 如何表达它们。如果没有 tracker，默认使用 local-markdown tracker。
+**Map、child tickets、blocking 和 frontier queries 的物理表达方式取决于 tracker。** Issue tracker 应该已经提供；如果没有，请让用户运行 `/setup-matt-pocock-skills`。查阅 tracker doc 的 "Wayfinding operations" section，了解这个 repo 如何表达它们。如果没有 tracker，默认使用 local-markdown tracker。
 
 ### The map body
 
@@ -74,9 +74,9 @@ Blocking 使用 tracker 的 **native** dependency relationship；这很重要，
 
 每个 ticket 都是 **HITL**（human in the loop，与能代表自己发言的人类一起处理）或 **AFK**（agent 独立驱动）。HITL ticket 只能通过 live exchange 解决；agent 绝不能替人类回答。一旦 grilling agent 自问自答，它就已经坏了。
 
-- **Research**（AFK）：阅读 documentation、third-party APIs，或 knowledge bases 等 local resources，找出某项 decision 正在等待的事实。交给 `/research` **subagent** 解决。当需要当前 working directory 外的知识时使用。
-- **Prototype**（HITL）：通过 cheap、rough、concrete artifact 提高讨论 fidelity，例如 outline、rough take、stub，或通过 /prototype skill 写 UI/logic code。Prototype 作为 asset 链接。当核心问题是 "how should it look" 或 "how should it behave" 时使用。
-- **Grilling**（HITL）：Conversation。默认类型。始终调用 /grilling 和 /domain-modeling skills。
+- **Research**（AFK）：阅读 documentation、third-party APIs，或 knowledge bases 等 local resources，找出某项 decision 正在等待的事实。交给调用 Skill 工具并指定 `research` 的 **subagent** 解决。当需要当前 working directory 外的知识时使用。
+- **Prototype**（HITL）：通过 cheap、rough、concrete artifact 提高讨论 fidelity，例如 outline、rough take、stub，或通过调用 Skill 工具并指定 `prototype` 写 UI/logic code。Prototype 作为 asset 链接。当核心问题是 "how should it look" 或 "how should it behave" 时使用。
+- **Grilling**（HITL）：Conversation。默认类型。始终调用两次 Skill 工具，分别指定 `grilling` 和 `domain-modeling`。
 - **Task**（HITL 或 AFK）：做出 _decision_ 前必须完成、但本身没有要 decide、prototype 或 research 的 manual work。例如注册服务以评估其 API、配置访问权限、移动数据以看清 shape。这是唯一会 _do_ 而不是 decide 的类型；它凭借解锁 decision 而存在，而不是交付 destination。Agent 能独立完成时采用 AFK，否则给人类精确 checklist（HITL）。工作完成后 resolved；答案记录做了什么，以及后续 tickets 依赖的事实（credentials location、new URLs、row counts 等）。
 
 ## Fog of war
@@ -108,11 +108,11 @@ Out-of-scope work 永远不会 graduate；frontier 会停在 destination。只�
 
 用户带着松散想法调用。
 
-1. **Name the destination.** 运行 `/grilling` 和 `/domain-modeling` session，确定 map 要找到的 spec、decision 或 change。Destination 固定 scope，所以先解决它。
+1. **Name the destination.** 调用两次 Skill 工具，分别指定 `grilling` 和 `domain-modeling`，确定 map 要找到的 spec、decision 或 change。Destination 固定 scope，所以先解决它。
 2. **Map the frontier.** 再 grill 一次，这次采用 **breadth-first**：覆盖整个空间，而不是深入一条 thread，浮现 open decisions 和现在可开始的 first steps。**如果没有 fog**，说明路径已经清晰，整个 journey 一个 session 就能完成，你不需要 map。停止并询问用户如何继续。
 3. **Create the map**（label `wayfinder:map`）：填好 Destination 和 Notes，Decisions-so-far 为空，把 fog 勾勒进 **Not yet specified**。
 4. **Create the tickets you can specify now** 作为 map 的 child issues，然后第二遍再 wire blocking edges（issues 需要 ids 后才能互相引用）。Wiring 会把它们分成 frontier 和 blocked；现在还说不清的都留在 **Not yet specified**。
-5. **启动 research subagents。** 对刚创建的每个 `research` ticket，并行启动一个 `/research` subagent 解决它；findings 保存在一次性的 `research/<name>` branch，并从 ticket 留下 context pointer。
+5. **启动 research subagents。** 对刚创建的每个 `research` ticket，并行启动一个调用 Skill 工具并指定 `research` 的 subagent 解决它；findings 保存在一次性的 `research/<name>` branch，并从 ticket 留下 context pointer。
 6. 停止。Charting 是一个 session 的工作；不要在这个 session 中手动 resolve tickets。
 
 ### Work through the map
@@ -121,7 +121,7 @@ Out-of-scope work 永远不会 graduate；frontier 会停在 destination。只�
 
 1. 加载 **map**：低分辨率视图，而不是每个 ticket body。
 2. 选择 ticket。用户点名就用它；否则按顺序拿第一个 frontier ticket。**Claim it**：任何工作开始前先 assign 给自己。
-3. Resolve it：按需 **zoom**，只在需要时获取相关或已关闭 ticket 的完整 body；调用 `## Notes` block 提到的 skills。不确定时用 `/grilling` 和 `/domain-modeling`。
+3. Resolve it：按需 **zoom**，只在需要时获取相关或已关闭 ticket 的完整 body；调用 `## Notes` block 提到的 skills。不确定时调用两次 Skill 工具，分别指定 `grilling` 和 `domain-modeling`。
 4. 记录 resolution：把答案作为 **resolution comment** 发布，**close** issue，并向 map 的 Decisions-so-far 追加 context pointer。
 5. 添加新浮现的 tickets（create-then-wire）；把答案已经说清的 fog graduate 成 ticket，并从 **Not yet specified** 清掉每个已升级 patch，让它只作为新 ticket 存在。如果答案表明这个或其他 ticket 位于 destination 之外，将其 **rule out of scope**，而不是当作路线的一部分解决。如果这个 decision 使 map 其他部分失效，更新或删除那些 tickets。
 

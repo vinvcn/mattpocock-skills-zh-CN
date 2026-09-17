@@ -1,0 +1,5 @@
+interface:
+  display_name: "复盘"
+  short_description: "对一次 coding session 做 retrospective"
+policy:
+  allow_implicit_invocation: false

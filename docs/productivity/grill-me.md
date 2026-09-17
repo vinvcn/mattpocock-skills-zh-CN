@@ -1,6 +1,6 @@
 ## What it does
 
-`grill-me` 拿一个**松散的想法**，持续访谈你，直到其中出现真正的 decisions。你不需要一份已经成型的工作计划才能开始——产出一份计划正是这个 [session](https://www.aihero.dev/ai-coding-dictionary/session) 的用途。它以 **rounds** 来提问：每一 round 就是整条 **frontier**——所有那些前提你已经搞定的问题——所以你永远不会被问到某个还悬而未决的问题。
+`grill-me` 拿一个**松散的想法**，持续访谈你，直到你能对它做出承诺。你不需要一份已经成型的工作计划才能开始——产出一份计划正是这个 [session](https://www.aihero.dev/ai-coding-dictionary/session) 的用途。它以 **rounds** 来提问：每一 round 就是整条 **frontier**——所有那些前提你已经搞定的问题——所以你永远不会被问到某个还悬而未决的问题。
 
 它是 **[stateless](https://www.aihero.dev/ai-coding-dictionary/stateless)** 的。它不写任何文件，也不留下任何 workspace。它唯一留下的，是你自己头脑中一个更清晰的、关于这个想法的版本。
 

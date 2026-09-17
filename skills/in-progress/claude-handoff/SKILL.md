@@ -9,7 +9,7 @@ disable-model-invocation: true
 
 始终带上 `-n`/`--name` 并给出描述性名称（例如 `--name "Fix login bug"`）——它设置显示名称，会出现在 job list、session picker 和 terminal title 中。
 
-在 summary 中包含一个 "suggested skills" section，推荐 agent 应当调用的 skills。
+在 summary 中包含一个 "suggested skills" section，写明下一个 agent 应调用 Skill 工具并指定哪些 skills。
 
 不要重复其它 artifacts（PRDs、plans、ADRs、issues、commits、diffs）中已经记录的内容，改为用 path 或 URL 引用它们。
 

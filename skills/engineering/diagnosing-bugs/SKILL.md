@@ -127,7 +127,7 @@ Correct seam 是 test 能以 call site 中真实发生的方式触发 **real bug
 4. 看它 pass。
 5. 重新针对原始（未 minimised）场景运行 Phase 1 feedback loop。
 
-## Phase 6 - Cleanup + post-mortem
+## Phase 6 - Cleanup
 
 声明完成前必须做：
 
@@ -136,5 +136,3 @@ Correct seam 是 test 能以 call site 中真实发生的方式触发 **real bug
 - [ ] 所有 `[DEBUG-...]` instrumentation 已移除（grep prefix）
 - [ ] Throwaway prototypes 已删除（或移动到明确标记的 debug location）
 - [ ] 正确 hypothesis 已写进 commit / PR message，让下一个 debugger 能学习
-
-**然后问：什么本可以预防这个 bug？** 如果答案涉及 architecture change（没有好 test seam、callers 缠绕、hidden coupling），带着具体细节交给 `/improve-codebase-architecture` skill。这个建议要在 fix 之后提出，不要在之前提出；现在你比开始时知道得更多。

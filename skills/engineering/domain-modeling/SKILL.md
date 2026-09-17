@@ -1,11 +1,11 @@
 ---
 name: domain-modeling
-description: 构建并打磨项目的领域模型。适用于用户想明确领域术语或通用语言、记录架构决策，或其他技能需要维护领域模型时。
+description: 构建并打磨项目的领域模型。适用于讨论 codebase 术语、编写或编辑 CONTEXT.md，或记录或编辑 ADR。
 ---
 
 # Domain Modeling
 
-在设计过程中主动构建并打磨项目的 domain model。这是 *active* discipline：挑战术语、发明 edge-case scenarios，并在概念成形的当下写入 glossary 和 decisions。（仅仅读取 `CONTEXT.md` 来获取词汇，不是这个 skill；那只是任何 skill 都能做的一行习惯。这个 skill 用于改变 model，而不是消费 model。）
+在设计过程中主动构建并打磨项目的 domain model。这是 *active* discipline：挑战术语、发明 edge-case scenarios，并在概念成形的当下写入 glossary 和 decisions。
 
 ## File structure
 

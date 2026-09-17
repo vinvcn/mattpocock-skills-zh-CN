@@ -14,7 +14,21 @@
 
 本仓库按内容刷新方式同步上游，不同步上游 Git 历史或仓库管理状态。维护规则见 [`.skills/translate-skill/SKILL.md`](./.skills/translate-skill/SKILL.md)。
 
-本仓库的最近一次同步翻译由 Claude（Anthropic）执行，并由仓库维护者通过 PR 纳入 `main`。翻译策略是 **skill-guided content localization**：把上游 `mattpocock/skills` 当作英文内容来源，只翻译自然语言说明，保留目录名、skill name、frontmatter key、命令、代码块、路径、URL、package/tool/API identifiers 和行为关键 labels。用户可见的安装路径统一保持为 `vinvcn/mattpocock-skills-zh-CN`。
+本仓库的同步翻译由 Codex 执行，并由仓库维护者通过 PR 纳入 `main`。翻译策略是 **skill-guided content localization**：把上游 `mattpocock/skills` 当作英文内容来源，只翻译自然语言说明，保留目录名、skill name、frontmatter key、命令、代码块、路径、URL、package/tool/API identifiers 和行为关键 labels。用户可见的安装路径统一保持为 `vinvcn/mattpocock-skills-zh-CN`。
+
+## 同步记录
+
+- 2026-09-17：已同步 `mattpocock/skills@959a8e9` 对 `retro` 的 deterministic checks 指引，并补齐既有的 `Skills` 行为说明；由 Codex 自动翻译并通过本地结构、行为不变量和 Markdown 检查，维护 commit 为 `fb3bd36`。
+- 2026-08-25：已同步 `mattpocock/skills@6654f6b` 的内容变化；由 Codex 自动翻译并通过本地结构、行为不变量和 Markdown 检查，维护 commit 为 `df042c8`，PR 为 [#29](https://github.com/vinvcn/mattpocock-skills-zh-CN/pull/29)。该工作使用 `/Users/hcc/projects/mattpocock-skills-zh-CN` 作为持久化维护副本。
+
+本次同步验证：
+
+- [x] 翻译结构、frontmatter、安装路径与 license invariant 检查
+- [x] 公开 skill 索引与 beta skill policy 检查
+- [x] Markdown、行为关键内容与 patch hygiene 检查
+- [x] 英文残留人工复核
+
+自动维护流程见 [`docs/maintenance/codex-sync.md`](./docs/maintenance/codex-sync.md)。
 
 ## 30 秒安装
 

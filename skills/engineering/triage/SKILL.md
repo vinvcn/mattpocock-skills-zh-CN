@@ -40,7 +40,7 @@ Triage 期间发布到 issue tracker 的每条 comment 或 issue **必须**以�
 
 每个已 triage 的 issue 应该刚好携带一个 category role 和一个 state role。如果 state roles 冲突，标记出来并先询问 maintainer，再做其他事。
 
-这些是 canonical role names；issue tracker 中实际使用的 label strings 可能不同。映射应该已经提供给你；如果没有，运行 `/setup-matt-pocock-skills`。
+这些是 canonical role names；issue tracker 中实际使用的 label strings 可能不同。映射应该已经提供给你；如果没有，请让用户运行 `/setup-matt-pocock-skills`。
 
 State transitions：未标记的 issue 通常先进入 `needs-triage`；之后移动到 `needs-info`、`ready-for-agent`、`ready-for-human` 或 `wontfix`。`needs-info` 在 reporter 回复后回到 `needs-triage`。Maintainer 可以随时 override；对看起来异常的 transitions 标记并在继续前询问。
 
@@ -73,7 +73,7 @@ Maintainer 调用 `/triage`，并用自然语言描述想要什么。解释请�
 
 3. **Verify the claim.** 在任何 grilling 前，检查该 claim 是否成立。对 bug，从 reporter 的步骤复现。对 PR，确认 diff 做到了它所声称的——checkout 它，运行相关 tests 或 commands。报告发生了什么：已确认（附 code path）、失败，或细节不足（强烈的 `needs-info` 信号）。已确认的验证会让 agent brief 更有力。
 
-4. **Grill（如果需要）.** 如果请求需要进一步充实，一起运行 `/grilling` 和 `/domain-modeling` skills——一轮一轮地把它 grill 成形，在 decisions 落定时打磨 domain terms 并内联更新 `CONTEXT.md`/ADRs。
+4. **Grill（如果需要）.** 如果请求需要进一步充实，调用两次 Skill 工具，分别指定 `grilling` 和 `domain-modeling`——一轮一轮地把它 grill 成形，在 decisions 落定时打磨 domain terms 并内联更新 `CONTEXT.md`/ADRs。
 
 5. **Apply the outcome:**
    - `ready-for-agent` — 发布 agent brief comment（[AGENT-BRIEF.md](AGENT-BRIEF.md)）。
