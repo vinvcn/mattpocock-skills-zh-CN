@@ -15,4 +15,5 @@ npx skills@latest add vinvcn/mattpocock-skills-zh-CN --skill=<name>
 - **[claude-handoff](./claude-handoff/SKILL.md)** — 把当前对话交接给一个全新的 background agent，让它立即接手工作，通过 `claude --bg` 以 handoff summary 作为种子。User-invoked。
 - **[setup-ts-deep-modules](./setup-ts-deep-modules/SKILL.md)** — 在 TypeScript repo 中接入 dependency-cruiser，让每个 package 成为 deep module——implementation 隐藏在 subfolders 中，只能通过其 entry-point files 访问，tests 则通过这些 entry points 来验证它。User-invoked。
 - **[implement-spec](./implement-spec/SKILL.md)** — 把一份 spec 的全部 tickets 实现为单个 PR，并按 task graph 的 frontier 并行推进。User-invoked。
+- **[pr](./pr/SKILL.md)** — PR 正文的结构参考：从原始材料（而非 diff）提炼摘要，用最小的可视化呈现变更，给出变更前后的证据，说明有意排除的内容，并标明单向门或双向门。Model-invoked。
 - **[retro](./retro/SKILL.md)** — 对一次 coding session 做 retrospective，按环境、检查、标准和信息获取等类别提出改进候选项。User-invoked。

@@ -16,6 +16,17 @@
 
 本仓库的同步翻译由 Codex 执行，并由仓库维护者通过 PR 纳入 `main`。翻译策略是 **skill-guided content localization**：把上游 `mattpocock/skills` 当作英文内容来源，只翻译自然语言说明，保留目录名、skill name、frontmatter key、命令、代码块、路径、URL、package/tool/API identifiers 和行为关键 labels。用户可见的安装路径统一保持为 `vinvcn/mattpocock-skills-zh-CN`。
 
+## 同步记录
+
+- 2026-09-24：已同步 `mattpocock/skills@c55ee46`，新增 beta `pr` skill 的简体中文翻译；由 Codex 自动翻译并通过本地结构、行为不变量和 Markdown 检查，维护 commit 为 `d71a03d`。
+
+本次同步验证：
+
+- [x] 翻译结构、frontmatter、安装路径与 license invariant 检查
+- [x] 公开 skill 索引与 beta skill policy 检查
+- [x] Markdown、行为关键内容与 patch hygiene 检查
+- [x] 英文残留人工复核
+
 ## 30 秒安装
 
 <p align="center">
