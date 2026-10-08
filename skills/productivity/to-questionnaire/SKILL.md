@@ -4,7 +4,7 @@ description: 把你无法完整回答的 decision 转成一份交给他人填写
 disable-model-invocation: true
 ---
 
-把用户无法独自回答的事情转成一份 **questionnaire**——一份交给某个人异步填写，或在会议中一起填写的 Markdown document。Recipient 掌握用户缺少的知识；questionnaire 要把这些知识提取出来。
+把用户无法独自回答的事情转成一份 **questionnaire**：一份交给某个人异步填写，或在会议中一起填写的 Markdown document。Recipient 掌握用户缺少的知识；questionnaire 要把这些知识提取出来。
 
 **Grill the send, not the subject。** 只围绕用户始终能够回答的 _send_ 进行访谈：发送给谁，以及需要对方返回什么。Document 中的问题再针对 recipient 所知与用户所需之间的 **gap**。
 
@@ -16,7 +16,7 @@ disable-model-invocation: true
 
 ## Document structure
 
-把 document 定位为 **discovery questionnaire**：用户缺少 context，而 recipient 掌握它。按重要程度降序排列问题——异步沟通可能只有一次机会；问题超过少量时，按主题放在 `##` headings 下。使用以下 template。
+把 document 定位为 **discovery questionnaire**：用户缺少 context，而 recipient 掌握它。按重要程度降序排列问题，异步沟通可能只有一次机会；问题超过少量时，按主题放在 `##` headings 下。使用以下 template。
 
 <questionnaire-template>
 
@@ -24,7 +24,7 @@ disable-model-invocation: true
 
 **Purpose:** <这份 questionnaire 为什么存在，以及它关系到哪项 decision>
 
-**From:** <用户> — **To:** <recipient> — **How your answers will be used:** <答案将用于哪里>
+**From:** <用户>, **To:** <recipient>, **How your answers will be used:** <答案将用于哪里>
 
 ## Context
 

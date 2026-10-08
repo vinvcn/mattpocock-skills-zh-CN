@@ -19,3 +19,5 @@ Skills 按 bucket folder 组织在 `skills/` 下：
 ## 翻译术语
 
 翻译与本地化时参考仓库根目录的 [翻译术语表](./TRANSLATION-GLOSSARY.md)；术语的请求与决定流程见 [贡献指南](./CONTRIBUTING.md)。
+
+行文不使用破折号（中文「——」与英文 em-dash `—`），与上游 v1.3.1 的 em-dash 清理一致：改用逗号、冒号、分号、括号或拆句，不要在后续翻译中重新引入。领域文档约定沿用上游 v1.3.1 的重命名：文件名为 `GLOSSARY.md` / `GLOSSARY-MAP.md`（文件名保留英文，不本地化）。

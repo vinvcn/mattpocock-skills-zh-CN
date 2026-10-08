@@ -104,7 +104,7 @@ getUser(fromAny({ body: { id: 123 } }));
 
 ## Workflow
 
-1. **Gather requirements** — 询问用户：
+1. **Gather requirements** - 询问用户：
    - 哪些 test files 中的 `as` assertions 造成问题？
    - 是否在处理大型 objects，但只关心部分 properties？
    - 是否需要传入故意错误的数据来测试 error paths？

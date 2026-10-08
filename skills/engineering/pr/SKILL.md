@@ -34,7 +34,7 @@ metadata:
 
 ## Sections
 
-跳过所有开场白，保持文字简短。使用 `CONTEXT.md` 中用户所在领域的语言。
+跳过所有开场白，保持文字简短。使用 `GLOSSARY.md` 中用户所在领域的语言。
 
 ### Summary
 
@@ -62,9 +62,11 @@ submitForm
 
 - 使用组件树展示 UI 结构，并包含重要的状态与模块边界：
 
-```tsx
-<SessionPage>(apps / example / src / routes / session.tsx);
-useSessionEvents() < SessionToolbar > <RunSkillButton>(packages / ui);
+```text
+<SessionPage> (apps/example/src/routes/session.tsx)
+  useSessionEvents()
+  <SessionToolbar>
+    <RunSkillButton> (packages/ui)
 ```
 
 - 使用浅层文件树展示文件职责或大范围重构：

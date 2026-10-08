@@ -1,6 +1,6 @@
 # Misc
 
-保留但很少使用的工具 — 不在 plugin 中推广。
+保留但很少使用的工具，不在 plugin 中推广。
 
 ## User-invoked
 

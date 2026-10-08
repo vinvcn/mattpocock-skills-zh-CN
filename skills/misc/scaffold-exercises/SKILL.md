@@ -18,9 +18,9 @@ description: 创建包含章节、题目、答案和讲解的练习目录结构�
 
 每个 exercise 至少需要这些 subfolders 中的一个：
 
-- `problem/` — student workspace，包含 TODOs
-- `solution/` — reference implementation
-- `explainer/` — conceptual material，不含 TODOs
+- `problem/` - student workspace，包含 TODOs
+- `solution/` - reference implementation
+- `explainer/` - conceptual material，不含 TODOs
 
 创建 stub 时，除非 plan 指定其他 variant，否则默认使用 `explainer/`。
 
@@ -43,11 +43,11 @@ Description here
 
 ## Workflow
 
-1. **Parse the plan** — 提取 section names、exercise names 和 variant types
-2. **Create directories** — 对每个 path 执行 `mkdir -p`
-3. **Create stub readmes** — 每个 variant folder 一个带 title 的 `readme.md`
-4. **Run lint** — 执行 `pnpm ai-hero-cli internal lint` 验证
-5. **Fix any errors** — 迭代直到 lint 通过
+1. **Parse the plan** - 提取 section names、exercise names 和 variant types
+2. **Create directories** - 对每个 path 执行 `mkdir -p`
+3. **Create stub readmes** - 每个 variant folder 一个带 title 的 `readme.md`
+4. **Run lint** - 执行 `pnpm ai-hero-cli internal lint` 验证
+5. **Fix any errors** - 迭代直到 lint 通过
 
 ## Lint rules summary
 

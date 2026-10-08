@@ -106,10 +106,10 @@ claude plugin install mattpocock-skills@mattpocock
 
 然后像上面的 quickstart 一样，在每个 repo 中运行一次 `/setup-matt-pocock-skills`。
 
-两种安装方式代表两种使用取向，只选其一——两个都装会让每个 skill 被安装两次：
+两种安装方式代表两种使用取向，只选其一；两个都装会让每个 skill 被安装两次：
 
 - **[skills.sh](https://skills.sh/vinvcn/mattpocock-skills-zh-CN)** 会把 skills 复制进项目，方便你修改、定制，把它们变成自己的东西。
-- **Plugin** 把它们作为受管理的只读 bundle 安装，随新版本发布统一更新——是订阅而不是 fork，适合只想直接使用并持续跟进更新的用户。
+- **Plugin** 把它们作为受管理的只读 bundle 安装，随新版本发布统一更新：是订阅而不是 fork，适合只想直接使用并持续跟进更新的用户。
 
 > 使用 Codex 或其他 agent？[skills.sh installer](https://skills.sh/vinvcn/mattpocock-skills-zh-CN) 已经可以把这些 skills 安装到 Codex 和其他兼容 Agent Skills 的 harnesses；目前尚未提供原生 Codex plugin。
 
@@ -151,7 +151,7 @@ AI 时代也是一样。你和 agent 之间存在沟通缺口。修复方式是�
 示例
 </summary>
 
-这是我 `course-video-manager` repo 中的一个 [`CONTEXT.md`](https://github.com/mattpocock/course-video-manager/blob/076a5a7a182db0fe1e62971dd7a68bcadf010f1c/CONTEXT.md) 示例。哪一个更容易读？
+这是我 `course-video-manager` repo 中的一个 [glossary](https://github.com/mattpocock/course-video-manager/blob/076a5a7a182db0fe1e62971dd7a68bcadf010f1c/CONTEXT.md) 示例（文件在该 pinned commit 中仍名为 `CONTEXT.md`，出自这些 skills 重命名这一约定之前）。哪一个更容易读？
 
 - **BEFORE**: "There's a problem when a lesson inside a section of a course is made 'real' (i.e. given a spot in the file system)"
 - **AFTER**: "There's a problem with the materialization cascade"
@@ -224,25 +224,27 @@ AI 时代也是一样。你和 agent 之间存在沟通缺口。修复方式是�
 **User-invoked**
 
 - **[ask-matt](./skills/engineering/ask-matt/SKILL.md)** - 询问当前情境适合哪个 skill 或 flow；它是本仓库 user-invoked skills 的 router。
-- **[grill-with-docs](./skills/engineering/grill-with-docs/SKILL.md)** - 追问式访谈，同时构建项目的 domain model、打磨术语，并内联更新 `CONTEXT.md` 与 ADRs。
+- **[grill-with-docs](./skills/engineering/grill-with-docs/SKILL.md)** - 追问式访谈，同时构建项目的 domain model、打磨术语，并内联更新 `GLOSSARY.md` 与 ADRs。
 - **[triage](./skills/engineering/triage/SKILL.md)** - 通过 triage roles state machine 推进 issues。
 - **[improve-codebase-architecture](./skills/engineering/improve-codebase-architecture/SKILL.md)** - 扫描 codebase 中的 deepening opportunities，生成可视化 HTML report，然后围绕你选中的候选项继续 grilling。
 - **[setup-matt-pocock-skills](./skills/engineering/setup-matt-pocock-skills/SKILL.md)** - 配置 issue tracker、triage labels 和 domain docs 布局。每个 repo 运行一次。
 - **[to-spec](./skills/engineering/to-spec/SKILL.md)** - 把当前对话整理成 spec 并发布到 issue tracker。不做访谈，只综合已经讨论过的内容。
-- **[to-tickets](./skills/engineering/to-tickets/SKILL.md)** - 把 plan、spec 或 conversation 拆成 tracer-bullet tickets，每个 ticket 声明 blocking edges——在 local file 中写成文本，或在真实 tracker 上写成 native blocking links。
-- **[wayfinder](./skills/engineering/wayfinder/SKILL.md)** - 把超出单个 agent session 的大块工作规划成 issue tracker 上的 decision tickets 共享 map，逐一解决直到通往 destination 的路清晰。
+- **[to-tickets](./skills/engineering/to-tickets/SKILL.md)** - 把 plan、spec 或 conversation 拆成 tracer-bullet tickets，每个 ticket 声明 blocking edges，在 local file 中写成文本，或在真实 tracker 上写成 native blocking links。
 - **[implement](./skills/engineering/implement/SKILL.md)** - 基于 spec 或 ticket 集合实现一段工作，在预先约定的 seams 处驱动 `/tdd`，并在提交前以 `/code-review` 收尾。
+- **[implement-spec](./skills/engineering/implement-spec/SKILL.md)** - 在单一 integration branch 上实现整份 spec。把 tickets 当作 task graph 来推进，在 ready frontier 上并行运行 implementer subagents 以最大化并发，最后以 `/code-review` 收尾。
+- **[wayfinder](./skills/engineering/wayfinder/SKILL.md)** - 把超出单个 agent session 的大块工作规划成 issue tracker 上的 decision tickets 共享 map，逐一解决直到通往 destination 的路清晰。
+- **[retro](./skills/engineering/retro/SKILL.md)** - 一次 session 结束后，针对 coding agent 的环境（navigation、automated checks、coding standards、steering files、tooling）提出改进建议，最严重的排最前。
 
 **Model-invoked**
 
-- **[prototype](./skills/engineering/prototype/SKILL.md)** - 构建 throwaway prototype 来回答一个设计问题——state/logic 问题产出一个可分享的单一 HTML 文件，或产出几个可从同一路由切换的 radically different UI 变体。
+- **[prototype](./skills/engineering/prototype/SKILL.md)** - 构建 throwaway prototype 来回答一个设计问题：state/logic 问题产出一个可分享的单一 HTML 文件，或产出几个可从同一路由切换的 radically different UI 变体。
 - **[diagnosing-bugs](./skills/engineering/diagnosing-bugs/SKILL.md)** - 面向棘手 bug 和性能回退的纪律化诊断循环：构建一个会对这个 bug 变红的 feedback loop → minimise → hypothesise → instrument → fix → regression-test。
 - **[research](./skills/engineering/research/SKILL.md)** - 对照 high-trust primary sources 调研问题，并把带引用的 findings 保存为 Markdown 文件。
 - **[tdd](./skills/engineering/tdd/SKILL.md)** - 使用 red-green-refactor 循环做 test-driven development；一次一个 vertical slice 地构建功能或修复 bug。
-- **[domain-modeling](./skills/engineering/domain-modeling/SKILL.md)** - 主动构建和打磨项目 domain model：挑战术语、用 edge-case scenarios 做压力测试，并内联更新 `CONTEXT.md` 与 ADRs。
+- **[domain-modeling](./skills/engineering/domain-modeling/SKILL.md)** - 主动构建和打磨项目 domain model：挑战术语、用 edge-case scenarios 做压力测试，并内联更新 `GLOSSARY.md` 与 ADRs。
 - **[codebase-design](./skills/engineering/codebase-design/SKILL.md)** - 设计 deep modules 的共享纪律和词汇：小 interface、clean seam、通过 interface 测试。
 - **[code-review](./skills/engineering/code-review/SKILL.md)** - 对 fixed point 以来的 diff 做双轴 review：Standards 与 Spec 分开检查，并用并行 sub-agents 运行。
-- **[resolving-merge-conflicts](./skills/engineering/resolving-merge-conflicts/SKILL.md)** - 逐个 hunk 处理正在进行的 git merge/rebase conflict，按追溯到各方 primary source 的 intent 解决，然后完成操作——绝不 `--abort`。
+- **[pr](./skills/engineering/pr/SKILL.md)** - PR 正文应有的形态：用最小的可视化 summary 讲清变更，附上证明它有效的 before/after 证据，再做一次合并风险判断（单向门还是双向门，外加 blast radius）。
 - **[wizard](./skills/engineering/wizard/SKILL.md)** - 生成一个交互式 bash wizard，带人走过只有人才能完成的步骤：provisioning infrastructure、设置 credentials 或 CI secrets、操作陌生的第三方 dashboard，或执行一次性 migration/cutover。
 
 #### Productivity
@@ -254,8 +256,8 @@ AI 时代也是一样。你和 agent 之间存在沟通缺口。修复方式是�
 - **[grill-me](./skills/productivity/grill-me/SKILL.md)** - 围绕计划或设计持续追问，直到 design tree 的每个分支都被解决。
 - **[handoff](./skills/productivity/handoff/SKILL.md)** - 把当前对话压缩成 handoff document，让另一个 agent 可以继续。
 - **[teach](./skills/productivity/teach/SKILL.md)** - 使用当前目录作为 stateful teaching workspace，在多个 sessions 中教用户一个新 skill 或概念。
-- **[to-questionnaire](./skills/productivity/to-questionnaire/SKILL.md)** - 把一个你自己答不了的 decision 变成一份 Markdown questionnaire，交给唯一能回答它的人——异步填写，或在一次会议里一起完成。它追问的是“发送”本身（发给谁、你想拿回什么），而不是主题。
-- **[wait-what](./skills/productivity/wait-what/SKILL.md)** - 某条消息没讲明白的瞬间就发它。agent 会补上你缺的 context，用平实的语言重新表述，并使用你 `CONTEXT.md` 里的词汇。
+- **[to-questionnaire](./skills/productivity/to-questionnaire/SKILL.md)** - 把一个你自己答不了的 decision 变成一份 Markdown questionnaire，交给唯一能回答它的人：异步填写，或在一次会议里一起完成。它追问的是“发送”本身（发给谁、你想拿回什么），而不是主题。
+- **[wait-what](./skills/productivity/wait-what/SKILL.md)** - 某条消息没讲明白的瞬间就发它。agent 会补上你缺的 context，用平实的语言重新表述，并使用你 `GLOSSARY.md` 里的词汇。
 
 **Model-invoked**
 

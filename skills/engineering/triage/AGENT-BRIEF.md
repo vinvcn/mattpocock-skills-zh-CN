@@ -2,7 +2,7 @@
 
 Agent brief 是 GitHub issue 或 PR 移动到 `ready-for-agent` 时发布在其上的结构化 comment。它是 AFK agent 后续工作的权威 spec。原始 body 和讨论是 context；agent brief 是 contract。
 
-Brief 说明 **agent 应该做什么**，这延伸到两种 surface：对 issue，是从零构建 change；对 PR，是*在现有 diff 上*还剩什么要做——完成它、补齐缺口、处理 review 意见。两种情况原则相同；下面的 PR 示例展示了差异。
+Brief 说明 **agent 应该做什么**，这延伸到两种 surface：对 issue，是从零构建 change；对 PR，是*在现有 diff 上*还剩什么要做：完成它、补齐缺口、处理 review 意见。两种情况原则相同；下面的 PR 示例展示了差异。
 
 ## Principles
 
@@ -53,9 +53,9 @@ Describe what should happen after the agent's work is complete.
 Be specific about edge cases and error conditions.
 
 **Key interfaces:**
-- `TypeName` — what needs to change and why
-- `functionName()` return type — what it currently returns vs what it should return
-- Config shape — any new configuration options needed
+- `TypeName`: what needs to change and why
+- `functionName()` return type: what it currently returns vs what it should return
+- Config shape: any new configuration options needed
 
 **Acceptance criteria:**
 - [ ] Specific, testable criterion 1
@@ -87,7 +87,7 @@ Truncation should break at the last word boundary before 1024 characters
 and append "..." to indicate truncation.
 
 **Key interfaces:**
-- The `SkillMetadata` type's `description` field — no type change needed,
+- The `SkillMetadata` type's `description` field: no type change needed,
   but the validation/processing logic that populates it needs to respect
   word boundaries
 - Any function that reads SKILL.md frontmatter and extracts the description
@@ -125,7 +125,7 @@ requested the feature. When triaging new issues, these files should be
 checked for matches.
 
 **Key interfaces:**
-- Markdown file format in `.out-of-scope/` — each file should have a
+- Markdown file format in `.out-of-scope/`: each file should have a
   `# Concept Name` heading, a `**Decision:**` line, a `**Reason:**` line,
   and a `**Prior requests:**` list with issue links
 - The triage workflow should read all `.out-of-scope/*.md` files early
@@ -162,7 +162,7 @@ remain: errors are still printed as human text (not JSON), and the new flag has
 no test coverage.
 
 **Desired behavior:**
-With `--json`, all output — including errors — is well-formed JSON on stdout,
+With `--json`, all output (including errors) is well-formed JSON on stdout,
 and the command's exit codes are unchanged. The existing human-readable output
 is untouched when the flag is absent.
 

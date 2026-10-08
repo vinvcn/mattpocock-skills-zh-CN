@@ -1,6 +1,6 @@
 ---
 name: translate-skill
-description: 将 mattpocock/skills 的内容翻译、刷新或复核到简体中文本地化仓库 vinvcn/mattpocock-skills-zh-CN 时使用这个项目级 skill。适用于 skill files、README content、CLAUDE.md、CONTEXT.md、docs，以及其他需要保留行为关键 identifiers 的上游用户可见内容。
+description: 将 mattpocock/skills 的内容翻译、刷新或复核到简体中文本地化仓库 vinvcn/mattpocock-skills-zh-CN 时使用这个项目级 skill。适用于 skill files、README content、CLAUDE.md、GLOSSARY.md、docs，以及其他需要保留行为关键 identifiers 的上游用户可见内容。
 ---
 
 # 翻译 skill

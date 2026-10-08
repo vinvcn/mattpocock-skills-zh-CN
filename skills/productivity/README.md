@@ -9,8 +9,8 @@
 - **[grill-me](./grill-me/SKILL.md)** - 围绕计划或设计进行持续追问，直到 decision tree 的每个分支都被解决。
 - **[handoff](./handoff/SKILL.md)** - 把当前对话压缩成 handoff document，让另一个 agent 可以继续。
 - **[teach](./teach/SKILL.md)** - 使用当前目录作为 stateful teaching workspace，在多个 sessions 中教用户一个新 skill 或概念。
-- **[to-questionnaire](./to-questionnaire/SKILL.md)** - 把你无法独自回答的 decision 转成一份交给唯一能回答之人的 Markdown questionnaire——异步填写，或在会议中一起填写。
-- **[wait-what](./wait-what/SKILL.md)** - 当一条消息没被理解时立即触发。agent 用你缺失的上下文、以直白的语言、借助你的 `CONTEXT.md` 词汇重新解释。
+- **[to-questionnaire](./to-questionnaire/SKILL.md)** - 把你无法独自回答的 decision 转成一份交给唯一能回答之人的 Markdown questionnaire：异步填写，或在会议中一起填写。
+- **[wait-what](./wait-what/SKILL.md)** - 当一条消息没被理解时立即触发。agent 用你缺失的上下文、以直白的语言、借助你的 `GLOSSARY.md` 词汇重新解释。
 
 ## Model-invoked
 

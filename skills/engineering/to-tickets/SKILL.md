@@ -68,11 +68,11 @@ Issue tracker 和 triage label vocabulary 应该已经提供；如果没有，�
 
 <local-ticket-template>
 
-# <NN> — <Ticket title>
+# <NN>: <Ticket title>
 
 **What to build:** 这个 ticket 从用户视角打通的 end-to-end behaviour，而不是逐层 implementation list。
 
-**Blocked by:** gate 这个 ticket 的 numbers/titles，或 “None — can start immediately”。
+**Blocked by:** gate 这个 ticket 的 numbers/titles，或 “None（can start immediately）”。
 
 **Status:** ready-for-agent
 
@@ -98,7 +98,7 @@ Tracker 上 parent issue 的 reference（如果来源是 existing issue；否则
 
 ## Blocked by
 
-- 每个 blocking ticket 的 reference，或 “None — can start immediately”。
+- 每个 blocking ticket 的 reference，或 “None（can start immediately）”。
 
 </issue-template>
 

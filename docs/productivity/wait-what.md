@@ -1,6 +1,6 @@
 ## What it does
 
-`wait-what` 是你在一句话没听明白时输入的内容。[agent](https://www.aihero.dev/ai-coding-dictionary/agent) 随后会把它刚说过的话重新讲一遍。它补上你缺少的 context，用朴素英语书写，并使用你项目 `CONTEXT.md` 里的词汇。
+`wait-what` 是你在一句话没听明白时输入的内容。[agent](https://www.aihero.dev/ai-coding-dictionary/agent) 随后会把它刚说过的话重新讲一遍。它补上你缺少的 context，用朴素英语书写，并使用你项目 `GLOSSARY.md` 里的词汇。
 
 这个 skill 只有三行长。这是设计，不是未完成的草稿。那些对抗冗长的 skills 会因膨胀而失败：一个四百行的 concision skill 仍然让 [model](https://www.aihero.dev/ai-coding-dictionary/model) 显得啰嗦，因为 model 读的是篇幅，而不是恳求。这一个只携带一个精确的 leading word，除此之外什么都没有。
 
@@ -20,17 +20,17 @@ skill 说重新讲一遍**那个**，不是"刚才那条消息"。让你迷失�
 
 ## It plugs into the language you already have
 
-正文复用了你全局 `CLAUDE.md` 和项目 `CONTEXT.md` 里已有的 leading words。ASD-STE100 简化技术英语 设定语域。遵循目前对话使用的语种。ubiquitous language 提供名词。skill、`CLAUDE.md` 和 `CONTEXT.md` 抓取的是同一批 [tokens](https://www.aihero.dev/ai-coding-dictionary/token)，所以调用它并不是一条新指令。它是对 agent 早已同意的一条指令的提醒。
+正文复用了你全局 `CLAUDE.md` 和项目 `GLOSSARY.md` 里已有的 leading words。ASD-STE100 简化技术英语 设定语域。遵循目前对话使用的语种。ubiquitous language 提供名词。skill、`CLAUDE.md` 和 `GLOSSARY.md` 抓取的是同一批 [tokens](https://www.aihero.dev/ai-coding-dictionary/token)，所以调用它并不是一条新指令。它是对 agent 早已同意的一条指令的提醒。
 
-如果你没有 `CONTEXT.md`，或者没有由 `CONTEXT-MAP.md` 指向正确 context 的文件，skill 仍然有效。你只是失去领域词汇那一半。
+如果你没有 `GLOSSARY.md`，或者没有由 `GLOSSARY-MAP.md` 指向正确 context 的文件，skill 仍然有效。你只是失去领域词汇那一半。
 
 ## It's working if
 
 - 重新讲一遍**更短更清楚**，而不是更短更生硬。
 - 它补上了你缺少的前提，而不只是删词。
-- 项目的名词替换了那些发明出来的词。你 `CONTEXT.md` 里的术语回来了。
+- 项目的名词替换了那些发明出来的词。你 `GLOSSARY.md` 里的术语回来了。
 - 你能连用两次，而它不会退化成生硬简短。
 
 ## Where it fits
 
-你可以在任何时刻、任何对话、任何其他 skill 内部使用 `wait-what`。它事后修复一条消息。真正的解药是预先商定的共享语言，那就是 [grill-with-docs](https://aihero.dev/skills-grill-with-docs)：一次 [grilling](https://www.aihero.dev/ai-coding-dictionary/grilling) 会话，一边跑 [domain-modeling](https://aihero.dev/skills-domain-modeling)，这样你们双方都在用的词会落进你的 `CONTEXT.md`。如果你不确定哪个 skill 适合此刻，[ask-matt](https://aihero.dev/skills-ask-matt) 会为你路由。
+你可以在任何时刻、任何对话、任何其他 skill 内部使用 `wait-what`。它事后修复一条消息。真正的解药是预先商定的共享语言，那就是 [grill-with-docs](https://aihero.dev/skills-grill-with-docs)：一次 [grilling](https://www.aihero.dev/ai-coding-dictionary/grilling) 会话，一边跑 [domain-modeling](https://aihero.dev/skills-domain-modeling)，这样你们双方都在用的词会落进你的 `GLOSSARY.md`。如果你不确定哪个 skill 适合此刻，[ask-matt](https://aihero.dev/skills-ask-matt) 会为你路由。

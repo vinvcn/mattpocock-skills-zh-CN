@@ -27,7 +27,7 @@
 - Agent 3: "Optimise for the most common caller - make the default case trivial."
 - Agent 4（如适用）: "Design around ports & adapters for cross-seam dependencies."
 
-Brief 中同时包含 [SKILL.md](SKILL.md) vocabulary 和 `CONTEXT.md` vocabulary，确保每个 sub-agent 的命名同时符合 architecture language 和项目 domain language。
+Brief 中同时包含 [SKILL.md](SKILL.md) vocabulary 和 `GLOSSARY.md` vocabulary，确保每个 sub-agent 的命名同时符合 architecture language 和项目 domain language。
 
 每个 sub-agent 输出：
 

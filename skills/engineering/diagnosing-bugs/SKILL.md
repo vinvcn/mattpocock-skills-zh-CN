@@ -7,11 +7,11 @@ description: 面向棘手缺陷和性能回退的诊断循环。适用于用户�
 
 面向棘手 bugs 的纪律。只有在明确说明理由时才跳过阶段。
 
-探索 codebase 时，先读取 `CONTEXT.md`（如果存在），建立相关 modules 的清晰 mental model，并检查你将触碰区域的 ADRs。
+探索 codebase 时，先读取 `GLOSSARY.md`（如果存在），建立相关 modules 的清晰 mental model，并检查你将触碰区域的 ADRs。
 
 ## Redact
 
-这个 skill 会要求你展示 commands、outputs 和捕获的 artifacts。**先 redact 掉每个 secret**——用 `<REDACTED>` 替换。Build loops 要针对 env vars 进行，让 credential 留在 environment 里而不是你展示的内容中。捕获的 artifacts 带有 auth headers：只引用携带 signal 的那些行。
+这个 skill 会要求你展示 commands、outputs 和捕获的 artifacts。**先 redact 掉每个 secret**：用 `<REDACTED>` 替换。Build loops 要针对 env vars 进行，让 credential 留在 environment 里而不是你展示的内容中。捕获的 artifacts 带有 auth headers：只引用携带 signal 的那些行。
 
 如果 redact 后的 output 不足以诊断 bug，就说明情况并询问用户。
 

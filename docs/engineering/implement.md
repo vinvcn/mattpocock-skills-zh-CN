@@ -2,11 +2,11 @@
 
 `implement` 构建那些已经被决定好的工作。你把它指向一个 [ticket](https://www.aihero.dev/ai-coding-dictionary/ticket)、一份 [spec](https://www.aihero.dev/ai-coding-dictionary/spec)，或你在对话里刚刚达成的计划，它就写代码、在 seams 上驱动 [tdd](https://aihero.dev/skills-tdd)、边走边 typecheck、最后运行 [code-review](https://aihero.dev/skills-code-review)，并提交到当前 branch。
 
-它从不重新打开计划。没有访谈、没有澄清轮、没有提出不同方案。上游敲定的任何东西就是输入，这个 skill 的全部工作就是把它变成一次 commit。这正是它区别于对一个全新的 [agent](https://www.aihero.dev/ai-coding-dictionary/agent) 输入"build this"的地方——后者会在构建的同时乐于重新设计这件工作。
+它从不重新打开计划。没有访谈、没有澄清轮、没有提出不同方案。上游敲定的任何东西就是输入，这个 skill 的全部工作就是把它变成一次 commit。这正是它区别于对一个全新的 [agent](https://www.aihero.dev/ai-coding-dictionary/agent) 输入"build this"的地方：后者会在构建的同时乐于重新设计这件工作。
 
 ## When to reach for it
 
-你通过输入 `/implement` 调用它——agent 不会自行取用它。它带着 `disable-model-invocation: true` 发布，所以其他 skill 也不能调用它。无论 [ask-matt](https://aihero.dev/skills-ask-matt) 还是 [to-tickets](https://aihero.dev/skills-to-tickets) 说"然后每个 ticket 走 `/implement`"，那都是给你的指令，而不是 agent 会在未提示下自己去做的事。
+你通过输入 `/implement` 调用它，[agent](https://www.aihero.dev/ai-coding-dictionary/agent) 不会自行取用它。它带着 `disable-model-invocation: true` 发布，所以其他 skill 也不能调用它。无论 [ask-matt](https://aihero.dev/skills-ask-matt) 还是 [to-tickets](https://aihero.dev/skills-to-tickets) 说"然后每个 ticket 走 `/implement`"，那都是给你的指令，而不是 agent 会在未提示下自己去做的事。
 
 工作当前住在哪里，决定了这是否是正确的 skill：
 
@@ -50,15 +50,15 @@
 
 **它完成了，但我的 ticket 仍然是 open 的，验收标准也仍然未被勾选。**
 
-正确，而且在意料之中。`implement` 没有完成步骤。它在 commit 处结束，从不触碰工作项——这在 GitHub Issues 和本地 markdown tracker 上都得到了确认，所以这不是 tracker 集成问题。它也不会对 `code-review` 产出的 findings 采取行动，更不会勾选源起 issue 上的 `- [ ]` 框。你自己去关闭 ticket 并核对标准。这在依赖链上咬得最狠，因为 `to-tickets` 把 frontier 定义为所有 blockers 都已关闭的 tickets。如果没有任何东西被关闭，就永远不会有什么东西变得可见地 unblocked。
+正确，而且在意料之中。`implement` 没有完成步骤。它在 commit 处结束，从不触碰工作项；这在 GitHub Issues 和本地 markdown tracker 上都得到了确认，所以这不是 tracker 集成问题。它也不会对 `code-review` 产出的 findings 采取行动，更不会勾选源起 issue 上的 `- [ ]` 框。你自己去关闭 ticket 并核对标准。这在依赖链上咬得最狠，因为 `to-tickets` 把 frontier 定义为所有 blockers 都已关闭的 tickets。如果没有任何东西被关闭，就永远不会有什么东西变得可见地 unblocked。
 
 **我可以一次指向我所有的 tickets，或者并行运行几个吗？**
 
-不行。一次调用，一个 ticket。跨 ticket 队列的批量派发和 [subagent](https://www.aihero.dev/ai-coding-dictionary/subagent) 扇出都被反复请求过，而两者都不存在。在同一个 checkout 里并排运行多个 `/implement` sessions，比"不受支持"更糟：一份现场报告描述了某个 session 里的 `git commit --amend` 落在另一个 session 的 commit 上、一条 stash 从 `refs/stash` 里消失、以及 commit 落到错误的 branch 上——全部发生在一个下午、横跨三个 issues。这些 sessions 共享同一个 working directory、同一个 index 和同一个 HEAD。Git worktrees 是社区的变通方案，而且注意 `refs/stash` 也跨 worktrees 共享，所以单靠 worktrees 并不能修复 stash 的情形。如果你今天就想要并行，你得自己把它组装起来。
+用 `/implement` 不行：一次调用，一个 ticket。要在一次运行里构建一整份 spec，用 [implement-spec](https://aihero.dev/skills-implement-spec)，它把 tickets 扇出到 [subagents](https://www.aihero.dev/ai-coding-dictionary/subagent)，每个在自己单独的 worktree 里，横跨 ready frontier，并把它们合并到一条 integration branch 上。在同一个 checkout 里并排运行多个 `/implement` sessions，比"不受支持"更糟：一份现场报告描述了某个 session 里的 `git commit --amend` 落在另一个 session 的 commit 上、一条 stash 从 `refs/stash` 里消失、以及 commit 落到错误的 branch 上，全部发生在一个下午、横跨三个 issues。这些 sessions 共享同一个 working directory、同一个 index 和同一个 HEAD。Git worktrees 是社区的变通方案，而且注意 `refs/stash` 也跨 worktrees 共享，所以单靠 worktrees 并不能修复 stash 的情形。
 
 **它可以开 pull request 而不是 commit 吗？**
 
-不是内建的。它直接提交到当前 branch，这让几个人觉得太急切：代码在他们有机会验证它能工作之前就落地了。没有任何配置 flag，也没有 PR 模式。人们会在调用里覆盖它（"commit 到一个 branch 并开一个 PR"），或者通过编辑他们本地的那份 skill 副本来覆盖。
+不是内建的。它直接提交到当前 branch，这让几个人觉得太急切：代码在他们有机会验证它能工作之前就落地了。没有任何配置 flag，也没有 PR 模式。人们会在调用里覆盖它（"commit 到一个 branch 并开一个 PR"），或者通过编辑他们本地的那份 skill 副本来覆盖。而当 agent 真的去写 PR 时，[pr](https://aihero.dev/skills-pr) 会塑造它的正文。
 
 **`code-review` 说它看不到我的变更。**
 
@@ -72,7 +72,7 @@
 
 **在一个全新 session 里跑 `/implement #2`，却处理了完全无关的东西。**
 
-`#2` 会对照 agent 能看到的任何编号列表来解析，而在一个全新 session 里，那可能是一个 todo 文件、一个 checklist、或另一份工作列表，而不是配置好的 tracker。解析是自信式的，而不是 fail-closed 的，所以这个错误在它开始之前并不明显。传入完整引用——issue URL 或 `owner/repo#2`——并让它开始之前先跟你确认标题。
+`#2` 会对照 agent 能看到的任何编号列表来解析，而在一个全新 session 里，那可能是一个 todo 文件、一个 checklist、或另一份工作列表，而不是配置好的 tracker。解析是自信式的，而不是 fail-closed 的，所以这个错误在它开始之前并不明显。传入完整引用（issue URL 或 `owner/repo#2`），并让它开始之前先跟你确认标题。
 
 ## It's working if
 
@@ -84,13 +84,13 @@
 
 ## Where it fits
 
-`implement` 是 main chain 的 build step，倒数第二：
+`implement` 是 main chain 的 build step：
 
 ```txt
-grill-with-docs → to-spec → to-tickets → implement → code-review
+grill-with-docs → to-spec → to-tickets → implement → code-review → retro
 ```
 
-它的邻居是 [to-tickets](https://aihero.dev/skills-to-tickets)——产出它所消费的 tickets 并声明决定其顺序的 blocking edges；[tdd](https://aihero.dev/skills-tdd)——它在每个 seam 上内部驱动它；以及 [code-review](https://aihero.dev/skills-code-review)——它在提交之前运行它。它位于规划类 skills 的下游并信任它们。它不会重新验证交给它的东西的形状，所以一张结构糟糕的地图或一个横向分层的 ticket 会照原样被构建。
+它的邻居是 [to-tickets](https://aihero.dev/skills-to-tickets)（产出它所消费的 tickets 并声明决定其顺序的 blocking edges）、[tdd](https://aihero.dev/skills-tdd)（它在每个 seam 上内部驱动它），以及 [code-review](https://aihero.dev/skills-code-review)（它在提交之前运行它）。它位于规划类 skills 的下游并信任它们。它不会重新验证交给它的东西的形状，所以一张结构糟糕的地图或一个横向分层的 ticket 会照原样被构建。
 
 这份信任正是 [wayfinder](https://aihero.dev/skills-wayfinder) 在 [to-spec](https://aihero.dev/skills-to-spec) 处并入这条 chain、而不是把它的地图直接循环进 `implement` 的原因。只有当场得出 effort 确实很小时，才从一张地图直接去 `implement`。
 

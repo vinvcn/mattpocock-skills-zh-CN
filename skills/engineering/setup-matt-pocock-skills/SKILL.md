@@ -1,6 +1,6 @@
 ---
 name: setup-matt-pocock-skills
-description: "为此仓库配置 engineering skills——设置其 issue tracker、triage labels 词汇与 domain docs 布局。在首次使用其他 engineering skills 前运行一次。"
+description: "为此仓库配置 engineering skills：设置其 issue tracker、triage labels 词汇与 domain docs 布局。在首次使用其他 engineering skills 前运行一次。"
 disable-model-invocation: true
 ---
 
@@ -10,7 +10,7 @@ disable-model-invocation: true
 
 - **Issue tracker** - issues 存放在哪里（默认 GitHub；也原生支持 local markdown）
 - **Triage labels** - 五个 canonical triage roles 使用的字符串
-- **Domain docs** - `CONTEXT.md` 与 ADRs 的位置，以及读取它们的 consumer rules
+- **Domain docs** - `GLOSSARY.md` 与 ADRs 的位置，以及读取它们的 consumer rules
 
 这是 prompt-driven skill，不是确定性脚本。先探索，展示发现，与用户确认，然后写入。
 
@@ -22,7 +22,7 @@ disable-model-invocation: true
 
 - `git remote -v` 和 `.git/config` - 这是 GitHub repo 吗？是哪一个？
 - repo root 的 `AGENTS.md` 和 `CLAUDE.md` - 是否存在？其中是否已有 `## Agent skills` section？
-- repo root 的 `CONTEXT.md` 和 `CONTEXT-MAP.md`
+- repo root 的 `GLOSSARY.md` 和 `GLOSSARY-MAP.md`
 - `docs/adr/` 以及任何 `src/*/docs/adr/` directories
 - `docs/agents/` - 这个 skill 之前是否已经输出过内容？
 - `.scratch/` - 表明已经在使用 local-markdown issue tracker 约定
@@ -56,9 +56,9 @@ disable-model-invocation: true
 
 默认值是五个 canonical roles，label string 与 role name 相同：`needs-triage`、`needs-info`、`ready-for-agent`、`ready-for-human`、`wontfix`。回答 yes 就原样写入。只有用户说 no（通常因为 tracker 已使用其他名称，例如用 `bug:triage` 表示 `needs-triage`）时，才收集 overrides，避免 `triage` 创建重复 labels。
 
-**Section C - Domain docs.** 默认 **single-context**：repo root 下一个 `CONTEXT.md` + `docs/adr/`。这适合几乎所有 repo，直接写入，无需提问。
+**Section C - Domain docs.** 默认 **single-context**：repo root 下一个 `GLOSSARY.md` + `docs/adr/`。这适合几乎所有 repo，直接写入，无需提问。
 
-只有 exploration 找到 monorepo signals 时，才提供 **multi-context**（root 下 `CONTEXT-MAP.md` 指向每个 context 的 `CONTEXT.md` files），并确认用户想要哪种 layout。
+只有 exploration 找到 monorepo signals 时，才提供 **multi-context**（root 下 `GLOSSARY-MAP.md` 指向每个 context 的 `GLOSSARY.md` files），并确认用户想要哪种 layout。
 
 ### 3. Confirm and edit
 

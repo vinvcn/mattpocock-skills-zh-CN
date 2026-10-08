@@ -62,9 +62,9 @@ Lesson 应该很短，并且很快就能完成。Learners 的 working memory 非
 
 ## Assets
 
-Lessons 由可复用的 **components** 构建，这些 components 存放在 `./assets/` 中：stylesheets、quiz widgets、simulators、diagram helpers——任何第二个 lesson 都能复用的东西。
+Lessons 由可复用的 **components** 构建，这些 components 存放在 `./assets/` 中：stylesheets、quiz widgets、simulators、diagram helpers，任何第二个 lesson 都能复用的东西。
 
-复用是默认，而不是例外。在编写一个 lesson 之前，先读取 `./assets/`，并基于已有的 components 构建。当一个 lesson 需要某个新的、可复用的东西时，把它写成 `./assets/` 中的一个 component 并链接过去——绝不要内联一段未来 lesson 会重复的代码。
+复用是默认，而不是例外。在编写一个 lesson 之前，先读取 `./assets/`，并基于已有的 components 构建。当一个 lesson 需要某个新的、可复用的东西时，把它写成 `./assets/` 中的一个 component 并链接过去：绝不要内联一段未来 lesson 会重复的代码。
 
 共享的 stylesheet 是每个 workspace 获得的第一个 component：每个 lesson 都链接它，这样 lessons 看起来像一门一致的课程，而不是一堆一次性产物。随着 workspace 增长，component library 也应随之增长。
 

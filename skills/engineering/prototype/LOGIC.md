@@ -1,8 +1,8 @@
 # Logic Prototype
 
-一个单一、自包含的 HTML 文件——一个 **shareable demo**——让任何人点按 buttons 就能驱动 state model。用于问题围绕 **business logic、state transitions 或 data shape** 的场景，也就是纸面上看起来合理，但只有跑过真实 cases 才会感觉哪里不对的东西。
+一个单一、自包含的 HTML 文件（一个 **shareable demo**），让任何人点按 buttons 就能驱动 state model。用于问题围绕 **business logic、state transitions 或 data shape** 的场景，也就是纸面上看起来合理，但只有跑过真实 cases 才会感觉哪里不对的东西。
 
-因为它是一个文件、无需安装任何东西，你可以把它交给非开发人员——designer、PM、domain expert——让他们亲手感受这个 model。它以他们的语言说话，而不是代码的语言。
+因为它是一个文件、无需安装任何东西，你可以把它交给非开发人员（designer、PM、domain expert），让他们亲手感受这个 model。它以他们的语言说话，而不是代码的语言。
 
 ## When this is the right shape
 
@@ -25,8 +25,8 @@
 
 合适形状取决于问题：
 
-- **Pure reducer** — `(state, action) => state`。适合 actions 是离散 events、state 是单个值的场景。
-- **State machine** — 显式 states 和 transitions。适合 “现在到底哪些 actions 合法” 本身就是问题的一部分。
+- **Pure reducer**：`(state, action) => state`。适合 actions 是离散 events、state 是单个值的场景。
+- **State machine**：显式 states 和 transitions。适合 “现在到底哪些 actions 合法” 本身就是问题的一部分。
 - **一组作用于 plain data type 的 pure functions**。适合没有隐式 current state，只有 transformations 的场景。
 - **Class 或带清晰 method surface 的 module**，当 logic 确实拥有持续的 internal state。
 
@@ -34,20 +34,20 @@
 
 ### 3. Build the shareable HTML file
 
-一个文件，纯 HTML/CSS/JS——没有 framework、没有 bundler、没有 server，一切内联，因此双击就能打开，经得起被 email 传来传去。任何人都应该能通过打开它来运行。
+一个文件，纯 HTML/CSS/JS：没有 framework、没有 bundler、没有 server，一切内联，因此双击就能打开，经得起被 email 传来传去。任何人都应该能通过打开它来运行。
 
-为非开发人员而写。每个 label 都用 **domain language**，而不是代码——buttons 和 state 读起来像业务，而不是 reducer。用平实的语言解释正在发生什么。
+为非开发人员而写。每个 label 都用 **domain language**，而不是代码：buttons 和 state 读起来像业务，而不是 reducer。用平实的语言解释正在发生什么。
 
 用清晰的层级从上到下排版：
 
 1. **Title 和一行说明**，说明这个 demo 让你探索什么（即 step 1 的问题）。
-2. **Current state** — 完整相关 state，渲染成可读的 panel（带 label 的 fields，而不是 raw JSON dump），每次点击后重新渲染，让变化可见。在有助于非开发人员跟上的地方，指出刚刚发生了什么变化。
-3. **Free-play buttons** — 每个 action 一个 button，始终可用，让任何人都可以按任意顺序戳这个 model。每次点击 dispatch 它的 action 并重新渲染 state。
-4. **Guided walkthroughs** — 一组 **scenarios**，每个 tab 一个。每个 tab 放一段简短的平实语言 scenario 描述——它搭建的情境、要看什么——下面是对应 scenario 按顺序 **要按的 buttons**。每一步都是真实 button：点击它执行该 action 并进入下一步。启动一个 walkthrough 会重置到已知 initial state，让 scenario 每次都以相同方式运行。
+2. **Current state**：完整相关 state，渲染成可读的 panel（带 label 的 fields，而不是 raw JSON dump），每次点击后重新渲染，让变化可见。在有助于非开发人员跟上的地方，指出刚刚发生了什么变化。
+3. **Free-play buttons**：每个 action 一个 button，始终可用，让任何人都可以按任意顺序戳这个 model。每次点击 dispatch 它的 action 并重新渲染 state。
+4. **Guided walkthroughs**：一组 **scenarios**，每个 tab 一个。每个 tab 放一段简短的平实语言 scenario 描述（它搭建的情境、要看什么），下面是对应 scenario 按顺序 **要按的 buttons**。每一步都是真实 button：点击它执行该 action 并进入下一步。启动一个 walkthrough 会重置到已知 initial state，让 scenario 每次都以相同方式运行。
 
-选择能演示那些 awkward cases 的 scenarios——happy path、一个棘手的 edge case、一次尝试做本应非法的事——也就是纸面上难以推理的那些。
+选择能演示那些 awkward cases 的 scenarios：happy path、一个棘手的 edge case、一次尝试做本应非法的事，也就是纸面上难以推理的那些。
 
-保持美观但克制：干净的 typography、充裕的 spacing、一个 accent colour。不要动画、不要花招——不要任何与 state 和 buttons 抢注意力的东西。
+保持美观但克制：干净的 typography、充裕的 spacing、一个 accent colour。不要动画、不要花招：不要任何与 state 和 buttons 抢注意力的东西。
 
 ### 4. Hand it over
 
@@ -55,7 +55,7 @@
 
 ### 5. Capture the answer and the prototype
 
-Prototype 回答问题后，capture answer，再按 [SKILL](SKILL.md) 描述的方式 capture prototype。Logic-specific mapping：验证过的 reducer / machine / function set 搬进真实 module（decision 被吸收）；HTML shell 跟随 prototype 一起进入把它作为 primary source 保留的 throwaway branch——而且由于它是单一自包含文件，在那里仍然可以毫不费力地重新运行。
+Prototype 回答问题后，capture answer，再按 [SKILL](SKILL.md) 描述的方式 capture prototype。Logic-specific mapping：验证过的 reducer / machine / function set 搬进真实 module（decision 被吸收）；HTML shell 跟随 prototype 一起进入把它作为 primary source 保留的 throwaway branch，而且由于它是单一自包含文件，在那里仍然可以毫不费力地重新运行。
 
 ## Anti-patterns
 

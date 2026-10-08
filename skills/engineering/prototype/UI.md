@@ -11,17 +11,17 @@
 - "Try a different layout for the settings screen."
 - 任何用户原本要花一天在脑子里比较三个模糊 mockups 的情况。
 
-## Two sub-shapes — strongly prefer sub-shape A
+## Two sub-shapes: strongly prefer sub-shape A
 
 当 UI prototype **贴着应用其他部分运行**时会更容易判断：真实 header、真实 sidebar、真实 data、真实 density。一个独立的 throwaway route 是真空环境；每个 variant 单看都还行。只要有合理的现有页面可以承载 variants，默认选择 sub-shape A。只有 prototype 确实没有附近归宿时，才使用 sub-shape B。
 
-### Sub-shape A — adjustment to an existing page (preferred)
+### Sub-shape A: adjustment to an existing page (preferred)
 
 路由已经存在。Variants 渲染在**同一路由**上，通过 `?variant=` URL search param gate。现有 data fetching、params、auth 都保留；只替换 rendering。这是默认选择，除非有明确理由不用。
 
 如果 prototype 的东西还没有页面，但*自然会存在于某个页面内部*（dashboard 新 section、settings screen 新 card、现有 flow 的新 step），仍然算 sub-shape A。把 variants mount 到 host page 内。
 
-### Sub-shape B — a new page (last resort)
+### Sub-shape B: a new page (last resort)
 
 只有被 prototype 的东西确实没有现有页面可放时才用，例如全新的顶层 surface，或无法合理嵌入任何地方的 flow。
 
@@ -58,7 +58,7 @@ Variants 必须**结构不同**：不同 layout、不同 information hierarchy�
 在路由上创建一个 switcher component：
 
 ```tsx
-// pseudo-code — adapt to the project's framework
+// pseudo-code, adapt to the project's framework
 const variant = searchParams.get('variant') ?? 'A';
 return (
   <>
@@ -78,9 +78,9 @@ return (
 
 屏幕底部居中的 fixed-position 小 bar，包含三部分：
 
-- **Left arrow** — 切到上一个 variant（循环）。
-- **Variant label** — 显示当前 variant key；如果 variant export 了 name，也一起显示。例如 `B — Sidebar layout`。
-- **Right arrow** — 切到下一个 variant（循环）。
+- **Left arrow**：切到上一个 variant（循环）。
+- **Variant label**：显示当前 variant key；如果 variant export 了 name，也一起显示。例如 `B (Sidebar layout)`。
+- **Right arrow**：切到下一个 variant（循环）。
 
 Behaviour：
 
@@ -99,8 +99,8 @@ Behaviour：
 
 一旦某个 variant 胜出，capture answer（哪个胜出以及为什么），再按 [SKILL](SKILL.md) 描述的方式 capture prototype。把 winner 折进真实 code，其余内容移到 throwaway branch，不要进入 main：
 
-- **Sub-shape A** — 把 winner 折进 existing page；从 main 中移除 losing variants 和 switcher。
-- **Sub-shape B** — 把 winning variant 提升为 real route；从 main 中移除 throwaway route 和 switcher。
+- **Sub-shape A**：把 winner 折进 existing page；从 main 中移除 losing variants 和 switcher。
+- **Sub-shape B**：把 winning variant 提升为 real route；从 main 中移除 throwaway route 和 switcher。
 
 完整 variants 集合是 primary source，应进入 throwaway branch，而不是垃圾桶；留在 main branch 的 variant components 和 switcher 会迅速腐烂并误导下一位读者。
 

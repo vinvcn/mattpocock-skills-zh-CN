@@ -4,7 +4,7 @@ description: 把单个 agent session 装不下的一大块工作规划成 issue 
 disable-model-invocation: true
 ---
 
-一个松散想法出现了：它太大，单个 agent session 装不下，而且被 fog 包围；从这里到 **destination** 的路还看不见。Wayfinding 的目标是找到这条路，而不是朝 destination 猛冲。这个 skill 会把路径绘制成 repo issue tracker 上的 **shared map**，然后逐个处理 **decision tickets**——它们承载需要决策才能解决的问题，而不是要执行的 build slices——直到路线清晰。
+一个松散想法出现了：它太大，单个 agent session 装不下，而且被 fog 包围；从这里到 **destination** 的路还看不见。Wayfinding 的目标是找到这条路，而不是朝 destination 猛冲。这个 skill 会把路径绘制成 repo issue tracker 上的 **shared map**，然后逐个处理 **decision tickets**（它们承载需要决策才能解决的问题，而不是要执行的 build slices），直到路线清晰。
 
 不同 effort 的 destination 不同，而为它命名是 charting 的第一个动作；它塑造每个 ticket。它可能是一份要 hand off 并迭代的 spec、一个必须在 planning 前确定的 decision，或 data-structure migration 之类原地完成的 change。Map 与领域无关：engineering work、course content，或任何符合这个形状的事项都可以。
 
@@ -31,7 +31,7 @@ Map 是低分辨率的全局视图，每个 session 加载一次。Open tickets 
 ```markdown
 ## Destination
 
-<what reaching the end of this map looks like — the spec, decision, or change this effort is finding its way to. One or two lines; every session orients to it before choosing a ticket.>
+<what reaching the end of this map looks like: the spec, decision, or change this effort is finding its way to. One or two lines; every session orients to it before choosing a ticket.>
 
 ## Notes
 
@@ -39,9 +39,9 @@ Map 是低分辨率的全局视图，每个 session 加载一次。Open tickets 
 
 ## Decisions so far
 
-<!-- the index — one line per closed ticket: enough to judge relevance, then zoom the link for the detail the ticket holds -->
+<!-- the index: one line per closed ticket, enough to judge relevance, then zoom the link for the detail the ticket holds -->
 
-- [<closed ticket title>](link) — <one-line gist of the answer>
+- [<closed ticket title>](link): <one-line gist of the answer>
 
 ## Not yet specified
 
@@ -98,11 +98,11 @@ Fog 只会聚集在通往 destination 的方向。Destination 固定 scope，因
 
 Out-of-scope work 永远不会 graduate；frontier 会停在 destination。只有重画 destination 时它才会回来，而且应成为新的 effort，不是 resumption。
 
-把某事排除出 scope 是 scoping act，不是 route 上的一步。如果已有 ticket 被发现位于 destination 之外——charting 时被错误地划入 scope，或被某次 resolution 暴露——应 **close it**（closed ticket 明确不在 frontier 上），并在 **Out of scope** section 中留一行：gist 加上它为何 out of scope，并链接到 closed ticket。不要把它放进 **Decisions so far**；后者只记录真正走过的路线——scope 边界不是路线上的一步。
+把某事排除出 scope 是 scoping act，不是 route 上的一步。如果已有 ticket 被发现位于 destination 之外（charting 时被错误地划入 scope，或被某次 resolution 暴露），应 **close it**（closed ticket 明确不在 frontier 上），并在 **Out of scope** section 中留一行：gist 加上它为何 out of scope，并链接到 closed ticket。不要把它放进 **Decisions so far**；后者只记录真正走过的路线，scope 边界不是路线上的一步。
 
 ## Invocation
 
-两种模式。无论哪种，**每个 session 绝不要 resolve 超过一个 ticket**——research tickets 除外。
+两种模式。无论哪种，**每个 session 绝不要 resolve 超过一个 ticket**，research tickets 除外。
 
 ### Chart the map
 

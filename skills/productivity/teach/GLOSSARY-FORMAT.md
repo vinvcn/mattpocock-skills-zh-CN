@@ -16,7 +16,7 @@ Muscle growth driven by mechanical tension and metabolic stress over repeated tr
 _Avoid_: Bulking, getting big
 
 **Progressive overload**:
-Systematically increasing the demand on a muscle over time — via load, volume, or intensity.
+Systematically increasing the demand on a muscle over time, via load, volume, or intensity.
 _Avoid_: Pushing harder, levelling up
 
 **RPE (Rate of Perceived Exertion)**:
@@ -31,5 +31,5 @@ _Avoid_: Effort score, intensity rating
 - **Keep definitions tight.** 一两句话。定义这个 term 是什么，而不是它做什么或怎么做。
 - **Use the glossary's own terms inside definitions.** 一旦某个 term 进入 glossary，就在所有地方优先使用它，包括其他 definitions 内部。这会让复杂 terms 之后更容易理解。
 - **Group under subheadings** when natural clusters emerge（例如 `## Anatomy`、`## Programming`）。当 terms 自然内聚时，扁平列表也可以。
-- **Flag ambiguities explicitly.** 如果一个 term 在更大领域中被宽泛使用，记录本 workspace 的 resolution："In this workspace, 'set' always means a working set — warm-ups are tracked separately."
+- **Flag ambiguities explicitly.** 如果一个 term 在更大领域中被宽泛使用，记录本 workspace 的 resolution："In this workspace, 'set' always means a working set; warm-ups are tracked separately."
 - **Revise as understanding deepens.** 用户第一周写的 definition 到第六周可能是错的。就地更新，不要留下 stale entries。

@@ -22,6 +22,8 @@ Skills 按 bucket folder 组织在 `skills/` 下：
 
 从 `mattpocock/skills` 刷新上游内容时，改文件前先使用 `.skills/translate-skill/SKILL.md`。本仓库采用 skill-guided content localization，不做 Git fork-sync：保留简体中文本地化身份，安装命令保持指向 `vinvcn/mattpocock-skills-zh-CN`，不要导入上游 repository-management state。翻译术语以 [翻译术语表](./TRANSLATION-GLOSSARY.md) 为准：刷新与本地化时优先采用已决定的译法；未决定的术语先按 [贡献指南](./CONTRIBUTING.md) 的流程提出请求，决定后再落地。
 
+行文不使用破折号（中文「——」与英文 em-dash `—`），与上游 v1.3.1 的 em-dash 清理一致：改用逗号、冒号、分号、括号或拆句，不要在后续翻译中重新引入。领域文档约定沿用上游 v1.3.1 的重命名：文件名为 `GLOSSARY.md` / `GLOSSARY-MAP.md`（文件名保留英文，不本地化）。
+
 ## 同步记录
 
 在SYNC.md中记录同步记录

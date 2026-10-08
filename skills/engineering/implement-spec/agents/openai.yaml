@@ -1,5 +1,5 @@
 interface:
   display_name: "实现 Spec"
-  short_description: "将完整 spec 实现为一个 PR"
+  short_description: "在代码中实现 /to-spec 和 /to-tickets 的产出。"
 policy:
   allow_implicit_invocation: false

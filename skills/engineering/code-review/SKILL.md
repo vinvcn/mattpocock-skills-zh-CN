@@ -5,8 +5,8 @@ description: "从固定点（commit、branch、tag 或 merge-base）开始，按
 
 对用户提供的 fixed point 与 `HEAD` 之间的 diff 做双轴 review：
 
-- **Standards** — 代码是否符合这个 repo 记录下来的 coding standards？
-- **Spec** — 代码是否忠实实现来源 issue / spec？
+- **Standards**：代码是否符合这个 repo 记录下来的 coding standards？
+- **Spec**：代码是否忠实实现来源 issue / spec？
 
 两个轴线都作为**并行 sub-agents**运行，避免互相污染 context；然后这个 skill 聚合它们的 findings。
 
@@ -26,7 +26,7 @@ Issue tracker 应该已经提供给你；如果缺少 `docs/agents/issue-tracker
 
 按以下顺序寻找来源 spec：
 
-1. Commit messages 中的 issue references（`#123`、`Closes #45`、GitLab `!67` 等）— 按 `docs/agents/issue-tracker.md` 中的 workflow 获取。
+1. Commit messages 中的 issue references（`#123`、`Closes #45`、GitLab `!67` 等），按 `docs/agents/issue-tracker.md` 中的 workflow 获取。
 2. 用户作为 argument 传入的 path。
 3. `docs/`、`specs/` 或 `.scratch/` 下与 branch name 或 feature 匹配的 spec 文件。
 4. 如果什么都找不到，询问用户 spec 在哪里。如果用户说没有 spec，**Spec** sub-agent 跳过并报告 “no spec available”。
@@ -42,28 +42,28 @@ Repo 中任何记录代码应该如何写的内容，例如 `CODING_STANDARDS.md
 
 每个 smell 按 _what it is_ -> _how to fix_ 读取，并对照 diff：
 
-- **Mysterious Name** — function、variable 或 type 的名称没有说明它做什么或装什么。-> rename it；如果找不到诚实名称，设计本身可能浑浊。
-- **Duplicated Code** — 同一 logic shape 出现在多个 hunk 或 file 中。-> 抽出共享形状，让两边调用。
-- **Feature Envy** — method 访问另一个 object 的 data 多于自己的 data。-> 把 method 移到它羡慕的数据上。
-- **Data Clumps** — 同几组 fields 或 params 总是一起出现。-> 包成一个 type 来传。
-- **Primitive Obsession** — primitive 或 string 代替了值得拥有自有 type 的 domain concept。-> 给该 concept 一个小 type。
-- **Repeated Switches** — 对同一 type 的相同 `switch`/`if` cascade 在改动中重复。-> 换成 polymorphism，或共享一个 map。
-- **Shotgun Surgery** — 一个 logical change 迫使 diff 分散修改很多文件。-> 把一起变化的东西收拢进一个 module。
-- **Divergent Change** — 一个 file 或 module 因多个无关原因被修改。-> 拆分，让每个 module 只因一个原因变化。
-- **Speculative Generality** — 为 spec 没有的需求增加 abstraction、params 或 hooks。-> 删除它，inline 回来，直到有真实需要。
-- **Message Chains** — caller 不该依赖的长链式导航 `a.b().c().d()`。-> 把这段导航藏到第一个 object 的一个 method 后面。
-- **Middle Man** — class 或 function 基本只是在继续委托。-> 删掉它，直接调用真实目标。
-- **Refused Bequest** — subclass 或 implementer 忽略或 override 了继承来的大部分内容。-> 去掉 inheritance，使用 composition。
+- **Mysterious Name**：function、variable 或 type 的名称没有说明它做什么或装什么。-> rename it；如果找不到诚实名称，设计本身可能浑浊。
+- **Duplicated Code**：同一 logic shape 出现在多个 hunk 或 file 中。-> 抽出共享形状，让两边调用。
+- **Feature Envy**：method 访问另一个 object 的 data 多于自己的 data。-> 把 method 移到它羡慕的数据上。
+- **Data Clumps**：同几组 fields 或 params 总是一起出现。-> 包成一个 type 来传。
+- **Primitive Obsession**：primitive 或 string 代替了值得拥有自有 type 的 domain concept。-> 给该 concept 一个小 type。
+- **Repeated Switches**：对同一 type 的相同 `switch`/`if` cascade 在改动中重复。-> 换成 polymorphism，或共享一个 map。
+- **Shotgun Surgery**：一个 logical change 迫使 diff 分散修改很多文件。-> 把一起变化的东西收拢进一个 module。
+- **Divergent Change**：一个 file 或 module 因多个无关原因被修改。-> 拆分，让每个 module 只因一个原因变化。
+- **Speculative Generality**：为 spec 没有的需求增加 abstraction、params 或 hooks。-> 删除它，inline 回来，直到有真实需要。
+- **Message Chains**：caller 不该依赖的长链式导航 `a.b().c().d()`。-> 把这段导航藏到第一个 object 的一个 method 后面。
+- **Middle Man**：class 或 function 基本只是在继续委托。-> 删掉它，直接调用真实目标。
+- **Refused Bequest**：subclass 或 implementer 忽略或 override 了继承来的大部分内容。-> 去掉 inheritance，使用 composition。
 
 ### 4. Spawn both sub-agents in parallel
 
-**Standards sub-agent prompt** — 包含：
+**Standards sub-agent prompt** 包含：
 
 - 完整 diff command 和 commit list。
 - Step 3 中找到的 standards-source files 列表，**以及 Step 3 的 smell baseline 全文**；sub-agent 没有其他方式读取它。
-- Brief："Report — per file/hunk where relevant — (a) every place the diff violates a documented standard: cite the standard (file + the rule); and (b) any baseline smell you spot: name it and quote the hunk. Distinguish hard violations from judgement calls — documented-standard breaches can be hard, but baseline smells are always judgement calls, and a documented repo standard overrides the baseline. Skip anything tooling enforces. Under 400 words."
+- Brief："Report, per file/hunk where relevant, (a) every place the diff violates a documented standard: cite the standard (file + the rule); and (b) any baseline smell you spot: name it and quote the hunk. Distinguish hard violations from judgement calls: documented-standard breaches can be hard, but baseline smells are always judgement calls, and a documented repo standard overrides the baseline. Skip anything tooling enforces. Under 400 words."
 
-**Spec sub-agent prompt** — 包含：
+**Spec sub-agent prompt** 包含：
 
 - Diff command 和 commit list。
 - Spec 的 path 或已获取内容。

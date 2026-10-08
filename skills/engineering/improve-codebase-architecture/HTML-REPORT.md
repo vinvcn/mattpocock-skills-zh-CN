@@ -9,7 +9,7 @@ Architecture review 渲染为单个 self-contained HTML file，写到 OS temp di
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Architecture review — {{repo name}}</title>
+    <title>Architecture review for {{repo name}}</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script type="module">
       import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
@@ -56,7 +56,7 @@ Diagrams 承担主要信息量。Prose 要稀疏、直白，并自然使用 `/co
 
 ## Diagram patterns
 
-选择适合 candidate 的 pattern，可以混用。不要让每个 diagram 都长得一样——多样性本身就是目的的一部分。
+选择适合 candidate 的 pattern，可以混用。不要让每个 diagram 都长得一样：多样性本身就是目的的一部分。
 
 ### Mermaid graph（dependencies / call flow 的主力）
 
@@ -77,7 +77,7 @@ Diagrams 承担主要信息量。Prose 要稀疏、直白，并自然使用 `/co
 
 ### Hand-built boxes-and-arrows（当 Mermaid 的 layout 妨碍表达时）
 
-Modules 用带 border 和 label 的 `<div>`；arrows 用绝对定位在 relative container 上的 inline SVG `<line>` 或 `<path>`。当你希望 "after" diagram 像一个 thick-bordered 的 deep module、internals 灰显时，就用这种方式——Mermaid 无法以合适的视觉分量渲染出那种效果。
+Modules 用带 border 和 label 的 `<div>`；arrows 用绝对定位在 relative container 上的 inline SVG `<line>` 或 `<path>`。当你希望 "after" diagram 像一个 thick-bordered 的 deep module、internals 灰显时，就用这种方式：Mermaid 无法以合适的视觉分量渲染出那种效果。
 
 ### Cross-section（适合 layered shallowness）
 

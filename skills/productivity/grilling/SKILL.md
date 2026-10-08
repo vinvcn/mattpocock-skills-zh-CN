@@ -5,7 +5,7 @@ description: 围绕计划、decision 或 idea 持续追问用户。适用于用�
 
 持续访谈用户，直到达成共同理解。把这件事映射成一棵 **design tree**：每个 decision 都分支到挂在它下面的那些 decisions。
 
-按 **rounds** 逐轮处理这棵树。**frontier** 是那些 prerequisites 已经敲定的 decisions——也就是你现在就可以问、无需猜测还没听到的答案的那些问题。在一轮里问完整条 frontier：给每个问题编号并附上你的推荐答案。然后等用户回答，再进入下一轮。
+按 **rounds** 逐轮处理这棵树。**frontier** 是那些 prerequisites 已经敲定的 decisions，也就是你现在就可以问、无需猜测还没听到的答案的那些问题。在一轮里问完整条 frontier：给每个问题编号并附上你的推荐答案。然后等用户回答，再进入下一轮。
 
 每一轮的格式如下:
 
@@ -21,8 +21,8 @@ description: 围绕计划、decision 或 idea 持续追问用户。适用于用�
 ➡️ <你的推荐答案>
 ```
 
-每一轮用户给出的回答都会重塑这棵树——敲定的 decisions 会把 frontier 向外推，并解锁依赖它们的问题。重新计算 frontier，然后问下一轮。其答案依赖本轮中另一个仍未解决的问题，属于 _更晚的_ 一轮，而不是本轮。
+每一轮用户给出的回答都会重塑这棵树：敲定的 decisions 会把 frontier 向外推，并解锁依赖它们的问题。重新计算 frontier，然后问下一轮。其答案依赖本轮中另一个仍未解决的问题，属于 _更晚的_ 一轮，而不是本轮。
 
-寻找 _facts_ 是你的工作，绝不是用户的。当一个 frontier 问题需要来自 environment（filesystem、tools 等）的 fact 时，派一个 sub-agent 去查——不要问用户任何你自己能查到的东西。不要被它阻塞：一次正在进行的探索是一个尚未敲定的 prerequisite，所以只有它下游的问题才需要等 sub-agent 回报——现在先问 frontier 的其余部分。_decisions_ 属于用户——逐个交给他，并等待。
+寻找 _facts_ 是你的工作，绝不是用户的。当一个 frontier 问题需要来自 environment（filesystem、tools 等）的 fact 时，派一个 sub-agent 去查，不要问用户任何你自己能查到的东西。不要被它阻塞：一次正在进行的探索是一个尚未敲定的 prerequisite，所以只有它下游的问题才需要等 sub-agent 回报，现在先问 frontier 的其余部分。_decisions_ 属于用户：逐个交给他，并等待。
 
 当 frontier 为空时，会话才算结束：design tree 的每个分支都访问过，没有留下任何被默默假设的东西。在用户确认我们已经达成共同理解之前，不要采取行动。
