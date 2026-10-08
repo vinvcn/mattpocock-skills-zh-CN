@@ -28,7 +28,17 @@ skill descriptions
 面向维护者的指引
 docs 说明性文字
 以说明性文字写成的示例
+Markdown 标题（headings）
 ```
+
+### Markdown 标题的翻译规则
+
+标题是说明性文字，翻译成简体中文；标题层级与 Markdown 结构保持不变。标题内嵌的 inline code、identifiers 原样保留。
+
+- docs 页面的固定 schema 标题（`What it does`、`When to reach for it`、`Common questions`、`It's working if`、`Where it fits`、`Prerequisites`）与 skill 文件的结构性标题（`Steps`、`Reference` 等）必须使用 `TRANSLATION-GLOSSARY.md` 登记的统一译法，保证所有页面一致。
+- 其余标题按页面语境意译，无需逐一登记。
+- 例外（作为术语保留英文，不译）：bucket 名（`Engineering`、`Productivity`、`Misc` 等，与目录名一致）；invocation 术语（`User-invoked`、`Model-invoked`）。
+- 修改标题时，同步更新同一文件内指向该标题的 anchor links（GitHub 会按标题文本生成 slug，中文标题生成中文 anchor）。
 
 ## 原样保留哪些内容
 

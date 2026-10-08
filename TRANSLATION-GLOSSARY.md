@@ -11,6 +11,8 @@
 | `ASD-STE100 Simplified Technical English` | `ASD-STE100 简化技术英语` | `ASD-STE100` 是规范代码不译；「简化技术英语」是该 controlled-language 标准的通用中文名 | `skills/productivity/wait-what/SKILL.md:7` | [#34](https://github.com/vinvcn/mattpocock-skills-zh-CN/issues/34)（2026-09-28 维护者批准） |
 | `plain English`（含大小写变体） | `平实的语言` | 语言中立，避免「平实的英文」误导；与 README 既有表述一致 | `skills/engineering/ask-matt/SKILL.md:84` | [#34](https://github.com/vinvcn/mattpocock-skills-zh-CN/issues/34)（2026-09-28 维护者批准） |
 | `GLOSSARY.md` / `GLOSSARY-MAP.md`（文件名） | 保留英文文件名，不本地化 | 上游 v1.3.1 将 `CONTEXT.md`/`CONTEXT-MAP.md` 约定重命名为 `GLOSSARY.md`/`GLOSSARY-MAP.md`；文件名是 skills 读取的行为关键 identifier，正文以 inline code 引用，说明性文字可称「术语表」 | 上游 v1.3.1 同步（`mattpocock/skills@24fe0ef`） | 维护者于 2026-10-08 v1.3.1 同步时批准（本 PR 待复核） |
+| Markdown schema 标题（docs 页面） | 见下行各译法 | `What it does` 译「它做什么」；`When to reach for it` 译「何时使用」；`Common questions` 译「常见问题」；`It's working if` 译「它正常工作的标志」；`Where it fits` 译「它在整体中的位置」；`Prerequisites` 译「前置条件」 | 标题翻译决定（Option B） | 维护者于 2026-10-08 批准（stacked PR） |
+| Markdown 结构性标题（skill 文件） | `Steps` 译「步骤」；`Reference` 译「参考」 | 其余 skill 标题按语境意译；例外不译：bucket 名（`Engineering`/`Productivity`/`Misc`）与 invocation 术语（`User-invoked`/`Model-invoked`） | 标题翻译决定（Option B） | 维护者于 2026-10-08 批准（stacked PR） |
 
 ## Translate terms（翻译请求）
 
