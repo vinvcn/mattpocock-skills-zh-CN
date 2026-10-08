@@ -1,8 +1,8 @@
-# Skill mechanics
+# Skill 机制
 
 [`writing-for-agents`](SKILL.md) 的 skill 专属分支：当文档是一个 skill 时会有什么不同：frontmatter、invocation 选择以及 router skills。关于写作的其他一切都是 `SKILL.md` 中的通用 reference。
 
-## Invocation
+## 调用
 
 两种选择，交易两种 load：
 
@@ -13,7 +13,7 @@
 
 两个 user-invoked skills 都需要的 shared reference 放在谁那里都不行：没有 descriptions，谁都触发不了谁。把它推到 skill system 之外的普通文件中：任何 skill 都能指向的 external reference。
 
-## Splitting by invocation
+## 按 invocation 拆分
 
 invocation 上的切分（sequence 切分在 `SKILL.md` 中）：当你有一个应独立触发它的 distinct leading word 时（一个你确实在自己的 prompts 里用到的触发词），或另一个 skill 必须触达它时，拆出一个 model-invoked skill。你为新的始终加载的 description 支付 context load，所以那份独立触达必须值得。
 

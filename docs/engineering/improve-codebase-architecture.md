@@ -1,4 +1,4 @@
-## What it does
+## 它做什么
 
 `improve-codebase-architecture` 扫描 codebase，寻找 **deepening opportunities**：那些 shallow module（interface 几乎和它所隐藏的东西一样复杂）可以变成 deep module 的地方；把它们写成一份自包含的 HTML report，然后就你选中的那一个继续 [grills](https://www.aihero.dev/ai-coding-dictionary/grilling) 你。
 
@@ -6,7 +6,7 @@
 
 两道过滤让 report 不至于沦为泛泛的清理建议。每个候选项都必须通过 **deletion test**：移除这个 module 会把复杂性*集中*到一个更小的 interface 后面，还是只是把它摊散到调用者之间？只有"会集中"的情况才配得上一张卡片。而且除非你把它指向某个特定区域，否则它会先读取最近的 commit 历史，把扫描偏向于正在活跃变化的路径，理由是：对没人触碰的代码做 deepening，是一次你永远不会兑现的 refactor。
 
-## When to reach for it
+## 何时使用
 
 你通过输入 `/improve-codebase-architecture` 调用它，[agent](https://www.aihero.dev/ai-coding-dictionary/agent) 不会自行取用它。
 
@@ -25,13 +25,13 @@
 - 对于大到一次 session 装不下的整体 effort，用 [wayfinder](https://aihero.dev/skills-wayfinder)。
 - 对于"这个具体的东西坏了"，用 [diagnosing-bugs](https://aihero.dev/skills-diagnosing-bugs)。当真正的发现是没有好 seam 可以锁住这个 bug 时，它会交还到这里。
 
-## Prerequisites
+## 前置条件
 
 运行它无需任何前置条件。它会读取 `GLOSSARY.md` 以及 `docs/adr/` 中存在的任何 ADRs，并在它们存在时用你领域自己的名词说话：一个候选项读起来是"加深 Order intake module"，而不是"重构 FooBarHandler"。
 
 它在两个地方写入。report 进入 `<tmpdir>/architecture-review-<timestamp>.html`，位于 repo 之外。在 grilling 循环期间，它会向 `GLOSSARY.md` 添加或锐化术语（如果该文件不存在就创建它），并提议把一个被否决的候选项记录为 ADR，这样未来的运行就不会再次建议它。
 
-## Depth, and the report that hunts for it
+## Depth，以及搜寻它的报告
 
 这个 skill 围绕一个观念运转：**depth**。一个 deep module 把大量行为放在一个小而稳定的 interface 后面；一个 shallow module 则透过一个几乎和底下代码一样宽的 interface 泄漏自己的实现。这份 report 是对浅薄的搜寻（纯粹为了可测试性而抽出、而真正的 bug 活在它们被调用的方式里的 pure functions（没有 **locality**）、跨 **seams** 泄漏的 modules、不打开五个文件就无法理解的概念），以及一份修复它的 deepening 提议。
 
@@ -43,13 +43,13 @@
 | `Worth exploring` | 貌似合理的 deepening，但回报取决于代码下一步会走向哪里。 |
 | `Speculative` | 为了完整性而浮出水面。这些大多可以放心忽略。 |
 
-report 以一条 **Top recommendation**（它最想先处理的那一个）收尾，然后 skill 停下来，问你想探索哪个候选项。到那一刻为止还没有任何东西被决定，也没有任何代码被移动。
+report 以一条**首选推荐**（它最想先处理的那一个）收尾，然后 skill 停下来，问你想探索哪个候选项。到那一刻为止还没有任何东西被决定，也没有任何代码被移动。
 
-## What happens after you pick one
+## 选中一个之后会发生什么
 
 选中一个候选项就会开启一场围绕它的 [grilling](https://aihero.dev/skills-grilling) session：约束、seam 后面放着什么、哪些测试能存活、加深后的 interface 应该长什么样。那场 session 的输出是一个决策，而不是一个 diff。从那里开始走常规 flow：把决策带进 [to-spec](https://aihero.dev/skills-to-spec)，然后 [to-tickets](https://aihero.dev/skills-to-tickets)，然后 [implement](https://aihero.dev/skills-implement)。
 
-## Common questions
+## 常见问题
 
 **它围绕一个想法 grill 了我一个小时，而不是给我看选项。我能关掉这个吗？**
 
@@ -87,7 +87,7 @@ report 从 CDN 加载 Tailwind 和 Mermaid，所以打开它时需要网络访�
 
 skill 没有随附一个好答案。反复出现的请求是想要一份 `TYPESCRIPT.md`，为这些原则给出具体的文件和 module 布局，而它并不存在。skill 会告诉你 deepening 该放在哪里、seam 后面应该放着什么；把它转译成 package 或目录结构，目前是你自己的事。
 
-## It's working if
+## 它正常工作的标志
 
 - 候选项用你领域的概念命名，而不是发明出来的类名：是"the Order intake module"，而不是"the FooBarHandler"。
 - 候选项聚集在你最近编辑过的文件里，而不是 repo 中沉睡的角落。
@@ -96,6 +96,6 @@ skill 没有随附一个好答案。反复出现的请求是想要一份 `TYPESC
 - 每张卡片都把回报解释为 locality 或 leverage，并说出哪些测试会变得更简单，而不是只说"这个更干净"。
 - 以持久理由否决一个候选项，会换来一次记录 ADR 的提议，这样下一次运行就不会再次建议它。
 
-## Where it fits
+## 它在整体中的位置
 
 `improve-codebase-architecture` 是**定期维护**：每隔几天运行一次，在任何链条之外，用来排队工作而不是亲自动手。它的邻居是 [codebase-design](https://aihero.dev/skills-codebase-design)，拥有每个候选项赖以书写的 depth-and-seam 词汇；[grilling](https://aihero.dev/skills-grilling)，一旦你选中候选项就由它走 decision tree；以及 [domain-modeling](https://aihero.dev/skills-domain-modeling)，在决策落定时保持 `GLOSSARY.md` 和 ADRs 处于最新状态。它产出的是一个 idea，这个 idea 在 [grill-with-docs](https://aihero.dev/skills-grill-with-docs) 或 [to-spec](https://aihero.dev/skills-to-spec) 处重新进入 main build flow。它在 main flow 末尾的对口物是 [retro](https://aihero.dev/skills-retro)：这个 skill 改进 agent 身处其中的代码，`retro` 则在一次 build 之后改进它周围的环境（checks、standards、steering files）。至于哪种情形该用哪个 skill，[ask-matt](https://aihero.dev/skills-ask-matt) 是覆盖全集的 router。

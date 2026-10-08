@@ -1,10 +1,10 @@
-## What it does
+## 它做什么
 
 `grill-me` 拿一个**松散的想法**，持续访谈你，直到你能对它做出承诺。你不需要一份已经成型的工作计划才能开始：产出一份计划正是这个 [session](https://www.aihero.dev/ai-coding-dictionary/session) 的用途。它以 **rounds** 来提问：每一 round 就是整条 **frontier**（所有那些前提你已经搞定的问题），所以你永远不会被问到某个还悬而未决的问题。
 
 它是 **[stateless](https://www.aihero.dev/ai-coding-dictionary/stateless)** 的。它不写任何文件，也不留下任何 workspace。它唯一留下的，是你自己头脑中一个更清晰的、关于这个想法的版本。
 
-## When to reach for it
+## 何时使用
 
 你通过输入 `/grill-me` 来调用它，这个 [agent](https://www.aihero.dev/ai-coding-dictionary/agent) 不会自行调用它。请在一个**全新的对话**中开始它，而不是叠加在一个你已经让 agent 写好的计划之上。
 
@@ -18,7 +18,7 @@
 
 关闭 [plan mode](https://www.aihero.dev/ai-coding-dictionary/agent-mode)。Plan mode 会让 agent 倾向于赶着产出一份计划，而这与停留在追问中恰恰相反。
 
-## It's a conversation, not an interview
+## 这是一场对话，不是一场访谈
 
 这个 skill 负责提问，但 **scope 由你**掌握。这正是人们会忽略的部分，也是区分「把想法变成 decisions 的 session」和「产出自信的胡言乱语」的地方。
 
@@ -28,7 +28,7 @@
 
 相反的错误是真实但罕见的：在访谈中停留太久，以至于永远到不了写代码那一步。
 
-## Grillable and ungrillable
+## 可以 grill 的与 grill 不动的
 
 有些问题可以通过交谈来回答。另一些不行，而且无论你怎么 grill 都到不了那儿。
 
@@ -36,14 +36,14 @@
 
 靠交谈硬磨一个 ungrillable 的问题，正是 session 膨胀的地方。agent 不断换说法，你不断猜，scope 也随着不确定性一起膨胀。
 
-## It's working if
+## 它正常工作的标志
 
 - 你对某件事表示不同意。一场没有你反驳的 session，是一场你本不需要的 session。
 - 问题以几轮 rounds 的形式到来，而不是一条漫长的涓流，而且后面的 rounds 清楚地建立在你早先说过的话之上。
 - 你最终到达了一个你没想到的地方，因为一个问题浮出了你一直在隐式做出的一个 decision。
 - 到结束时，你能向一个不在场的人为每一个选择辩护。
 
-## Common questions
+## 常见问题
 
 **我应该预期多少问题，以及我怎么知道它何时结束？**
 数 rounds，而不是数问题。四个 rounds 里四十六个问题是一个普通的 session。它在前沿为空时结束：每一个分支都被走过，没有任何东西被默默地当作理所当然。
@@ -67,7 +67,7 @@ When grilling, ask one question at a time.
 **模型重要吗？**
 比大多数 skills 更重要。Grilling 依赖 [model](https://www.aihero.dev/ai-coding-dictionary/model) 自己对系统如何崩溃的直觉，所以给它你最好的模型。实施大多跟随 context，可以容忍更便宜的模型。
 
-## Where it fits
+## 它在整体中的位置
 
 `grill-me` 是一个**可以在任何地方、针对任何事物运行的 standalone**。stateless 正是让它可移植的原因：没有 repo、没有 workspace、没有配置，也不假设这个想法与软件有关。人们把它用于商业决定、用于写作、用于下一步要做什么，任何在他们头脑里无法安定的东西。
 

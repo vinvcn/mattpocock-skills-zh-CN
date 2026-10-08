@@ -1,10 +1,10 @@
-## What it does
+## 它做什么
 
 `handoff` 把你所处的对话压缩成一份 **handoff document**：一个写到你操作系统临时目录、而不是 workspace 里的 markdown 文件，一个新的 [agent](https://www.aihero.dev/ai-coding-dictionary/agent) 读完它就能接着干这份工作。
 
 它买到的是**可移植性**，而不是压缩。这让这个 skill 比听起来更窄。只有当工作必须 *travel*（到一个新的 [harness](https://www.aihero.dev/ai-coding-dictionary/harness)、一个新的目录、一个同事，或者一个你想 fork 出去的 side task），你才需要一份文件。如果没有东西在 travel，你就不需要 handoff：留在当前 [session](https://www.aihero.dev/ai-coding-dictionary/session)、`/clear`、一个 [subagent](https://www.aihero.dev/ai-coding-dictionary/subagent) 和 `/compact` 就覆盖了普通的 phase 末尾情况，而且 `/compact` 比这个 skill 更常覆盖它。
 
-## When to reach for it
+## 何时使用
 
 你通过输入 `/handoff` 来调用它，agent 不会自行调用它。附上一句关于下一个 session 用途的说明，文档就会据此被写出。
 
@@ -19,7 +19,7 @@
 
 对于其他任何情况（相同的 harness、相同的目录、你已经完成 [grilling](https://www.aihero.dev/ai-coding-dictionary/grilling) 并转向实施），`/compact` 才是选择。[ask-matt](https://aihero.dev/skills-ask-matt) 在 phase 边界上携带覆盖全部五个选项的有序 tree。
 
-## Branching is the use people skip
+## 分叉是人们最常跳过的用法
 
 这个 skill 的描述读起来像是 session 的恢复：写一份摘要、在这里结束、在那里恢复。这样读起来它像是一个更差的 `/compact`，所以被一带而过。Fork 的情况才是值得了解的。你**留在自己的 session 里**，把积累的 context 的一份副本交给一个并行工作的第二个 agent。
 
@@ -27,13 +27,13 @@
 
 在 phase 边界上，五个选项中的三个保留的东西各不相同：`/compact` 保留你的意图，`/clear` 什么都不保留，`/handoff` 保留这项工作移动的能力。
 
-## What travels, and what doesn't
+## 什么随行，什么不随行
 
 这份文档承载 live thread（进行着什么、为什么、下一步是什么），外加一个 **suggested skills** 小节，列出下一个 agent 应该调用什么。Secrets 在它被写出之前就被 redact。
 
 它刻意不承载任何已经写下来的东西。Specs、plans、ADRs、issues、commits 和 diffs 都通过路径或 URL 引用，绝不复制。这保持文件小巧，也把已定型的细节保持在一个地方，而不是两个会漂移的地方。
 
-## Common questions
+## 常见问题
 
 **Handoff 还是 compact？**
 只要没有东西在 travel，就用 `/compact`。停留在同一个任务上是 compact，而不是 handoff：相同的 harness、相同的目录，而且你需要保持在 loop 里，这正是 phase-boundary tree 大多数日子里落点所在。`/handoff` 的优势不是它摘要得更好；而是结果是一份你能带到 `/compact` 到不了的地方去的文件。
@@ -62,7 +62,7 @@
 **为什么它是一个 skill，而不是一条 slash command？**
 两者都行；它们适合不同的情况。作为一个 skill，它通过与这里其他一切相同的 install path 发布与更新，这正是它可共享的原因：agent 不会自行触发它的约束是由它的 frontmatter 设定的，而不是由机制设定的。
 
-## It's working if
+## 它正常工作的标志
 
 - 文档只是对话的一小部分，而 specs、issues 和 diffs 以路径和 URL 的形式出现在其中，而不是被复制的文本。
 - 你不需要打开原始 session 就能冷读它，并且知道接下来该做什么。
@@ -71,6 +71,6 @@
 - suggested-skills 小节点名了你本来就会自己调用的那个 skill。
 - 其中没有任何 key、token 或 password。
 
-## Where it fits
+## 它在整体中的位置
 
 `handoff` 是一个**随时可调用的 standalone**，它位于 sessions 之间的接缝处，而不是某条 build chain 内部，但它是窄窄一个，而诚实的图景是：在 phase 边界上，你用它会比用其他四个选项少得多。它最近的邻居是 [prototype](https://aihero.dev/skills-prototype)，因为 prototype 住在自己的目录里，而出出进进的往返正是这个 skill 所为之服务的跨越。当你处于一个边界、不确定是该 continue、clear、hand off、delegate 还是 compact 时，[ask-matt](https://aihero.dev/skills-ask-matt) 携带给那五个判序的 tree，并带你路由到该集合的其余部分。

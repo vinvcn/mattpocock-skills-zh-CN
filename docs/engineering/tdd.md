@@ -1,10 +1,10 @@
-## What it does
+## 它做什么
 
 `tdd` 用 test-first 的方式构建 feature 或修 bug：一个 failing test，然后刚好足够通过它的代码，再下一个 behavior。它承载着让这个 loop 产出值得保留的 tests 的那些标准：什么样的 test 是好 test、tests 放在哪里、mocks 是干嘛的，以及三个会悄悄毁掉一个 suite 的 anti-patterns。
 
 它不会在你尚未认可 seam 的地方写任何 test。在任何 test 存在之前，它会说出它打算在其上测试的 public boundaries，并停下来等你确认，因为测试精力是有限的，而这就是你把精力花在关键路径而非每一个 edge case 上的地方。另一件要知道的事是：`tdd` 是一个 **reference**，而不是一个 driver。它持有这个 loop 的规则，而别的东西（你，或 [implement](https://aihero.dev/skills-implement)）运行应用这些规则的 [session](https://www.aihero.dev/ai-coding-dictionary/session)。
 
-## When to reach for it
+## 何时使用
 
 输入 `/tdd`，或者当任务合适时由 [agent](https://www.aihero.dev/ai-coding-dictionary/agent) 自动触发，test-first 地构建 feature 或修 bug，或者当你说 "red-green-refactor" 时。
 
@@ -20,11 +20,11 @@
 
 最后一行是一个真正的洞，而不是风格偏好。这个 skill 决定 seams *在哪里*；它内部没有任何东西决定一个 change 是否*值得*跑这个 loop。把它运行在一个没有独立真相来源可断言的变化上，你会得到一个重述 implementation 的 test，那个 skill 自己警告过的 tautological anti-pattern，从另一个方向抵达。它是 [issue #746](https://github.com/mattpocock/skills/issues/746)，而且是开放的。在它关闭之前，那个判断是你或你的 `CLAUDE.md` 的。
 
-## Prerequisites
+## 前置条件
 
 需要安装 [codebase-design](https://aihero.dev/skills-codebase-design)。`tdd` 过去自带 deep-module 和 interface-design 笔记；在 v1.0 中它们被删除，以支持共享 skill，现在 `tdd` 依靠它来获取 interface-design 词汇。没有别的，这个 skill 是 [stateless](https://www.aihero.dev/ai-coding-dictionary/stateless) 的，不写自己的任何文件。
 
-## The loop, and the seam it runs at
+## 循环，以及它运行所在的 seam
 
 有三个词承载这个 skill。
 
@@ -44,7 +44,7 @@
 
 Mocks 只用于系统边界：外部 APIs、时间、随机性，有时是 filesystem 或 database。不是你自己的 modules。
 
-## Common questions
+## 常见问题
 
 **它为什么不 refactor？description 说 "red-green-refactor"。**
 
@@ -74,7 +74,7 @@ Mocks 只用于系统边界：外部 APIs、时间、随机性，有时是 files
 
 不知道。对一个 ticket 运行时，它会乐意提议属于兄弟 ticket 的工作，因为它看不到 issue graph 的其余部分（[issue #129](https://github.com/mattpocock/skills/issues/129)）。Matt 的立场是这不关 `tdd` 的事。把 spec 与 ticket 一起传过去会有帮助；先在源头把 tickets 切成合适的大小更有帮助。
 
-## It's working if
+## 它正常工作的标志
 
 - 在任何 test 文件存在之前，它会停下来、说出它打算在其上测试的 seams，并等待。
 - 一个 test 出现、变红、得到刚好足够通过的代码，然后才有下一个 test，而不是一批 tests 后跟一批代码。
@@ -83,7 +83,7 @@ Mocks 只用于系统边界：外部 APIs、时间、随机性，有时是 files
 - 重命名一个内部函数不会破坏 suite 中的任何东西。
 - Mocks 只出现在外部边界（payment API、clock），永远不会围绕你自己的 modules。
 
-## Where it fits
+## 它在整体中的位置
 
 `tdd` 是 main chain 的 build 步骤内部的引擎，而不是它自己的一个步骤：
 

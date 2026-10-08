@@ -1,8 +1,8 @@
-# GLOSSARY.md Format
+# GLOSSARY.md 格式
 
 `GLOSSARY.md` 是这个 teaching workspace 的 canonical language。所有 explainers、exercises 和 learning records 都应遵守它的 terminology。构建它本身就是学习的一部分：把一个 concept 压缩成 tight definition，是用户理解它的证据。
 
-## Structure
+## 结构
 
 ```md
 # {Topic} Glossary
@@ -24,7 +24,7 @@ A 1–10 self-rating of how hard a set felt, where 10 is failure and 8 means two
 _Avoid_: Effort score, intensity rating
 ```
 
-## Rules
+## 规则
 
 - **Add a term only when the user understands it.** Glossary 是 compressed knowledge 的记录，不是给用户阅读学习的 dictionary。如果用户刚接触一个 concept，等到他们能正确使用它后，再把它提升到这里。
 - **Be opinionated.** 当同一 concept 有多个词时，选择最好的那个，并把其他词列为应避免的 aliases。这就是 language compression 的方式。

@@ -1,8 +1,8 @@
-# Issue tracker: GitLab
+# Issue tracker：GitLab
 
 这个 repo 的 issues 和 specs 存放在 GitLab issues 中。所有操作都使用 [`glab`](https://gitlab.com/gitlab-org/cli) CLI。
 
-## Conventions
+## 约定
 
 - **Create an issue**: `glab issue create --title "..." --description "..."`。多行 description 使用 heredoc。传入 `--description -` 可打开编辑器。
 - **Read an issue**: `glab issue view <number> --comments`。使用 `-F json` 获取 machine-readable output。
@@ -14,7 +14,7 @@
 
 从 `git remote -v` 推断 repo；在 clone 内运行时，`glab` 会自动处理。
 
-## Merge requests as a triage surface
+## Merge requests 作为 triage surface
 
 **MRs as a request surface: no.** _（如果这个 repo 把 external merge requests 当作 feature requests，则设为 `yes`；`/triage` 会读取这个 flag。）_
 
@@ -26,15 +26,15 @@
 
 与 GitHub 不同，GitLab 对 issues 和 MRs 分别编号，因此一旦知道 maintainer 指的是哪个 surface，`#42` 就没有歧义。
 
-## When a skill says "publish to the issue tracker"
+## 当 skill 说 "publish to the issue tracker" 时
 
 创建一个 GitLab issue。
 
-## When a skill says "fetch the relevant ticket"
+## 当 skill 说 "fetch the relevant ticket" 时
 
 运行 `glab issue view <number> --comments`。
 
-## Wayfinding operations
+## Wayfinding 操作
 
 供 `/wayfinder` 使用。**map** 是单个 issue，以 **child** issues 作为 tickets。
 

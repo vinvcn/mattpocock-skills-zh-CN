@@ -1,10 +1,10 @@
-## What it does
+## 它做什么
 
 `prototype` 编写**回答一个问题的 throwaway code**：这个 state model 感觉对吗，或者这个屏幕应该长什么样。问题先行，并决定其后一切事物的形状；一个回答了错误问题的 prototype，无论看起来多好，都是纯粹的浪费。
 
 Throwaway 是对代码*怎么写*的一种约束，而不是销毁它的承诺。没有测试、除了能让它跑起来之外没有错误处理、没有抽象、没有持久化，因为那些东西没有一样能帮你学到你想学到的那一件事。存续下来的是答案（折叠进真实代码），以及 prototype 本身（停在 main 之外的一条 branch 上，作为答案来自何处的证据）。
 
-## When to reach for it
+## 何时使用
 
 输入 `/prototype`，或者当任务合适时由 [agent](https://www.aihero.dev/ai-coding-dictionary/agent) 自动取用它。
 
@@ -12,7 +12,7 @@ Throwaway 是对代码*怎么写*的一种约束，而不是销毁它的承诺�
 
 你也会在非自愿的情况下到达这里。[wayfinder](https://aihero.dev/skills-wayfinder) 会在地图上登记 `prototype` 决策 [tickets](https://www.aihero.dev/ai-coding-dictionary/ticket)，而处理其中一个，就是这个 skill。
 
-## Two branches
+## 两个分支
 
 问题选择分支，而分支产出截然不同的 artifacts：
 
@@ -21,7 +21,7 @@ Throwaway 是对代码*怎么写*的一种约束，而不是销毁它的承诺�
 
 两者都把 state 保存在内存中、无需思考即可启动，并在每一步之后展示完整 state。当你发现自己在加固其中一个的那一刻（加一个测试、接上真实数据库、为了你以后可能想要的 case 而泛化），你就已经停止 prototyping 了。
 
-## The prototype is a primary source
+## Prototype 是一手来源
 
 一个完成的 prototype 留下两样东西，它们去往不同的地方。
 
@@ -29,7 +29,7 @@ Throwaway 是对代码*怎么写*的一种约束，而不是销毁它的承诺�
 
 **prototype** 是答案所源自的可运行证据，而且它不会被删除。它同样不属于 main（那里没有东西需要维护，而且它腐烂得很快），所以它被提交到 main 之外的一条 throwaway `prototype/<name>` branch，永不合并，并在 implementation issue 上留下一个指向该 branch 的 [context pointer](https://www.aihero.dev/ai-coding-dictionary/context-pointer)。Main 保持干净；那份探索对任何接下来接手工作的人来说，保持可被发现、可被重新运行。
 
-## Common questions
+## 常见问题
 
 **等等，prototype 不是应该被删掉吗？**
 不再是这样了。以前确实是：构建它、留住答案、扔掉代码。对此最尖锐的反对从来不是关于速度，而是*下一个 [session](https://www.aihero.dev/ai-coding-dictionary/session) 谁来接手这件工作，他们有什么可据以工作的东西？*一份 prototype 的口语化总结，会丢失让它具有说服力的东西。所以 prototype 现在被当作一份 [primary source](https://www.aihero.dev/ai-coding-dictionary/primary-source)：它落在 main 之外的一条 `prototype/<name>` branch 上，而 implementation issue 指向它。改变的是代码住在哪里，而不是纪律：它仍然永远不会合并进 main。
@@ -49,7 +49,7 @@ prototype 住在它自己的目录里，并生成大量你不想留在这个提�
 **这难道不是烧 tokens 的最快方式吗？**
 可能是，如果你 prototype 那些靠谈话就能回答的问题，或者让一个 prototype 蔓延到整个 feature 上的话。真正重要的比较不是 tokens 对比零；而是 [tokens](https://www.aihero.dev/ai-coding-dictionary/token) 对比构建了错误的 state model、然后等它有了生产调用者才发现。让问题保持狭窄、运行保持简短，花费就会保持相称。
 
-## It's working if
+## 它正常工作的标志
 
 - 你能用一句话说出这个 prototype 存在是为了回答什么问题，而且它被写在 demo 的顶部，而不只是在你脑子里。
 - 一个不读代码的人能驱动这个 logic demo。他们打开文件，按下 walkthrough 标签页里的按钮，用自己的话描述他们看到的东西。
@@ -58,7 +58,7 @@ prototype 住在它自己的目录里，并生成大量你不想留在这个提�
 - 它被一次性回答。如果一天之后你还在构建它，那问题太大了；拆分它。
 - 结束时，main 只包含决策、不包含任何 prototype 代码，而 implementation issue 指向仍然保存着它的那条 branch。
 
-## Where it fits
+## 它在整体中的位置
 
 `prototype` 是一个**可随时取用的 standalone**（你进入它来敲定一个设计问题，然后退出），同时它也是另一个 skill 赖以运行的机制。
 

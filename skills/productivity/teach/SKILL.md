@@ -7,7 +7,7 @@ argument-hint: "你想学习什么？"
 
 用户要求你教他们某件事。这是一个 stateful request：他们打算在多个 sessions 中学习这个 topic。
 
-## Teaching Workspace
+## 教学工作区
 
 把当前目录视为 teaching workspace。他们的学习状态保存在这个目录中的几个文件里：
 
@@ -19,7 +19,7 @@ argument-hint: "你想学习什么？"
 - `./assets/*`：跨 lessons 共享的可复用 **components**。见 [Assets](#assets)。
 - `NOTES.md`：scratchpad，用来记下用户偏好或 working notes。
 
-## Philosophy
+## 理念
 
 要深度学习，用户需要三样东西：
 
@@ -31,7 +31,7 @@ argument-hint: "你想学习什么？"
 
 有些 topics 可能比 knowledge 更需要 skills。学习 theoretical physics 可能更偏 knowledge-based。Yoga 则更偏 skills-based。
 
-### Fluency vs Storage Strength
+### Fluency 与 Storage Strength
 
 你应小心区分两类学习：
 
@@ -68,7 +68,7 @@ Lessons 由可复用的 **components** 构建，这些 components 存放在 `./a
 
 共享的 stylesheet 是每个 workspace 获得的第一个 component：每个 lesson 都链接它，这样 lessons 看起来像一门一致的课程，而不是一堆一次性产物。随着 workspace 增长，component library 也应随之增长。
 
-## The Mission
+## 学习使命
 
 每个 lesson 都应绑定到 mission，也就是用户想学习这个 topic 的原因。
 
@@ -78,7 +78,7 @@ Lessons 由可复用的 **components** 构建，这些 components 存放在 `./a
 
 Missions 可能随着用户发展更多 skills 和 knowledge 而变化。这很正常。确保更新 `MISSION.md`，并添加 learning record 来捕获这次变化。改变 mission 前先和用户确认。
 
-## Zone Of Proximal Development
+## 最近发展区
 
 每个 lesson 中，用户都应始终感觉自己被“刚好足够”地挑战。
 
@@ -109,7 +109,7 @@ Knowledge 应先从 trusted resources 中获取。使用 `RESOURCES.md` 跟踪�
 
 对 quizzes 来说，每个答案都应有完全相同的词数（如果可能，字符数也相同）。不要通过 formatting 给用户任何答案线索。
 
-## Acquiring Wisdom
+## 获取 Wisdom
 
 Wisdom 来自真实世界互动，也就是在 learning environment 之外测试 skills。
 
@@ -119,7 +119,7 @@ Community 是一个线上或线下场所，用户可以在真实世界中测试 
 
 你应尝试找到用户可以加入的 high-reputation communities。如果用户表示不想加入 community，尊重这个偏好。
 
-## Reference Documents
+## 参考文档
 
 创建 lessons 时，你也应创建 reference documents。Lessons 可以引用这些 documents。它们有助于跟踪跨 lessons 都有用的原始 knowledge units。
 

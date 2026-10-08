@@ -1,10 +1,10 @@
-## What it does
+## 它做什么
 
 `code-review` 沿两条轴线 review `HEAD` 与你点名的一个固定点（一个 commit、一个 branch、一个 tag、`main`、`HEAD~5`）之间的 diff。**Standards** 问的是代码是否符合本仓库写代码的方式。**Spec** 问的是代码是否做了来源 issue 或 [spec](https://www.aihero.dev/ai-coding-dictionary/spec) 所要求的事。每条轴线都在各自的 [sub-agent](https://www.aihero.dev/ai-coding-dictionary/subagent) 中运行，这样谁也不会看到对方的推理。
 
 两条轴线从不合并、也从不重新排序。报告以*每条轴线*的最严重问题收尾，并拒绝在它们之间点名一个单独的赢家，因为一个变更可能通过一条轴线却在另一条上失败：一段遵循了每一条约定、却实现了错误东西的代码通过 Standards 却败给 Spec；一段完全按 [ticket](https://www.aihero.dev/ai-coding-dictionary/ticket) 要求去做、却破坏了仓库约定的代码则相反。一个混合的裁决会让通过的那条轴线掩盖失败的那条。
 
-## When to reach for it
+## 何时使用
 
 输入 `/code-review`，或者当你要求 review 一个 branch、一个 PR、进行中的改动，或任何「since X」的内容时，由 agent 自动调用。
 
@@ -19,7 +19,7 @@
 
 你必须提供那个固定点。如果你没有提供，skill 会要求你提供一个，而不是猜测；然后它在生成任何东西之前会检查 ref 能解析、diff 非空，所以一个打错的 branch 名字会在你面前失败，而不是在两个 sub-agents 内部失败。
 
-## Prerequisites
+## 前置条件
 
 Standards 轴线不需要任何东西。它读取仓库记录的任何东西（`CODING_STANDARDS.md`、`CONTRIBUTING.md` 等），而当仓库什么也没记录时，回退到一个内置的 baseline。
 
@@ -32,7 +32,7 @@ Spec 轴线需要一份 spec 存在且可找到。它按这个顺序查找：
 
 第 1 步依赖 `docs/agents/issue-tracker.md`，它由 [setup-matt-pocock-skills](https://aihero.dev/skills-setup-matt-pocock-skills) 写入。没有它，如果你递给它一条路径，这条轴线仍然能工作。如果完全没有 spec，Spec 的 sub-agent 会被跳过，报告会说 "no spec available"，而不是编造需求。
 
-## The two axes
+## 两条轴线
 
 | | Standards | Spec |
 | --- | --- | --- |
@@ -45,7 +45,7 @@ Spec 轴线需要一份 spec 存在且可找到。它按这个顺序查找：
 
 **Smell baseline** 是它底下的地板：来自《Refactoring》第 3 章的十二个 Fowler code smells：Mysterious Name、Duplicated Code、Feature Envy、Data Clumps、Primitive Obsession、Repeated Switches、Shotgun Surgery、Divergent Change、Speculative Generality、Message Chains、Middle Man、Refused Bequest。每一个都是一个带标签的启发式（「possible Feature Envy」），绝不是一条硬性违规，而且每一个都表述为 *它是什么* → *如何修复*，所以一条 finding 自带一个动作抵达，而不是自带一份抱怨。你的 linter 已经强制执行的任何东西，两条轴线都会跳过。
 
-## Common questions
+## 常见问题
 
 **它和 Claude Code 自己的 `/code-review` 冲突。我该怎么办？**
 
@@ -75,7 +75,7 @@ Spec 轴线需要一份 spec 存在且可找到。它按这个顺序查找：
 
 不会。它 diff `<fixed-point>...HEAD`，三点式，从 merge-base 度量，排除了 staged 和 working-tree 变更。如果 `implement` 没有做 interim commit，那么即将被提交的工作对 review 是不可见的。先 commit，再 review，然后 amend 或追加一个 fixup。
 
-## It's working if
+## 它正常工作的标志
 
 - 它在任何 sub-agent 生成之前，就拒绝在坏的 ref 或空 diff 上开始。
 - 报告以 `## Standards` 和 `## Spec` 下的两个独立区块抵达，而不是一个合并的列表。
@@ -83,7 +83,7 @@ Spec 轴线需要一份 spec 存在且可找到。它按这个顺序查找：
 - 收尾总结给出每条轴线的最大问题，并拒绝挑出一个整体赢家。
 - 没有 spec 可用时，Spec 区块会说明这一点，而不是列出它从代码推断出的需求。
 
-## Where it fits
+## 它在整体中的位置
 
 `code-review` 是 build chain 靠近尾部的 review 步骤（`grill-with-docs → to-spec → to-tickets → implement → code-review → retro`），也能在你指向它的任何 branch 或 PR 上独立运行。
 

@@ -1,10 +1,10 @@
-# ADR Format
+# ADR 格式
 
 ADRs 位于 `docs/adr/`，使用连续编号：`0001-slug.md`、`0002-slug.md` 等。
 
 按需懒创建 `docs/adr/` 目录：只有第一个 ADR 需要出现时才创建。
 
-## Template
+## 模板
 
 ```md
 # {Short title of the decision}
@@ -14,7 +14,7 @@ ADRs 位于 `docs/adr/`，使用连续编号：`0001-slug.md`、`0002-slug.md` �
 
 就这些。ADR 可以只有一个段落。价值在于记录 *做出了某个决定* 以及 *为什么*，而不是填满章节。
 
-## Optional sections
+## 可选章节
 
 只有在真正增加价值时才包含这些。多数 ADRs 不需要。
 
@@ -22,11 +22,11 @@ ADRs 位于 `docs/adr/`，使用连续编号：`0001-slug.md`、`0002-slug.md` �
 - **Considered Options** - 只有被拒绝的 alternatives 值得记住时才写
 - **Consequences** - 只有需要指出非显而易见的下游影响时才写
 
-## Numbering
+## 编号
 
 扫描 `docs/adr/` 中已有的最高编号并递增一。
 
-## When to offer an ADR
+## 何时提议 ADR
 
 以下三项必须全部成立：
 
@@ -36,7 +36,7 @@ ADRs 位于 `docs/adr/`，使用连续编号：`0001-slug.md`、`0002-slug.md` �
 
 如果决定很容易反转，就跳过；你会直接反转它。如果它不意外，就没人会问为什么。如果没有真正 alternative，就没有超过 "we did the obvious thing" 的内容可记录。
 
-### What qualifies
+### 符合条件的情形
 
 - **Architectural shape.** "We're using a monorepo." "The write model is event-sourced, the read model is projected into Postgres."
 - **Integration patterns between contexts.** "Ordering and Billing communicate via domain events, not synchronous HTTP."

@@ -1,10 +1,10 @@
-## What it does
+## 它做什么
 
 `diagnosing-bugs` 对难啃的 bug 或性能回退运行一个六 phase 的诊断：构建一个 repro，把它最小化，对 hypotheses 排序、instrument，带着 regression test 修复，清理。
 
 在一条 **tight** feedback loop 存在之前（一条已经运行过一次的、在*这个* bug 上变红、修复后就变绿的具名命令），它不允许 agent 形成理论。一个接到 bug report 的 coding agent 的默认行为是读代码然后猜测；这个 skill 阻止它。如果不存在能变红的命令，就没有 Phase 2。这唯一一道闸门就是这个 skill 存在的意义。它之后的一切（bisection、hypothesis-testing、instrumentation）一旦信号存在就都是机械操作。
 
-## When to reach for it
+## 何时使用
 
 输入 `/diagnosing-bugs`，或者当任务契合时由 agent 自行调用：它是 model-invoked 的，会在 "diagnose" / "debug this" 时触发，或者在关于某样东西 broken、throwing、failing 或 slow 的报告时触发。
 
@@ -21,7 +21,7 @@
 | 在 bug 修复之后追问什么本可以阻止它 | [retro](https://aihero.dev/skills-retro)，在同一场 session 里运行 |
 | 没有好的 seam 能锁住这个 bug | [improve-codebase-architecture](https://aihero.dev/skills-improve-codebase-architecture)，由你自己启动 |
 
-## The tight loop is the skill
+## 紧凑的 loop 才是 skill 本身
 
 Phase 1 获得了不成比例的精力，因为它是唯一难做的 phase。Skill 给出了一架构建 loop 的梯子，大致按偏好顺序：
 
@@ -40,7 +40,7 @@ Phase 1 获得了不成比例的精力，因为它是唯一难做的 phase。Ski
 
 当它真的无法构建一条时，它被指示停下来并说明，列出它试过的东西，并向你要 [environment](https://www.aihero.dev/ai-coding-dictionary/environment) 访问权限、一个捕获的 artifact，或临时 instrumentation 的许可。它不应该照旧继续假设。
 
-## The gates between phases
+## Phase 之间的闸门
 
 Phases 是闸门，不是清单。每一个都拒绝打开，直到某件具体的事为真。
 
@@ -54,7 +54,7 @@ Phases 是闸门，不是清单。每一个都拒绝打开，直到某件具体�
 
 Phase 5 有一个值得知道的逃生舱。Regression test 在修复*之前*被写下来，但仅当存在一条对它**正确的 seam** 时：一条 test 能像在 call site 处发生的那样演练真实 bug 模式的 seam。在唯一可用的 seam 太浅的地方，skill 被指示说明这一点，而不是写一条给出虚假信心的 test。那种缺失本身就是那项 finding，而 skill 会把它记录下来，而不是把它掩盖过去。
 
-## Common questions
+## 常见问题
 
 **它在我只想要一个直接答案的快速问题上触发了。**
 这是这个 skill 被报告最多的一个问题，而且是真的。特别是在 GPT-5.6-Sol 上，用户报告它在一个对问题的朴素描述上触发：「the model triggers the rather formal diagnosing-bugs skill instead. It then goes on to construct a reproduction scenario (often building a mock scenario with limited value) before giving me a response or suggestion. This results in considerable reply delays.」四个人在 [issue #578](https://github.com/mattpocock/skills/issues/578) 上报告了同样的形态。被接受的修复是以一个更轻的方法开始，只在问题值得时才升级到更重的那个，但那个变更尚未落地。Skill 是照 Claude Code 的调用行为校准的；一个激活阈值更低的 [model](https://www.aihero.dev/ai-coding-dictionary/model) 会过度触发它。在它被升级之前，实际的修复是说出你想要的（「just answer this, don't diagnose」），或者在你的 [harness](https://www.aihero.dev/ai-coding-dictionary/harness) 里为它禁用 model invocation。
@@ -77,7 +77,7 @@ Snyk 标记它，而那个 flag 是误报。它是这套里唯一随附一个可
 **`/diagnose` 怎么了？**
 在 v1.0.0 被改名为 `/diagnosing-bugs`。旧名字不再存在。任何你链接了 `/diagnose` 的东西（一个 wrapper skill、一条保存的 prompt）都需要更新。
 
-## It's working if
+## 它正常工作的标志
 
 - 它在提出任何一条理论*之前*就给你看一条命令和它的变红输出。如果理论先到，skill 就没有在运行。
 - 它复现的失败是你报告的那个，而不是它在路上找到的邻近一个。
@@ -87,7 +87,7 @@ Snyk 标记它，而那个 flag 是误报。它是这套里唯一随附一个可
 - Commit 或 PR message 点名哪条 hypothesis 是对的。
 - 当它无法用一条 test 锁住 bug 时，它直白地说出来，而不是写一条浅的。
 
-## Where it fits
+## 它在整体中的位置
 
 `diagnosing-bugs` 是一个随时可调用的 standalone。你在某样东西坏掉的那一刻落入它，并在修复及其 regression test 就位时退出；它不持有状态，也不需要先前的设置。[ask-matt](https://aihero.dev/skills-ask-matt) 把「有东西坏了」路由到这里。
 

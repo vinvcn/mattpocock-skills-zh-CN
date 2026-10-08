@@ -1,8 +1,8 @@
-# Issue tracker: GitHub
+# Issue tracker：GitHub
 
 这个 repo 的 issues 和 specs 存放在 GitHub issues 中。所有操作都使用 `gh` CLI。
 
-## Conventions
+## 约定
 
 - **Create an issue**: `gh issue create --title "..." --body "..."`。多行 body 使用 heredoc。
 - **Read an issue**: `gh issue view <number> --comments`，用 `jq` 过滤 comments，并同时获取 labels。
@@ -13,7 +13,7 @@
 
 从 `git remote -v` 推断 repo；在 clone 内运行时，`gh` 会自动处理。
 
-## Pull requests as a triage surface
+## Pull requests 作为 triage surface
 
 **PRs as a request surface: no.** _（如果这个 repo 把 external PRs 当作 feature requests，则设为 `yes`；`/triage` 会读取这个 flag。）_
 
@@ -25,15 +25,15 @@
 
 GitHub 在 issues 和 PRs 之间共享一个 number space，因此裸 `#42` 可能是两者之一：用 `gh pr view 42` 解析，失败则回退到 `gh issue view 42`。
 
-## When a skill says "publish to the issue tracker"
+## 当 skill 说 "publish to the issue tracker" 时
 
 创建一个 GitHub issue。
 
-## When a skill says "fetch the relevant ticket"
+## 当 skill 说 "fetch the relevant ticket" 时
 
 运行 `gh issue view <number> --comments`。
 
-## Wayfinding operations
+## Wayfinding 操作
 
 供 `/wayfinder` 使用。**map** 是单个 issue，以 **child** issues 作为 tickets。
 

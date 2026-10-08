@@ -16,7 +16,7 @@ tickets 不是步骤清单，而是一个 **task graph**，其中包含 blocking
 
 在可能的情况下，**implementer subagents** 应当在 background 中运行，以获得最大并发度。
 
-## Steps
+## 步骤
 
 1. 阅读 spec 和 tickets，理解 task graph。
 

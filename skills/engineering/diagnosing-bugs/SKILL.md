@@ -3,25 +3,25 @@ name: diagnosing-bugs
 description: 面向棘手缺陷和性能回退的诊断循环。适用于用户说 “diagnose” / “debug this”，或报告某些东西 broken、throwing、failing、slow 时。
 ---
 
-# Diagnosing Bugs
+# 诊断缺陷
 
 面向棘手 bugs 的纪律。只有在明确说明理由时才跳过阶段。
 
 探索 codebase 时，先读取 `GLOSSARY.md`（如果存在），建立相关 modules 的清晰 mental model，并检查你将触碰区域的 ADRs。
 
-## Redact
+## 脱敏
 
 这个 skill 会要求你展示 commands、outputs 和捕获的 artifacts。**先 redact 掉每个 secret**：用 `<REDACTED>` 替换。Build loops 要针对 env vars 进行，让 credential 留在 environment 里而不是你展示的内容中。捕获的 artifacts 带有 auth headers：只引用携带 signal 的那些行。
 
 如果 redact 后的 output 不足以诊断 bug，就说明情况并询问用户。
 
-## Phase 1 - Build a feedback loop
+## Phase 1 - 构建 feedback loop
 
 **这就是这个 skill 的核心。** 其他所有内容都是机械步骤。如果你拥有一个针对该 bug 的 **tight** pass/fail signal，即它会在 _这个_ bug 上变红，你就能找到原因；bisection、hypothesis-testing 和 instrumentation 都只是消费这个 signal。没有它，盯着代码看多久都救不了你。
 
 在这里投入不成比例的精力。**要强硬、要有创造力、拒绝放弃。**
 
-### Ways to construct one - try them in roughly this order
+### 构建 loop 的方式 - 大致按以下顺序尝试
 
 1. **Failing test**，放在能触达 bug 的 seam 上：unit、integration、e2e 都可以。
 2. **Curl / HTTP script**，打到运行中的 dev server。
@@ -36,7 +36,7 @@ description: 面向棘手缺陷和性能回退的诊断循环。适用于用户�
 
 构建正确的 feedback loop，bug 就修好了 90%。
 
-### Tighten the loop
+### 收紧 loop
 
 把 loop 当作产品。只要有了 _一个_ loop，就继续 **tighten** 它：
 
@@ -46,15 +46,15 @@ description: 面向棘手缺陷和性能回退的诊断循环。适用于用户�
 
 一个 30 秒且 flaky 的 loop 几乎不比没有 loop 好；一个 2 秒 deterministic loop 才是 tight 的调试超能力。
 
-### Non-deterministic bugs
+### 非确定性 bugs
 
 目标不是 clean repro，而是 **higher reproduction rate**。循环触发 100x、parallelise、加 stress、缩小 timing windows、注入 sleeps。50%-flake bug 可以调试；1% 不行。持续提高复现率，直到它可调试。
 
-### When you genuinely cannot build a loop
+### 当你确实无法构建 loop 时
 
 停下来并明确说明。列出你尝试过什么。向用户请求：(a) 能复现的环境访问权限，(b) 经 redact 的 captured artifact（HAR file、log dump、core dump、带 timestamps 的 screen recording），或 (c) 添加临时 production instrumentation 的许可。**不要** 在没有 loop 时继续 hypothesise。
 
-### Completion criterion - a tight loop that goes red
+### 完成条件 - 能变红的 tight loop
 
 Phase 1 完成条件：loop **tight** 且 **red-capable**。你能指出 **一个 command**（script path、test invocation、curl），并且你已经至少运行过一次（展示 invocation 和 output，已 redact），且它满足：
 
@@ -65,7 +65,7 @@ Phase 1 完成条件：loop **tight** 且 **red-capable**。你能指出 **一�
 
 如果你发现自己在 command 存在前就读代码构建理论，**停下；直接跳到 hypothesis 正是这个 skill 要防止的失败。** 没有 red-capable command，就没有 Phase 2。
 
-## Phase 2 - Reproduce + minimise
+## Phase 2 - 复现 + 最小化
 
 运行 loop。看它变红，也就是 bug 出现。
 
@@ -75,7 +75,7 @@ Phase 1 完成条件：loop **tight** 且 **red-capable**。你能指出 **一�
 - [ ] Failure 能在多次运行中复现（或对于 non-deterministic bugs，复现率足够高，能用来调试）。
 - [ ] 你已捕获 exact symptom（error message、wrong output、slow timing），后续阶段可以验证 fix 确实解决它。
 
-### Minimise
+### 最小化
 
 一旦变红，就把 repro 缩到 **仍会变红的最小场景**。逐个削减 inputs、callers、config、data 和 steps，每次削减后重新运行 loop；只保留 failure 的 load-bearing 部分。
 
@@ -85,7 +85,7 @@ Phase 1 完成条件：loop **tight** 且 **red-capable**。你能指出 **一�
 
 在 reproduce 并 minimise 之前不要继续。
 
-## Phase 3 - Hypothesise
+## Phase 3 - 形成假设
 
 在测试任何假设前，生成 **3-5 个 ranked hypotheses**。单假设会锚定在第一个看似合理的想法上。
 
@@ -97,7 +97,7 @@ Phase 1 完成条件：loop **tight** 且 **red-capable**。你能指出 **一�
 
 **测试前把 ranked list 展示给用户。** 用户常常有 domain knowledge，可以立即重排（"we just deployed a change to #3"），或知道哪些 hypotheses 已被排除。便宜 checkpoint，大幅省时。不要因此阻塞；如果用户 AFK，就按你的排序继续。
 
-## Phase 4 - Instrument
+## Phase 4 - 插桩
 
 每个 probe 都必须映射到 Phase 3 的某个具体 prediction。**一次只改变一个变量。**
 
@@ -111,7 +111,7 @@ Tool preference：
 
 **Perf branch。** 对 performance regressions，logs 通常不对。改为先建立 baseline measurement（timing harness、`performance.now()`、profiler、query plan），然后 bisect。先 measure，再 fix。
 
-## Phase 5 - Fix + regression test
+## Phase 5 - 修复 + regression test
 
 在 fix 前写 regression test，但前提是存在 **correct seam**。
 
@@ -127,7 +127,7 @@ Correct seam 是 test 能以 call site 中真实发生的方式触发 **real bug
 4. 看它 pass。
 5. 重新针对原始（未 minimised）场景运行 Phase 1 feedback loop。
 
-## Phase 6 - Cleanup
+## Phase 6 - 清理
 
 声明完成前必须做：
 

@@ -4,18 +4,18 @@ description: 询问当前情境适合哪个技能或流程；它是本仓库所�
 disable-model-invocation: true
 ---
 
-# Ask Matt
+# 问 Matt
 
 你不需要记住每个 skill，所以直接问。
 
 **Flow** 是穿过 skills 的一条路径。大多数路径沿着一条 **main flow** 前进，两个 **on-ramps** 会并入它。其他内容要么是 standalone，要么是在下层运行的 vocabulary layer。
 
-## The main flow: idea -> ship
+## 主流程：idea -> ship
 
 这是大多数工作的路线：你有一个想法，并希望把它构建出来。
 
-1. **`/grill-with-docs`** - 通过访谈打磨想法。在 **working directory** 中工作时从这里开始：它是 stateful 的，会把学到的内容保存在 `GLOSSARY.md` 和 ADRs 中。（没有 working directory？用 `/grill-me`，见 Standalone。两者都运行同一个 `/grilling` primitive；`grill-with-docs` 是会留下文档痕迹的版本，只要有 repo 可记录，它就是两者中更好的那个。）
-2. **分支 - 能否在对话中解决所有问题？** 如果某个问题需要可运行的答案（state、business logic，或必须亲眼看到的 UI），就通过 prototype 绕行，并用 **`/handoff`** 在两个方向桥接（prototype 住在自己的目录里，这正是 `/handoff` 的用途，见 Phase boundaries）：
+1. **`/grill-with-docs`** - 通过访谈打磨想法。在 **working directory** 中工作时从这里开始：它是 stateful 的，会把学到的内容保存在 `GLOSSARY.md` 和 ADRs 中。（没有 working directory？用 `/grill-me`，见「独立 skills」。两者都运行同一个 `/grilling` primitive；`grill-with-docs` 是会留下文档痕迹的版本，只要有 repo 可记录，它就是两者中更好的那个。）
+2. **分支 - 能否在对话中解决所有问题？** 如果某个问题需要可运行的答案（state、business logic，或必须亲眼看到的 UI），就通过 prototype 绕行，并用 **`/handoff`** 在两个方向桥接（prototype 住在自己的目录里，这正是 `/handoff` 的用途，见「Phase 边界」）：
    - **`/handoff`** 导出，然后基于该文件打开 fresh session；
    - **`/prototype`** 用 throwaway code 回答问题；
    - **`/handoff`** 把学到的内容带回来，并在原始 idea thread 中引用它。
@@ -31,13 +31,13 @@ disable-model-invocation: true
 
 4. **`/retro`** 闭合循环。一次 build 之后，尤其是一次走了弯路的 build，它会回看整个 session，建议改动 agent 的 **environment**，而不是代码：navigation pointers、automated checks、`/code-review` 强制执行的 coding standards、steering files、tooling。机械性错误变成 deterministic checks；judgement calls 变成 coding standards。下一次 build 由此从更好的 environment 出发。
 
-### Context hygiene
+### Context 卫生
 
 步骤 1 到 `/to-tickets` 要留在 **同一个未中断的 context window** 中；不要 compact 或 clear，这样 grilling、spec 和 tickets 才能建立在同一组思考之上。之后每个 `/implement` 都从 fresh session 开始，只基于对应 ticket 工作。在 clear 之前，在被回看的那个 session 里运行 `/retro`；clear 之后，改为让它读取该 session 的 log。
 
-限制来自 **[smart zone](https://www.aihero.dev/ai-coding-dictionary/smart-zone)**：在该窗口（最新模型大约 150k tokens）内，模型还能保持敏锐推理。如果 session 在 `/to-tickets` 前接近这个区间，不要硬撑降级状态；在最近的 phase boundary 用 `/compact`，然后继续（见 Phase boundaries）。
+限制来自 **[smart zone](https://www.aihero.dev/ai-coding-dictionary/smart-zone)**：在该窗口（最新模型大约 150k tokens）内，模型还能保持敏锐推理。如果 session 在 `/to-tickets` 前接近这个区间，不要硬撑降级状态；在最近的 phase boundary 用 `/compact`，然后继续（见「Phase 边界」）。
 
-## On-ramps
+## 入口匝道
 
 起点会生成工作，然后并入 main flow。
 
@@ -51,20 +51,20 @@ disable-model-invocation: true
 
   Map 清晰后，**它会 hand off，而不是 build**：先进入 **`/to-spec`**，把 map 中相互链接的 decisions 收束成可构建计划，然后照常使用 `/to-tickets` 和 `/implement`。让 map 直接循环进入 `/implement` 会跳过这次收束并丢掉相互链接的细节；只有当 effort 后来发现确实很小时，才直接进入 `/implement`。
 
-## Codebase health
+## Codebase 健康
 
 这不是 feature work，而是维护。
 
 - **`/improve-codebase-architecture`** - 有空时运行，保持 codebase 适合 agents 操作。它会暴露 **deepening opportunities**；选择其中一个会生成一个 idea，可以带入 main flow 的 `/grill-with-docs`。它负责找候选项；**`/codebase-design`**（见下文）是你设计已选候选项时使用的工作台。
 
-## Vocabulary underneath
+## 底层词汇
 
 两个 model-invoked references 在其他 skills 下层运行，分别是自己词汇的 single source of truth。问题在于**词语**而不是流程时直接用它们；也可以让上面的 skills 自动拉起它们。
 
 - **`/domain-modeling`** - 打磨项目的 _domain_ language：挑战模糊术语、解决 overloaded word（例如一个 "account" 承担三件事）、把难以逆转的决策记录为 ADR。它是 `/grill-with-docs` 用来保持 `GLOSSARY.md` glossary 干净的主动纪律。
 - **`/codebase-design`** - deep-module vocabulary（module、interface、depth、seam、adapter、leverage、locality），用于设计 module 的 _shape_：把大量 behavior 放在 clean seam 上的小 interface 后面。`/tdd` 和 `/improve-codebase-architecture` 都使用这套语言。
 
-## Phase boundaries
+## Phase 边界
 
 **phase** 是 session 内的一段工作：grilling、implementation、QA。在它们之间的 **boundary** 处你有五个选项，而在这整张 map 中，选哪个是最模糊的决定：
 
@@ -76,7 +76,7 @@ disable-model-invocation: true
 
 关于有序的树，阅读 [PHASE-BOUNDARIES.md](PHASE-BOUNDARIES.md)：五个问题、每个分支背后的推理，以及为什么 primary-source 成本让 **Continue** 成为第一个要排除的选项。**在** boundary 处做决定；阶段中途，要么继续，要么把剩余的工作拆成 subagents。
 
-## Standalone
+## 独立 skills
 
 完全在 main flow 之外。
 
@@ -90,6 +90,6 @@ disable-model-invocation: true
 - **`/teach`** - 使用当前目录作为 stateful workspace，跨多个 sessions 学习一个概念。
 - **`/writing-for-agents`** - 编写 agents 消费的文档的 reference：skills、AGENTS.md、被指向的 docs。
 
-## Precondition
+## 前置条件
 
 **`/setup-matt-pocock-skills`** - 第一次运行 engineering flow 前先执行，用来配置其他 skills 所依赖的 issue tracker、triage labels 和 docs layout。自定义 issue trackers 也可以。

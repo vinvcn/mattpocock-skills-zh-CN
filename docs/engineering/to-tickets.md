@@ -1,10 +1,10 @@
-## What it does
+## 它做什么
 
 `to-tickets` 拿一个 plan、一份 [spec](https://www.aihero.dev/ai-coding-dictionary/spec) 或你所在的 conversation，并把它拆成你 issue tracker 上的一组 **[tickets](https://www.aihero.dev/ai-coding-dictionary/ticket)**。每个 ticket 都声明它的 **blocking edges**（在它开始之前必须完成的其他 tickets）。
 
 每个 ticket 都是一颗 **tracer bullet**：一条穿过 change 每一层（schema、API、UI、tests）的窄但完整的路径，可以在它落地的瞬间独立 demo。正是这个约束让它与明显的拆分工作的方式（一次切一层、最后再集成）行为不同。它还会把每个 ticket 定尺寸到适合单个全新的 [context window](https://www.aihero.dev/ai-coding-dictionary/context-window)，因为接手这个 ticket 的会是一个从没见过你 spec 的 [session](https://www.aihero.dev/ai-coding-dictionary/session)。
 
-## When to reach for it
+## 何时使用
 
 你通过输入 `/to-tickets` 调用它，[agent](https://www.aihero.dev/ai-coding-dictionary/agent) 不会自行触发。
 
@@ -18,11 +18,11 @@
 
 `to-tickets` 产出的 tickets 按构造就是 agent-ready 的。不要在它们上面运行 [triage](https://aihero.dev/skills-triage)：triage 是为从别人那里到达的工作准备的。
 
-## Prerequisites
+## 前置条件
 
 `to-tickets` 发布到一个 tracker，所以 [setup-matt-pocock-skills](https://aihero.dev/skills-setup-matt-pocock-skills) 必须先为这个 repo 配置好一个，连同 triage-label vocabulary。任一类型都可以：像 GitHub 或 Linear 这样的真实 tracker，或 `.scratch/` 下的 local markdown 文件，后者开箱即受支持。
 
-## Tracer bullets, not layers
+## Tracer bullets，而非分层
 
 **Horizontal** slice 交付 change 的一个层。在每一层都落地之前什么都不能工作，而每个 ticket 的 acceptance criteria 不得不伸进另一个 ticket 拥有的工作里。**Vertical** slice（tracer bullet）一次性交付一条穿过所有层的薄路径，所以它可以单独验证，并拥有它评分的一切。
 
@@ -30,7 +30,7 @@
 
 在发布任何东西之前有两件事发生。`to-tickets` 寻找 prefactoring（"make the change easy, then make the easy change"），并把那部分工作排在最前。然后它把拆分方案呈现为编号列表，并就此考问你：粒度对不对、blocking edges 是否真实、有没有什么该合并或拆分。在你批准之前没有任何东西到达 tracker，而那场质问正是你反驳的地方。
 
-## Blocking edges
+## 阻塞边
 
 Edges 是这个 artifact 的重点。它们根据 tracker 有两种读法：
 
@@ -41,7 +41,7 @@ Edges 是这个 artifact 的重点。它们根据 tracker 有两种读法：
 
 无论哪种方式，edges 都活在 ticket 里。介质只决定是否有东西能并行地作用于它们。`to-tickets` 产出 artifact；运行它（一次一个 session，或一个 fleet）是你的工作，而不是 skill 的。
 
-## The wide-refactor exception
+## Wide refactor 的例外
 
 有一种形状打破 tracer-bullet 规则。**Wide refactor** 是一个单一的机械性变更（重命名一个 column、重新定义一个共享 symbol 的类型），其 **blast radius** 扇形展开到整个 codebase，所以一次编辑破坏数千个 call sites，没有任何 vertical slice 能以 green 落地。
 
@@ -53,7 +53,7 @@ Edges 是这个 artifact 的重点。它们根据 tracker 有两种读法：
 
 凡是连 batches 都无法独自保持 green 的地方，它们共享一个 integration branch，全部 block 一个最终的 integrate-and-verify ticket。Green 只在那里被承诺。
 
-## Common questions
+## 常见问题
 
 **它为一个三行改动产出了十二个 tickets。**
 Over-decomposition 是这个 skill 上被报告最多的摩擦，而且在从业者之间一致：[model](https://www.aihero.dev/ai-coding-dictionary/model) 默认原子单元，丢了会让它们有意义的 grouping。质问步骤正是为此存在：要求它 merge，它会照做。更深层的回答是：tickets 有一个下限，如果整个 change 适合一个 context window，你根本不需要这个 skill。直接去 [implement](https://aihero.dev/skills-implement)。
@@ -79,7 +79,7 @@ Template 要求 criteria，却没说什么它们能否失败，所以这种事�
 **tickets 已发布。我实际上怎么运行它们？**
 Skill 止步于 artifact，没有 auto-dispatch 模式。分派是手工的：看板、数出没有未完成 blockers 的 tickets、打开同样多的 agent sessions。每个全新 context 一个 ticket，在它们之间清理。要注意 [implement](https://aihero.dev/skills-implement) 完成时不会可靠地关闭或勾选 ticket，无论是在 GitHub 还是 local markdown 上，所以 ticket 的状态由你更新。
 
-## It's working if
+## 它正常工作的标志
 
 - 每个 ticket 都有一个对 "它完成时我能 demo 什么？" 的回答，而且回答是 behavior，不是层。
 - 在发布任何东西之前，列表作为编号列表带着每个上的 "Blocked by" 行返回给你。
@@ -88,7 +88,7 @@ Skill 止步于 artifact，没有 auto-dispatch 模式。分派是手工的：�
 - 每个 ticket 读起来都像一个全新 session 能在你不在场的情况下完成的东西。
 - Prefactoring，凡找到的，都在顺序的前面，而不是混进 feature tickets。
 
-## Where it fits
+## 它在整体中的位置
 
 `to-tickets` 是 main build chain 中的一个步骤：
 

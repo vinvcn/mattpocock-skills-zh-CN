@@ -4,7 +4,7 @@ description: "为此仓库配置 engineering skills：设置其 issue tracker、
 disable-model-invocation: true
 ---
 
-# Setup Matt Pocock's Skills
+# 配置 Matt Pocock 的 Skills
 
 搭建 engineering skills 所假定的每仓库配置：
 
@@ -14,9 +14,9 @@ disable-model-invocation: true
 
 这是 prompt-driven skill，不是确定性脚本。先探索，展示发现，与用户确认，然后写入。
 
-## Process
+## 流程
 
-### 1. Explore
+### 1. 探索
 
 查看当前 repo，理解起始状态。读取已有内容，不要假设：
 
@@ -29,7 +29,7 @@ disable-model-invocation: true
 - 是否已安装 `triage` skill（本 skill 旁边有 `triage` folder，或 available skills 中存在 `triage`）？这决定 Section B 是否运行。
 - Monorepo signals：`pnpm-workspace.yaml`、`package.json` 的 `workspaces` field，或已有内容且各自带 `src/` 的 `packages/*`。只有真正的大型 multi-package repo 才算；没有这些 signal 就是 single-context，几乎所有 repo 都如此。
 
-### 2. Present findings and ask
+### 2. 呈现发现并询问
 
 总结已有内容和缺失内容。按顺序处理 sections：每次一个 section、一个回答，再进入下一个。
 
@@ -60,7 +60,7 @@ disable-model-invocation: true
 
 只有 exploration 找到 monorepo signals 时，才提供 **multi-context**（root 下 `GLOSSARY-MAP.md` 指向每个 context 的 `GLOSSARY.md` files），并确认用户想要哪种 layout。
 
-### 3. Confirm and edit
+### 3. 确认并编辑
 
 向用户展示草稿：
 
@@ -69,7 +69,7 @@ disable-model-invocation: true
 
 写入前允许用户修改。
 
-### 4. Write
+### 4. 写入
 
 **选择要编辑的文件：**
 
@@ -111,6 +111,6 @@ Block：
 
 对于 "other" issue trackers，根据用户描述从头写 `docs/agents/issue-tracker.md`。
 
-### 5. Done
+### 5. 完成
 
 告诉用户 setup 已完成，以及哪些 engineering skills 现在会读取这些文件。说明他们之后可以直接编辑 `docs/agents/*.md`；只有当他们想切换 issue trackers 或从头开始时，才需要重新运行此 skill。

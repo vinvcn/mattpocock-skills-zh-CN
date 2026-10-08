@@ -1,6 +1,6 @@
-# GLOSSARY.md Format
+# GLOSSARY.md 格式
 
-## Structure
+## 结构
 
 ```md
 # {Context Name}
@@ -22,14 +22,14 @@ A person or organization that places orders.
 _Avoid_: Client, buyer, account
 ```
 
-## Rules
+## 规则
 
 - **Be opinionated.** 当多个词指向同一概念时，选出最好的那个，并把其他词列在 `_Avoid_` 下。
 - **Keep definitions tight.** 最多一两句话。定义它是什么，而不是它做什么。
 - **Only include terms specific to this project's context.** 一般编程概念（timeouts、error types、utility patterns）不属于这里，即使项目大量使用它们。添加 term 前先问：这是该 context 独有的概念，还是通用编程概念？只有前者属于这里。
 - **Group terms under subheadings** when natural clusters emerge. 如果所有 terms 都属于一个 cohesive area，平铺列表也可以。
 
-## Single vs multi-context repos
+## 单 context 与多 context repos
 
 **Single context（多数 repos）：** root 下一个 `GLOSSARY.md`。
 

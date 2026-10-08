@@ -1,16 +1,16 @@
-## What it does
+## 它做什么
 
 `retro` 回顾一场编码 [session](https://www.aihero.dev/ai-coding-dictionary/session)，并为改进 agent 的 **[environment](https://www.aihero.dev/ai-coding-dictionary/environment)** 提出建议，好让下一次运行更好。它读取 session 自己的记录（默认是当前这场，或你在 session logs 里指向的那一场），找出 agent 挣扎的时刻，并交给你一份候选修复的清单，最严重的排最前。
 
 它改变的是 environment，而不是代码。Agent 交付的那个 bug、它花了二十次 [tool calls](https://www.aihero.dev/ai-coding-dictionary/tool-call) 才找到的那个文件、reviewer 漏掉的那条规则：`retro` 不会就地修复其中任何一个。它问的是这个 repo 里的什么让它们发生了，然后提出能阻止它们再次发生的 check、pointer 或 standard。它也只提出建议；在你选中一个候选之前，什么都不会变。
 
-## When to reach for it
+## 何时使用
 
 你通过输入 `/retro` 来调用它，agent 不会自行取用它。
 
 在一场感觉比它应有的更艰难的 session 结束时用它：agent 找某个东西找了太久、犯了一个机器本可以抓住的错误、或者需要一种它无从获得的信息。一场顺滑的 session 没什么可教的；一场痛苦的 session 才是 findings 所在。如果你想要的是对这场 session 产出的代码的裁决，改用 [code-review](https://aihero.dev/skills-code-review)。
 
-## Where the findings land
+## 发现落到哪里
 
 每个候选都属于一个类别，而类别决定修复落在哪里：
 
@@ -28,7 +28,7 @@
 
 在任何规则被写下之前，violation 会先被归类。**机械性的**（一个被禁的 API、一种 import 形状、一条文件位置规则）会得到一个确定性 check，因为一个 check 可以失败，而 standards 文件里的一句话不能。只有真正的判断题，也就是任何 linter 都无法强制执行的那类，才成为散文。一个完全没有任何护栏的 repo（没有 pre-commit hook，没有跑 lint、typecheck 和 tests 的 CI job）会被当作一个独立的 finding 上报。
 
-## Common questions
+## 常见问题
 
 **它自己写那条 lint rule，还是等一个同意？我能把它接在每场 session 之后运行吗？**
 
@@ -58,14 +58,14 @@
 
 输入不同。[improve-codebase-architecture](https://aihero.dev/skills-improve-codebase-architecture) 只需要代码，并寻找对代码的结构性改进。`retro` 需要一份 session 历史，改进的是 agent 工作于其中的 environment，而不是代码。它们并肩而坐；谁也不取代谁。
 
-## It's working if
+## 它正常工作的标志
 
 - 每个候选都指回 session 里的一个具体时刻，而不是一条泛泛的最佳实践。
 - 重复的错误变成会失败的 checks，而你的 `AGENTS.md` 随时间变短而不是变长。
 - 一个早已存在却一直没接上的缺失 check 会作为 finding 出现，而不是一个新建一个的提议。
 - 下一场同类任务的 session 找路更快。
 
-## Where it fits
+## 它在整体中的位置
 
 `retro` 是 main chain 的最后一步，flow 在这里回顾它自己：
 

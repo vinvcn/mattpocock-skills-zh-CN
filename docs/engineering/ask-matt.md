@@ -1,10 +1,10 @@
-## What it does
+## 它做什么
 
 `ask-matt` 是本仓库 skills 的 router。你描述当前处境（一个不知如何开始的 idea、一堆 incoming bug reports、一场已经持续很久的 [session](https://www.aihero.dev/ai-coding-dictionary/session)），它就会指出契合的 skill 或 skill 序列，以及该序列中人类决策所处的位置。
 
 它负责推荐，然后停下。它不 grill、不写 [spec](https://www.aihero.dev/ai-coding-dictionary/spec)、不打开文件、也不触发它刚点名的 skill；你拿回来的是下一步该输入什么，然后由你去输入它。它同时也是这套 skills 的手写地图，而不是对你已安装内容的扫描，所以它不会把你路由到你自己的 skills 或其他作者的 skills 上。
 
-## When to reach for it
+## 何时使用
 
 你通过输入 `/ask-matt` 调用它，agent 不会自行取用它。
 
@@ -16,13 +16,13 @@
 | 一场漫长的 session，以及一个关于 [context](https://www.aihero.dev/ai-coding-dictionary/context) 的决策 | 在某个 phase 边界上，对五个选项的排好序的树 |
 | 你已经选定了一个 skill | 没什么有用的。直接调用那个 skill。 |
 
-## Prerequisites
+## 前置条件
 
 Router 只点名 skills，它不安装它们。它指向的一切都必须已安装，推荐才具有可操作性，而且它只认识本仓库中那些已推广的 skills。
 
 依赖 tracker 的 routes（triage、`to-spec`、`to-tickets`、`implement`）假设 [setup-matt-pocock-skills](https://aihero.dev/skills-setup-matt-pocock-skills) 已经在仓库中配置好了一个 issue tracker。router 会乐于在那之前就推荐它们。
 
-## Flows, not skills
+## Flow，而非 skill
 
 这个 skill 给你用来思考的词是 **flow**：一条穿*过*多个 skills 的路径，而不是单个 skill。说出你的处境，就把你放到了某个 flow 的某一步上，这与「这就是匹配你关键字的 skill」是不同的答案。存在五种 route，而 skill 本身完整地携带它们：
 
@@ -32,7 +32,7 @@ Router 只点名 skills，它不安装它们。它指向的一切都必须已安
 - **Standalones**，脱离所有 flow，按自身的条件被取用：prototype、questionnaire、一次 research 运行。
 - **底下一层 vocabulary**，即当问题出在词语而非流程时，其他 skills 会引入的两个参考。
 
-## The phase boundary
+## 阶段边界
 
 它交给你的另一个想法是 **phase boundary**。一个 phase 是 session 内的一块工作（[grilling](https://www.aihero.dev/ai-coding-dictionary/grilling)、implementation、QA），而其中两个 phase 之间的边界，是「我该怎么处理这份 context？」这个问题唯一归属的地方。Phase 中间没有什么可决定的：继续，或者把剩下的拆给 [subagents](https://www.aihero.dev/ai-coding-dictionary/subagent)。
 
@@ -46,7 +46,7 @@ Router 只点名 skills，它不安装它们。它指向的一切都必须已安
 
 其中有两个经常被弄错，这正是 router 携带顺序而非列表的原因。`/handoff` 读起来像窗口之间的通用桥梁，但它不是：可移植性就是它买到的一切。`/compact` 是树的底部而非首选，因为它上方的四个问题每一个都更便宜或更精确。
 
-## Common questions
+## 常见问题
 
 **难道没有一张按正确顺序排列的 skills 列表吗？**
 
@@ -76,7 +76,7 @@ Router 只点名 skills，它不安装它们。它指向的一切都必须已安
 
 在假设它消失了之前，先查一下 changelog 里的改名。`writing-great-skills` 变成了 [writing-for-agents](https://aihero.dev/skills-writing-for-agents)、没有 alias，`to-prd` 变成了 [to-spec](https://aihero.dev/skills-to-spec)，而 `pathfinder` 变成了 [wayfinder](https://aihero.dev/skills-wayfinder)。有四个 skills 被直接退役，并入吸收它们的 skills：`ubiquitous-language`、`design-an-interface`、`qa` 和 `request-refactor-plan`。反向的情况则是 router 自身的滞后，见上。
 
-## It's working if
+## 它正常工作的标志
 
 - 它最后点名该输入什么，然后就此停下，而不是自己开始干活。
 - 它给出的 route 提到了在哪里 clear 或 compact context，以及哪里期望你 review，而不只是一串 skill 名字。
@@ -84,7 +84,7 @@ Router 只点名 skills，它不安装它们。它指向的一切都必须已安
 - 它关于另一个 skill 行为的所有断言，都显示在 trace 里是它读取了那个 skill 的 `SKILL.md`。
 - 你在它交回的东西里认出了自己的处境，而不是最接近的通用场景。
 
-## Where it fits
+## 它在整体中的位置
 
 `ask-matt` 是一个 **standalone router**，悬于整套 skills 之上。它从不处于某条 chain 中的一步；它指向每一条 chain，而其他 docs 页面都回链到它这个节点，这样它们谁都不用重画这张图。从这里你最常落到 [grill-with-docs](https://aihero.dev/skills-grill-with-docs)（main flow 的头部）或 [triage](https://aihero.dev/skills-triage)（那份「到达的工作」而非「你开始的工作」的 on-ramp）。
 

@@ -32,11 +32,11 @@ metadata:
 <optional: potential ramifications of merge>
 ```
 
-## Sections
+## 各部分
 
 跳过所有开场白，保持文字简短。使用 `GLOSSARY.md` 中用户所在领域的语言。
 
-### Summary
+### 摘要
 
 选择能清楚表达要点的最小视图。
 
@@ -149,13 +149,13 @@ function expandSkill(command: string): string {
 }
 ```
 
-#### Guidance
+#### 指引
 
 把每个可视化放在它所支持的简短文字旁边。只保留回答用户当前问题或解决当前讨论点所需的调用、文件、props、状态和边界。
 
 你可以使用其中一种，也可以使用多种，但通常不太可能全部使用。请自行判断，不要让用户承受过多信息。
 
-### Evidence
+### 证据
 
 提供能证明变更有效的具体证据，并展示 before 和 after。
 
@@ -163,7 +163,7 @@ function expandSkill(command: string): string {
 
 执行结果是 A-tier 证据，例如测试结果、console output。使用伪代码展示现在会失败和会通过的准确测试。
 
-### Merge Danger
+### 合并风险
 
 说明这是 one-way door 还是 two-way door。two-way door 可以退回，但 one-way door 不行。回滚成本低的 PR 风险更低。涉及破坏性操作或难以逆转决策的变更属于 one-way door。
 

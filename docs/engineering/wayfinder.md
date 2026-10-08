@@ -1,10 +1,10 @@
-## What it does
+## 它做什么
 
 `wayfinder` 接手一个对单个 agent [session](https://www.aihero.dev/ai-coding-dictionary/session) 来说太大的 effort（一个你能说出其 **destination**、却还看不见路径的想法），并把它绘制成你 issue tracker 上的一张由 **decision tickets** 组成的 **shared map**，然后一次一个地解决它们，直到路径清晰。
 
 它做 planning，不做执行。每个 ticket 都承载一个问题，其解决是一个 decision，而不是一个待执行的 build 切片；当在有人去构建这东西之前再没有什么需要决定时，map 就完成了。这一条规则就是 wayfinder ticket 与普通实现 [ticket](https://www.aihero.dev/ai-coding-dictionary/ticket) 的区别，也是 agent 最常打破的规则。当 map 清除时，wayfinder 交接；它不会继续进入代码。
 
-## When to reach for it
+## 何时使用
 
 你通过输入 `/wayfinder` 调用它，[agent](https://www.aihero.dev/ai-coding-dictionary/agent) 不会自行触发。
 
@@ -20,13 +20,13 @@
 
 Greenfield 不是必要条件。Wayfinder 也常规地用于 legacy 和半成品的 codebase，而且在那里它可以说更锐利，因为很多 fog 是"这里已经成立的事实"，而不是"我们应该做什么"。
 
-## Prerequisites
+## 前置条件
 
-Map 及其 tickets 位于 repo 的 issue tracker 上，因此 wayfinder 需要 [setup-matt-pocock-skills](https://aihero.dev/skills-setup-matt-pocock-skills) 铺设的 tracker wiring。该步骤会写入一个 "Wayfinding operations" 小节，描述 map、child tickets、blocking edges 和 frontier queries 在 GitHub、GitLab 或 local markdown 上如何表达。Wayfinder 通过你 `CLAUDE.md` / `AGENTS.md` 中的 pointer 解析这份文档，而不是某个固定路径；如果完全没有配置 tracker，它就回退到 local markdown 文件。
+Map 及其 tickets 位于 repo 的 issue tracker 上，因此 wayfinder 需要 [setup-matt-pocock-skills](https://aihero.dev/skills-setup-matt-pocock-skills) 铺设的 tracker wiring。该步骤会写入一个「Wayfinding 操作」小节，描述 map、child tickets、blocking edges 和 frontier queries 在 GitHub、GitLab 或 local markdown 上如何表达。Wayfinder 通过你 `CLAUDE.md` / `AGENTS.md` 中的 pointer 解析这份文档，而不是某个固定路径；如果完全没有配置 tracker，它就回退到 local markdown 文件。
 
 Tracker 不是装饰。正是 blocking 让 frontier 在 tracker 自己的 UI 中可视化呈现，而一个没有原生依赖链接的 tracker（比如自托管的 Gitea）会让 wayfinder 退化为从 map 文本推断 blockers，这能用，但需要更密切的监督。
 
-## The map, the fog, and the frontier
+## Map、fog 与 frontier
 
 **map** 是一个标记为 `wayfinder:map` 的单一 issue；它的 tickets 是它的 child issues。它是一个 **index, not a store**：一个 decision 恰好存在于一个地方（它的 ticket），map 只摘要并链接它。一个 session 以低分辨率加载 map，并按需放大到各个 ticket；这正是一个 map 可以不断增长、却不必让每个 session 为它的全部历史买单的原因。
 
@@ -39,7 +39,7 @@ map 上承载四样东西：
 
 **Frontier** 是那些 open、unblocked、unclaimed 的 tickets（已知世界的边缘）。一个 session 在动手之前先把 ticket 分配给自己，从而认领它，因此 assignee *就是*认领，并发 session 会跳过它。在整个过程中 tickets 都以名字引用，绝不是一个光秃秃的 `#42`；一墙 issue 编号在叙述中无法阅读。
 
-## The four decision-ticket types
+## 四种 decision ticket 类型
 
 每个 ticket 都带一个 `wayfinder:<type>` label，并且要么是 **[HITL](https://www.aihero.dev/ai-coding-dictionary/human-in-the-loop)**（与一个为自己发声的人类一起完成），要么是 **[AFK](https://www.aihero.dev/ai-coding-dictionary/afk)**，由 agent 独自驱动。一个 HITL ticket 只能通过 live exchange 解决；一个自答 [grilling](https://www.aihero.dev/ai-coding-dictionary/grilling) 问题的 agent 已经把它破坏了。
 
@@ -54,7 +54,7 @@ map 上承载四样东西：
 
 Research 是 *每个 session 一个 ticket* 的唯一例外。
 
-## Common questions
+## 常见问题
 
 **这和 `/grill-with-docs` 有什么不同？我应该先启动哪个？**
 看 session 数量，而不是项目大小。`/grill-with-docs` 是单 session 规划；wayfinder 是多 session 规划。如果你能在一次 conversation 里装下整件事，grilling 是更便宜也更好的工具，而 wayfinder 在这种情况下确实更慢、更密。社区已经沉淀了一句简短的总结：只有当工作放不进单个 session 时，wayfinder 才有意义。这是 wayfinder 被问得最多的问题，而且一直被问，因为那两段描述并没有告诉你自己的任务在这条线上位于何处，你必须自己判断 session 数量。
@@ -86,7 +86,7 @@ Frontier 就是用来向你展示哪些是可领取的，blocking edges 的存�
 **`decision-mapping` 去哪了？**
 它就是当前这个 skill，在 v1.1 中改名为 `wayfinder`，并以 `/wayfinder` 调用。"Decision map" 是行话，而且也不准确，因为四种 ticket 类型里只有一种真正是 decision。这次重构给了 skill 一套连贯的词汇（destination、fog of war、frontier、map），而不是在顶上再叠一层生造的词。不过单位保留了 "decision" 这个词：**decision ticket** 就是 wayfinder ticket 的称呼，正是为了阻止人们把它读成实现 ticket。
 
-## It's working if
+## 它正常工作的标志
 
 - 在任何一个 ticket 存在之前，destination 就已写下并达成一致。
 - 每个 open ticket 读起来都是一个问题。任何读起来像 "build the X" 的 ticket，要么是打错了类型，要么属于 map 的下游。
@@ -96,7 +96,7 @@ Frontier 就是用来向你展示哪些是可领取的，blocking edges 的存�
 - 当开场的那次 breadth-first grill 完全没浮现出 fog 时，skill 会停下来，告诉你这个 effort 小到可以跳过 map。
 - 完成 map 的那个 session 把你引向一份 spec，而不是一个 pull request。
 
-## Where it fits
+## 它在整体中的位置
 
 `wayfinder` 是一个 **situational on-ramp**，而不是默认的正门。以 grill 为起点的 idea → ship 链条仍然是大多数工作的起点；当 idea 大到无法装进一个 session 时，你才爬上 wayfinder，而它会在 [to-spec](https://aihero.dev/skills-to-spec) 处重新汇入那条链条，因为一张已清除的 map 是交接，而不是继续构建。
 

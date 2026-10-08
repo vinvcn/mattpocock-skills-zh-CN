@@ -17,7 +17,7 @@ description: 为 agent 编写文档。适用于创建或编辑 skills，或修�
 - **每个 branch 一个 trigger。** 如果同义词只是重命名单一 branch，那就是同一个 branch 写了两遍；合并它们，只保留真正不同的 branches。
 - **删掉正文已经承载的 identity。**
 
-## The two loads
+## 两种 load
 
 你添加的每个文档和 pointer 都会花掉两个预算之一：
 
@@ -26,7 +26,7 @@ description: 为 agent 编写文档。适用于创建或编辑 skills，或修�
 
 只能通过 pointer 触达的材料，以该 pointer 自己那一行为代价逃过 context load；完全没有 pointer 的材料则完全由 cognitive load 承载。
 
-## Information hierarchy
+## 信息层级
 
 一个文档由两类内容构成：**steps**（agent 执行的有序动作）和 **reference**（按需查阅的定义、规则、事实），它们自由混合：全是 steps（一份菜谱）、全是 reference（一次 review 的规则、本 skill），或两者都有。核心决策是每块内容放在 **information hierarchy** 的哪个位置，一个按 agent 需要材料的即时程度排序的 ladder：
 
@@ -42,7 +42,7 @@ description: 为 agent 编写文档。适用于创建或编辑 skills，或修�
 
 **Sprawl** 是这里的失败模式：文档过长，即使每一行都 live 且 unique。注意力在多余内容上变稀薄，每一行多余的都要多维护一条。治疗方式是 ladder：把 **reference** disclose 到 pointers 后面，并按 **branch** 或 sequence 拆分，让每条路径只携带它需要的。
 
-## Steps and completion criteria
+## Steps 与 completion criteria
 
 每个 step 都以一个 **completion criterion** 结束：告诉 agent 工作完成的条件。两个属性让它成为杠杆：
 
@@ -51,7 +51,7 @@ description: 为 agent 编写文档。适用于创建或编辑 skills，或修�
 
 最强的 criteria 既可检查又穷尽。
 
-## When to split
+## 何时拆分
 
 把一个文档拆成两个会花掉两种 load 之一，所以只有当这一刀赚回成本时才拆：
 
@@ -73,7 +73,7 @@ description: 为 agent 编写文档。适用于创建或编辑 skills，或修�
 
 **Negation** 是这个杠杆旁边的失败模式：用禁止来引导会把被禁止的行为拖进 context，让它 _更容易_ 浮现，而不是更难。_Don't think of an elephant_，而 elephant 就是全部；negation 是一个被强烈激活的概念压垮的弱修饰符，所以禁令读起来一半像是在叫你去做那件事。应 prompt **positive**：直接说明目标行为（"write one-line comments"），让被禁止的那个从不被说出。只有当你无法正向表达某条 hard guardrail 时，prohibition 才配得上一个位置；即便如此，也要配上正向目标，让注意力落到该做什么上。
 
-## Pruning
+## 修剪
 
 - 让每个 meaning 都保持在 **single source of truth**：一个权威位置，这样改变行为就是一处的编辑。**Duplication**（同一含义出现在多处）会花维护成本和 tokens，并把这个含义在 ladder 上的 prominence 抬高到超过它真实等级的位置。（这是 leading word 的意外反例：leading word 是有意重复一个 token，绝不重复含义。）
 - **environment** 也是一个 source of truth（`package.json` scripts、config files、目录布局、`--help` output），而一个把它重述出来的文档是一个 **cache**：一次 lookup 的副本，只有当 lookup 很昂贵时才配得上它的 load。缓存那些 agent 查看环境也找不到的东西：未写下的约定、某个选择背后的原因、没有 config 会招认的 gotcha。把 one-file、one-command 的 lookups 留给 environment，在那里它们不会过时。

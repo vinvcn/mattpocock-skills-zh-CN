@@ -1,10 +1,10 @@
-## What it does
+## 它做什么
 
 `grill-with-docs` 围绕一个计划或设计访谈你，直到你与 [agent](https://www.aihero.dev/ai-coding-dictionary/agent) 对它达成共同的理解为止，并在进行的同时把词汇和那些艰难的决策写进你的 repo。它就是 [grill-me](https://aihero.dev/skills-grill-me) 所运行的那场同款访谈（一轮问题，然后等待，再下一轮），只不过指向的是一个 codebase。
 
 它是 **[stateful](https://www.aihero.dev/ai-coding-dictionary/stateful)** 的。其他每一个 grilling skill 都会把 [session](https://www.aihero.dev/ai-coding-dictionary/session) 留在你的脑子里；这一个则在磁盘上留下文件。一个术语被敲定，它就在敲定的那一刻落入 `GLOSSARY.md`，而不是攒到末尾批量写。一个决策通过三道门，它就作为一条 ADR 落盘。这正是全部的区别，也是人们使用这个 skill 时遇到的大部分麻烦的源头：这些 artifact 是真实 repo 里的真实文件，所以它们可能在你预期时缺席，也可能在不止一个人写它们时发生漂移。
 
-## When to reach for it
+## 何时使用
 
 你通过输入 `/grill-with-docs` 来调用它，agent 不会自行取用它。
 
@@ -20,13 +20,13 @@
 
 与 wayfinder 的分界归结为 session 数量：`/grill-with-docs` 用于 single-session 规划，`/wayfinder` 用于 multi-session 规划。
 
-## Prerequisites
+## 前置条件
 
 这个 skill 会写入你的 repo，所以你需要身处可以安全写入的地方。已敲定的术语进入根目录的一份 `GLOSSARY.md` glossary；或者，如果根目录的 `GLOSSARY-MAP.md` 把 repo 标记为 multi-context，则进入相关 context 的 `GLOSSARY.md`。决策进入 `docs/adr/`。两者都是惰性创建的；在第一个术语或决策成形之前什么都不存在，所以无需预先搭建任何脚手架。
 
 它还需要另外两个 skill 在场，因为它自己的 `SKILL.md` 只有一行，把工作委托给它们：[grilling](https://aihero.dev/skills-grilling) 提供访谈，[domain-modeling](https://aihero.dev/skills-domain-modeling) 提供书写。单独安装 `grill-with-docs` 只会得到一个无法工作的 skill。
 
-## The paper trail
+## 留下的书面记录
 
 一次 session 会产出三样东西，而且它们并不对等。
 
@@ -40,7 +40,7 @@
 
 glossary 才是重点。Domain language 才是这个 skill 真正在构建的东西：项目自己的词，一次性达成共识，这样你、agent 和你的同事就不再需要反复付出代价去重新推导它们。值得说明的是，并非所有人都同意这能换来 agent 的性能：最尖锐的公开反驳是，一个术语和它的平白英文展开式对 [model](https://www.aihero.dev/ai-coding-dictionary/model) 来说得到同样的结果，而这套词汇真正压缩的是共享它的那些人类之间的沟通。这种解读仍然让 glossary 有价值；它只是挪动了价值所在。
 
-## Common questions
+## 常见问题
 
 **我应该用这个还是 `/wayfinder`？**
 由范围决定。凡是你能在一次 session 内敲定的，就用这个；当 effort 大到一次装不下时用 [wayfinder](https://aihero.dev/skills-wayfinder)，它会先把工作绘制成一张决策 [tickets](https://www.aihero.dev/ai-coding-dictionary/ticket) 地图。Wayfinder 更慢也更密集，在一个范围清晰的 feature 上取用它是常见的错误。它并不取代这个 skill：它为了地图中适合一场 grilling 的部分而落入一场 grilling session。
@@ -63,7 +63,7 @@ glossary 才是重点。Domain language 才是这个 skill 真正在构建的东
 **为什么它叫这个名字？**
 没有人对这个名字满意。有一个未决的提议，把它改名为 `grill-domain-model`，这个名字更诚实地描述了它的行为。这件事没有任何进展。如果改名真的落地，文档页面会随之移动，URL 也会改变。
 
-## It's working if
+## 它正常工作的标志
 
 - `GLOSSARY.md` 在 session *期间*一个术语一个术语地变化，而不是在末尾一次性出现。
 - glossary 读起来是纯粹的词汇（你项目自己的词配上紧凑的定义），不含任何实现细节或类 spec 的叙述。
@@ -71,7 +71,7 @@ glossary 才是重点。Domain language 才是这个 skill 真正在构建的东
 - 你得到的 ADR 很少或没有，而得到的那些正是你宁可被逼着重议也难受的决策。
 - 它会质疑你使用的一个词，因为你现有的 glossary 对它的定义不同。
 
-## Where it fits
+## 它在整体中的位置
 
 `grill-with-docs` 是 main build chain 的开头：
 

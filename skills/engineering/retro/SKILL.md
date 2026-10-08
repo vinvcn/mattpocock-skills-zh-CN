@@ -6,7 +6,7 @@ disable-model-invocation: true
 
 用户要求做一次 **retrospective**。你要针对 coding agent 的 **environment** 提出改进建议，以改善未来的运行结果。
 
-## Steps
+## 步骤
 
 1. 调用 Skill 工具并指定 `writing-for-agents`，获取写作风格指南。
 
@@ -24,9 +24,9 @@ disable-model-invocation: true
 
 4. 按严重程度顺序向用户呈现这些候选项。
 
-## Reference
+## 参考
 
-### Implementation vs Review
+### Implementation 与 Review
 
 记住，所有工作都经过两个阶段：implementation 和 review。implementation agent 承受最大的 **context pressure**，负责探索、编写代码和调试失败。
 
@@ -34,7 +34,7 @@ review agent 承受最小的 context pressure：它收到的是 diff，因此不
 
 因此，review agent 应负责施加 coding standards，而不是 implementation agent。
 
-### Files
+### 文件
 
 你可以访问 repo 中的几个 files：
 

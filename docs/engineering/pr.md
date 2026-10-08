@@ -1,10 +1,10 @@
-## What it does
+## 它做什么
 
 `pr` 是一份 pull request body 应该采用的形状：一段展示这次变更的 **Summary**、证明它可用的 **Evidence**、以及对把它落地有多危险所做的 **Merge Danger** 判断。它是一个格式参考，不是一个工作流。它不 push branch、不打开 PR、也不决定里面放什么；它告诉 [agent](https://www.aihero.dev/ai-coding-dictionary/agent)，当它写 PR body 时，这个 body 应该长什么样。
 
 摘要是一幅图，而不是一段话。默认的 PR body 用散文叙述 diff，而这一份会挑出能把关键点讲清楚的**最小视图**（pseudocode、一棵 call tree、一棵 component tree、一棵 file tree、一张 Mermaid 图，或一个 shaped diff），并让它周围的文字保持简短。reviewer 手里已经打开了 diff；body 的任务是在他们阅读之前先展示它的形状。
 
-## When to reach for it
+## 何时使用
 
 输入 `/pr`，或者每当 agent 在写 PR body 时，它会自动取用。
 
@@ -14,7 +14,7 @@
 | 代码写完了，但还没有人 review 过 | 先 [code-review](https://aihero.dev/skills-code-review)，再 `pr` |
 | PR 已经打开，review comments 正在回来 | 这套里暂时没有对应的；`pr` 只写 body |
 
-## The template
+## 模板
 
 三个 section，按此顺序：
 
@@ -24,7 +24,7 @@
 
 关于门的判断是主导想法。它把"这合并安全吗"从一种直觉变成一条 reviewer 可以表示异议的明确主张，并告诉他们把 [human review](https://www.aihero.dev/ai-coding-dictionary/human-review) 花在哪里：blast radius 小的双向门可以扫读；单向门值得一次慢读。
 
-## Common questions
+## 常见问题
 
 **我能相信 agent 自己给出的门判断吗？**
 
@@ -62,14 +62,14 @@
 
 它自己做不到。一位用户的做法是在 repo 的 agent docs 里放一条常设指令：agent 写的每一个 issue、comment 和 PR 都以一行披露结尾。这条规则属于 repo，在那里它覆盖 agent 发出的一切，而不是待在只管一种文档的模板里。
 
-## It's working if
+## 它正常工作的标志
 
 - 只看 Summary 的那张图、在打开 diff 之前，你就能说出这个 PR 改了什么。
 - body 没有 preamble：它从 Summary 标题开始。
 - Evidence section 展示一份 before 和 after，而不是一个"测试通过"的主张。
 - 每个 PR 都声明一扇门和一个 blast radius，而单向门就是你放慢速度对待的那些。
 
-## Where it fits
+## 它在整体中的位置
 
 当构建以 pull request 的形式上线时，`pr` 位于 review 和 retro 之间：`to-spec → to-tickets → implement → code-review → pr → retro`。它是 model-invoked 的，所以在这条链之外，任何时候 agent 写 PR body，它也会自行触发。
 

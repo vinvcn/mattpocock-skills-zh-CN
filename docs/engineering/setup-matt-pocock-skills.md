@@ -1,4 +1,4 @@
-## What it does
+## 它做什么
 
 `setup-matt-pocock-skills` 就一个 repo 回答三个问题（issues 放在哪里、triage labels 叫什么名字、以及 domain docs 放在哪里），并把答案记录为 `docs/agents/` 下的 markdown 文件。
 
@@ -6,13 +6,13 @@
 
 它是一个 prompt 驱动的 skill，而不是一个确定性的脚本。它读取你的 `git remote`、你已有的 `CLAUDE.md`、你已有的 `GLOSSARY.md`，提出它发现的内容，并在写入任何东西之前等你确认。
 
-## When to reach for it
+## 何时使用
 
 你通过输入 `/setup-matt-pocock-skills` 调用它，[agent](https://www.aihero.dev/ai-coding-dictionary/agent) 不会自行触发。它被刻意标记为不可调用，所以没有其他 skill 能替你触发它。
 
 **每个 repo 使用一次，在首次使用任何其他 engineering skill 之前**。如果 [triage](https://aihero.dev/skills-triage)、[to-spec](https://aihero.dev/skills-to-spec)、[to-tickets](https://aihero.dev/skills-to-tickets) 或 [wayfinder](https://aihero.dev/skills-wayfinder) 开始猜测你的 issues 放在哪里，或套用你的 tracker 并不存在的 labels，说明它们还没在这里完成配置。一个已经进行到项目一半的 repo 也是运行它的好地方；这个 skill 会读取已经存在的内容，之前的工作不会浪费。
 
-## Prerequisites
+## 前置条件
 
 它写入你运行它的那个 repo：
 
@@ -25,7 +25,7 @@
 
 全部都是已提交的 markdown。没有 user-level 或 global 模式：config 就在 repo 里，所以每个 repo 都有自己的副本。
 
-## The three decisions
+## 三个决策
 
 它用每个小节都先给出推荐答案的方式开头，并跳过任何已经解决的探索。大多数运行就是两次确认然后收工。
 
@@ -48,7 +48,7 @@ tracker 选项：
 
 "Other" 也不是一个 stub。它就是 Jira、Linear、Azure DevOps、Beads 都能工作的原因：你描述 workflow，skill 把你的段落记录进 `docs/agents/issue-tracker.md`，下游 skills 遵循那段文字。社区已经这么做过：一个 Jira-over-[MCP](https://www.aihero.dev/ai-coding-dictionary/mcp) 变体、一个形状像 `gh` 的 Gitea CLI、一个手工构建的本地 dashboard。
 
-## Common questions
+## 常见问题
 
 **我非得用 GitHub 吗？**
 
@@ -81,7 +81,7 @@ tracker 选项：
 
 一个长期存在的抱怨说奇怪，措辞大致是：*"having a skill to set up the other skill does not feel right to me: that means the LLM is configuring its own skills."* 这个权衡是真实且被承认的：setup 步骤的替代方案，是把 tracker 指令复制进每一个触碰 issues 的 skill。输出是可检查、可编辑的 markdown，这正是缓解手段：你可以读取它写下的每个文件并手工改动，而日常的微调正是那样，而不是再一次运行。
 
-## It's working if
+## 它正常工作的标志
 
 - `docs/agents/issue-tracker.md` 和 `docs/agents/domain.md` 存在，如果安装了 `triage` 还有 `triage-labels.md`。
 - 你的 harness 真正读取的那个指令文件中出现了一个 `## Agent skills` 小节，每一行以一个单行摘要指向这些文件中的每一个。
@@ -89,6 +89,6 @@ tracker 选项：
 - 之后，`/to-tickets` 发布时不再询问 issues 放在哪里，`/triage` 套用 labels 而不是发明它们。
 - skill 文件本身没有任何变化。如果 setup 编辑了一个 `SKILL.md`，那一定出错了。
 
-## Where it fits
+## 它在整体中的位置
 
-`setup-matt-pocock-skills` 是 engineering flow 的 **run-once setup**，是其他一切默认的前提，而不是 chain 中的一个步骤。它的邻居是它的读者：[triage](https://aihero.dev/skills-triage)，它套用在里写下的 label vocabulary；[to-spec](https://aihero.dev/skills-to-spec) 和 [to-tickets](https://aihero.dev/skills-to-tickets)，它们发布到在这里命名的 tracker；以及 [wayfinder](https://aihero.dev/skills-wayfinder)，它读取同一个 tracker 文件的 "Wayfinding operations" 小节，以知道 maps 和子 [tickets](https://www.aihero.dev/ai-coding-dictionary/ticket) 是如何存储的。它记录的 domain-doc 布局，正是 [domain-modeling](https://aihero.dev/skills-domain-modeling) 之后要填满的：它非惰性地创建 `GLOSSARY.md` 和 ADRs，当一个 term 或 decision 真正被解决时，所以 setup 之后一个空 repo 是预期的状态。至于下一步该用哪个 skill，[ask-matt](https://aihero.dev/skills-ask-matt) 为整套工具路由。
+`setup-matt-pocock-skills` 是 engineering flow 的 **run-once setup**，是其他一切默认的前提，而不是 chain 中的一个步骤。它的邻居是它的读者：[triage](https://aihero.dev/skills-triage)，它套用在里写下的 label vocabulary；[to-spec](https://aihero.dev/skills-to-spec) 和 [to-tickets](https://aihero.dev/skills-to-tickets)，它们发布到在这里命名的 tracker；以及 [wayfinder](https://aihero.dev/skills-wayfinder)，它读取同一个 tracker 文件的「Wayfinding 操作」小节，以知道 maps 和子 [tickets](https://www.aihero.dev/ai-coding-dictionary/ticket) 是如何存储的。它记录的 domain-doc 布局，正是 [domain-modeling](https://aihero.dev/skills-domain-modeling) 之后要填满的：它非惰性地创建 `GLOSSARY.md` 和 ADRs，当一个 term 或 decision 真正被解决时，所以 setup 之后一个空 repo 是预期的状态。至于下一步该用哪个 skill，[ask-matt](https://aihero.dev/skills-ask-matt) 为整套工具路由。

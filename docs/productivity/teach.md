@@ -1,10 +1,10 @@
-## What it does
+## 它做什么
 
 `teach` 把你运行它的那个目录变成一个常设的教学 workspace，并在多个 [sessions](https://www.aihero.dev/ai-coding-dictionary/session) 中教你一个主题，以简短、自包含的 HTML 课程的形式。
 
 它不从 [model](https://www.aihero.dev/ai-coding-dictionary/model) 已经知道的东西教学。[Parametric knowledge](https://www.aihero.dev/ai-coding-dictionary/parametric-knowledge) 被视为不可信：在它教学之前，它去寻找高可信度的资源，把它们记录在 `RESOURCES.md` 里，并在每一节课内部引用它们。另一个结构性事实是它是 [stateful](https://www.aihero.dev/ai-coding-dictionary/stateful) 的：mission、resources、lessons 和你学过什么的记录都以文件的形式存在于目录中，所以下一个 session 从那些文件接续，而不是从上一段对话剩下的任何东西接续。
 
-## When to reach for it
+## 何时使用
 
 你通过输入 `/teach` 来调用它，[agent](https://www.aihero.dev/ai-coding-dictionary/agent) 不会自行调用它。
 
@@ -19,7 +19,7 @@
 | 一个后台 agent 去读 [primary sources](https://www.aihero.dev/ai-coding-dictionary/primary-source) 并给你留一份带引用的文档 | [research](https://aihero.dev/skills-research) |
 | 学习某个在 grilling 中途冒出来的东西，而不让 [grilling](https://www.aihero.dev/ai-coding-dictionary/grilling) 脱轨 | [handoff](https://aihero.dev/skills-handoff) 到一个教学 workspace，然后在那里 `teach` |
 
-## Prerequisites
+## 前置条件
 
 `teach` 构建一个目录，而不是产出一份文件，而且这个 skill 假设每个 workspace 一个 mission，所以请在一个你乐意把它交给单一主题的地方运行它。把它放在你正在工作的 project 之外：一个独立的 repo 是推荐的家，而不是一个全局的 `~/.learnings/` 文件夹或工作项目本身。一个专用的 repo 也让课程可以 commit，这正是团队共享它们的方式。
 
@@ -37,7 +37,7 @@
 
 关于这份列表有两条诚实的说明。一份 glossary 适合大多数主题，但这个 skill 附带了一份 `SKILL.md` 不再链接到的 `GLOSSARY-FORMAT.md`，所以只有你开口要才会得到一份（[issue #559](https://github.com/mattpocock/skills/issues/559)）。而且 workspace 并不总在你预期的地方被创建，在它之上构建一个冗长的课程之前，先看下面的第一个问题。
 
-## Storage strength, not fluency
+## 存储强度，而非流利度
 
 用来思考的词是 **storage strength**：长期保持，与之相对的是 **fluency**，那种当你阅读时感觉像精通、一周后就消失的当下回忆。`teach` 通过可取的难度（desirable difficulty）来构建前者：retrieval practice、spacing、interleaving。知识先行，在那里难度是敌人，因为它会吞噬你用来理解的 working memory；然后 skill 通过一个紧密的反馈 loop 被反复操练，在那里难度是工具。
 
@@ -45,7 +45,7 @@
 
 这也是为什么这个 skill 会回推而不是迁就。一个需要 **wisdom**（现实世界判断）的问题，会得到一个尝试性的回答，然后是一个指向你能去检验它的社区的指针。一个 quiz 是一道关卡，而不是一种形式：一位用户报告说了一句「非常感谢」，结果被告知操练仍然在进行中。
 
-## Lessons, references and components
+## 课程、参考文档与组件
 
 一份 **lesson** 是一个自包含的 HTML 文件，短到一口气就能读完，与 mission 相连，给出一个实实在在的收获。它引用它的来源，推荐一份你自己去读的 primary source，并链接到兄弟课程和 reference 文档。
 
@@ -53,7 +53,7 @@
 
 课程由 `assets/` 中的 **components** 构建：stylesheets、quiz 小组件、simulators、diagram 辅助工具。复用是默认。agent 在撰写课程前会读取 `assets/`，并基于那里已有的东西构建，而任何第二个课程可能用到的新的东西都会被写成 component，而不是内联。共享的 stylesheet 是每个 workspace 挣得的第一个 component；正是它阻止输出变成一堆一次性作品。
 
-## Common questions
+## 常见问题
 
 **它把文件放哪里了？我的最后落在了 `~/.claude/skills`。**
 一个真实、未修复的 bug（[#377](https://github.com/mattpocock/skills/issues/377)）。`SKILL.md` 同时为两个不同的根使用 `./`：`./MISSION-FORMAT.md` 及其兄弟文件确实紧挨着已安装 skill 中的 `SKILL.md`，而 `./lessons/`、`./reference/`、`./learning-records/` 和 `./assets/` 本意是在你的目录里。一个针对 skill 的安装目录解析第一类的 agent，会继续在那里解析第二类，并把你的课程写进 skill 文件夹。在它之上构建之前，先检查第一节课落在了哪里，并在开始时显式地说出目录名，而不是依赖「当前目录」被理解。
@@ -79,7 +79,7 @@
 **我应该用哪个模型运行它？**
 没有标准答案，而且被报告的差异很大。更高的 [reasoning effort](https://www.aihero.dev/ai-coding-dictionary/effort) 被报告为能产出比 medium 设置明显更好的课程。一位用户用 Codex 通过 Copilot CLI 运行同一个 skill，得到一个 30 行的 HTML 卡片，而 Claude Code 则产出一份完整的课程。它在 Claude Cowork 中无需修改即可运行，取决于你的组织是否允许在那里添加 skills。如果课程出来很单薄，在重写你的 prompt 之前，先换模型、[harness](https://www.aihero.dev/ai-coding-dictionary/harness) 或 effort。
 
-## It's working if
+## 它正常工作的标志
 
 - 它在空目录里做的第一件事是访谈你为什么想要这个，而不是产出课程。
 - `RESOURCES.md` 在课程之前就被填满，而每节课都点名一份值得你自己去读的 primary source。
@@ -90,7 +90,7 @@
 - 课程看起来像同一门课：它们链接 `assets/` 里的 stylesheet，而不是各自带一份。
 - 一个需要判断的问题会让你被指向一个 forum、subreddit 或课堂，而不只是一个答案。
 
-## Where it fits
+## 它在整体中的位置
 
 `teach` 是一个**随时可调用的 standalone**。它不是 build chain 中的一步，也不与 engineering flow 共享任何 artifact；它拥有自己的目录，并在主题持续期间驻留其中。
 

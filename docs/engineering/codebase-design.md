@@ -1,10 +1,10 @@
-## What it does
+## 它做什么
 
 `codebase-design` 修正你用来设计 module 的那些词：**module**、**interface**、**depth**、**seam**、**adapter**、**leverage**、**locality**。它精确定义每一个，禁用那些松散的替代词（"component"、"service"、"API"、"boundary"），并陈述由它们推出的那几条原则。
 
 它是一个参考，而不是一套流程。没有要运行的 loop，不产出 artifact，也没有它会问你一个问题的 checkpoint。每个触及设计的其他 skill 都借用它的词汇；单独使用时，它把语言交给你然后停下。这是你在调用它之前要知道的那件事，因为一个没有流程、没有停止规则的 skill，如果你把一场 [session](https://www.aihero.dev/ai-coding-dictionary/session) 指向它说「go」，就会即兴编一个，见下面的问题。
 
-## When to reach for it
+## 何时使用
 
 输入 `/codebase-design`，或者当设计任务契合时由 agent 自动调用。
 
@@ -20,7 +20,7 @@
 | 你想让设计被辩驳，而不只是被命名 | [grilling](https://aihero.dev/skills-grilling) |
 | 有一份具体的 behavior 要构建，你想要能在重构中存活的 tests | [tdd](https://aihero.dev/skills-tdd) |
 
-## The vocabulary
+## 词汇
 
 Glossary 就是这个 skill。每个术语都对照其他术语来定义，而且每个都带着它所替换的词。
 
@@ -36,7 +36,7 @@ Glossary 就是这个 skill。每个术语都对照其他术语来定义，而�
 
 Depth 刻意*不*被定义为 implementation 行数对 interface 行数的比值，那是 Ousterhout 自己的定义。这个度量奖励的是给 implementation 灌水。这里改用 depth-as-leverage。
 
-## The four principles
+## 四条原则
 
 - **Depth 是 interface 的属性，不是 implementation 的。** 一个 deep module 内部可以由小的、可替换的部件构建而成。它们只是不暴露给 callers。一个 module 可以有自己的、它的 tests 会用的 internal seams，以及 interface 处的一条 external seam。
 - **Deletion test。** 想象删掉这个 module。如果复杂性消失了，它只是一个 pass-through。如果它在 N 个 callers 中重新出现，那它就是在挣它的口粮。
@@ -45,7 +45,7 @@ Depth 刻意*不*被定义为 implementation 行数对 interface 行数的比值
 
 两份支持文件走得更远，而且 skill 按需读取它们，而不是开头就读。[DEEPENING.md](https://github.com/mattpocock/skills/blob/main/skills/engineering/codebase-design/DEEPENING.md) 对候选的依赖做分类（in-process、local-substitutable、remote-but-owned、true-external），因为类别决定了加深后的 module 如何跨其 seam 被测试。[DESIGN-IT-TWICE.md](https://github.com/mattpocock/skills/blob/main/skills/engineering/codebase-design/DESIGN-IT-TWICE.md) 启动并行的 [sub-agents](https://www.aihero.dev/ai-coding-dictionary/subagent)，为同一个 module 产出三个或更多截然不同的 interface，然后在 depth、locality 和 seam placement 上比较它们。
 
-## Common questions
+## 常见问题
 
 **我到底如何在 TypeScript 里构建一个 deep module？**
 
@@ -75,7 +75,7 @@ Depth 刻意*不*被定义为 implementation 行数对 interface 行数的比值
 
 人们恰恰提议过这些。[Issue #180](https://github.com/mattpocock/skills/issues/180) 把 Parnas 的 module secrets 和 Page-Jones 的 connascence 作为一层命名，用于*什么*正在跨 seam 泄漏，并附带一份可用的 diff；[issue #303](https://github.com/mattpocock/skills/issues/303) 提议在 implementation 内部做 progressive disclosure，这样在 public interface 处 deep 的 module 底下就不是一块无差别的平板。两者都开着、未合并。随附发布的 glossary 刻意很小，而它保持小的原因在 skill 本身里说明了：语言一致是全部要点，而一个没人一致使用的术语比没有术语更糟。
 
-## It's working if
+## 它正常工作的标志
 
 - 设计对话不再产出 "component"、"service" 和 "boundary" 这些词，开始产出 "module"、"interface" 和 "seam"。
 - 有人能指着一次拟议的 extraction，不支支吾吾地说出它是否通过 deletion test。
@@ -83,6 +83,6 @@ Depth 刻意*不*被定义为 implementation 行数对 interface 行数的比值
 - 对 interface 的讨论涵盖 invariants、ordering 和 error modes，而不只是类型签名。
 - 调用它不会启动一场 session。如果 agent 仅凭 `/codebase-design` 就开始读文件、提议 refactors，那它就把参考当成了 driver。
 
-## Where it fits
+## 它在整体中的位置
 
 `codebase-design` 是一个 **随时可调用的 standalone**，是 engineering skills 底下的词汇层，而不是任何 chain 中的一步。它最接近的邻居是 [domain-modeling](https://aihero.dev/skills-domain-modeling)，即针对*问题域*的词而非 module 形状的平行参考：两者通常一起被需要，因为把 deep module 命名得好两者都需要。[improve-codebase-architecture](https://aihero.dev/skills-improve-codebase-architecture) 是另一个：它调查 codebase 寻找 deepening 候选，并用这份 glossary 写出每一个，所以它找到 module，而这个 skill 是你设计它的工作台。当你拿不准哪个 skill 或 flow 契合时，[ask-matt](https://aihero.dev/skills-ask-matt) 会为你路由。

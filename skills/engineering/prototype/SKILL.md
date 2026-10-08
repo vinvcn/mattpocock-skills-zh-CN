@@ -3,11 +3,11 @@ name: prototype
 description: 构建一次性原型来回答一个设计问题。适用于用户想验证某个 state model 或 logic 是否感觉对，或探索 UI 应该长什么样时。
 ---
 
-# Prototype
+# 原型
 
 Prototype 是**用来回答一个问题的 throwaway code**。问题决定形状。
 
-## Pick a branch
+## 选择分支
 
 先识别正在回答哪个问题：来自用户 prompt、周围代码，或在用户在线时直接询问：
 
@@ -16,7 +16,7 @@ Prototype 是**用来回答一个问题的 throwaway code**。问题决定形状
 
 这两个分支会产出非常不同的 artifacts；选错会浪费整个 prototype。如果问题确实模糊且用户不可达，默认选择更匹配周围代码的分支（backend module → logic；page 或 component → UI），并在 prototype 顶部说明假设。
 
-## Rules that apply to both
+## 两个分支通用的规则
 
 1. **从第一天就是 throwaway，并明确标记。** Prototype code 要靠近它实际会被使用的位置（放在被 prototype 的 module 或 page 旁边），这样上下文清楚；但命名要让随手读代码的人看出它是 prototype，不是 production。对 throwaway UI routes，遵守项目现有 routing convention；不要发明新的顶层结构。
 2. **运行毫无负担。** UI prototype 从项目 task runner 中的一条命令启动：`pnpm <name>`、`python <path>`、`bun <path>` 等。Logic demo 则是用户双击即可打开的单个 HTML 文件。无论哪种，启动都不需要动脑。

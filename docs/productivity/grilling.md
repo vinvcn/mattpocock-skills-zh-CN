@@ -1,10 +1,10 @@
-## What it does
+## 它做什么
 
 `grilling` 是那个让计划、decision 或 idea 在任何人采取行动之前接受 stress-test 的访谈循环。它把主题映射为一棵 **design tree**（每一个 decision 都分支成挂在它下面的 decisions），并一个分支一个分支地访谈你，直到没有任何东西被默默地当作理所当然。
 
 它不会一次只问一个问题，也不会一次问完所有问题。每一 **round** 会问整条 **frontier**：所有前提已经落实的 decisions，仅此而已。如果两个问题其中一个依赖另一个，它们就永远不会出现在同一 round 里；一个取决于某个悬而未决答案的问题属于后面的 round。你的回答落实 decisions，frontier 向外移动，下一 round 就会问那些被解锁出来的问题。十三个问题通常落在三个 round 左右，而不是十三个。
 
-## When to reach for it
+## 何时使用
 
 输入 `/grilling`，或者当任务合适时 [agent](https://www.aihero.dev/ai-coding-dictionary/agent) 会自行调用它。它是 grilling 家族中唯一 model-invoked 的 [skill](https://www.aihero.dev/ai-coding-dictionary/skill)，这正是你很少直接输入它的原因：通常是一个你*确实*输入了的 skill 正在替你运行它。
 
@@ -18,7 +18,7 @@
 | 一个交谈无法解决、关于某物该如何呈现或感觉的问题 | [prototype](https://aihero.dev/skills-prototype)，构建一次性版本，然后回来 |
 | 一个你自己的、需要访谈的 skill | 从它内部调用 `/grilling`，而不是另写一场访谈 |
 
-## The round, the frontier, and who decides
+## Round、frontier，以及谁来决定
 
 三个想法撑起整个 skill。
 
@@ -30,7 +30,7 @@
 
 诚实的局限：frontier 是 agent 的判断，而不是计算出来的图。它可能把两个问题放进同一个 round，之后才发现其中一个答案本应改变另一个。除了告诉它、从而在下一个 round 重新打开受影响的 branch 之外，没有别的防护。
 
-## What lives here and what lives in the wrappers
+## 这里承载什么，包装层承载什么
 
 本页讲的是机制。人们最常想要的东西，记录在上一层。
 
@@ -40,7 +40,7 @@
 | 一个 session 应该持续多久、对一个你无法靠交谈回答的问题该怎么办、如何避免一路点头 | [grill-me](https://aihero.dev/skills-grill-me) |
 | 什么会被写进 `GLOSSARY.md`、什么会成为 ADR | [grill-with-docs](https://aihero.dev/skills-grill-with-docs) |
 
-## Common questions
+## 常见问题
 
 **我能回到一次只问一个问题吗？**
 可以，而且受众中有很大一部分就是这么做的。把这段加到你的全局 `CLAUDE.md` 里：
@@ -72,7 +72,7 @@ round-based 的默认设置确实存在争议。读得慢的实践者、用第�
 **`grill-with-docs` 运行了，但它从未加载 `grilling`。**
 一个真实且未修复的粗糙边缘，在各种 [harnesses](https://www.aihero.dev/ai-coding-dictionary/harness) 和模型上都有报告：一个点名另一个 skill 的 skill 并不能可靠地让那个 skill 被加载，而 `grill-with-docs` 点名了两个。迹象是一场一次问完所有问题、不附带任何推荐的 session：那是模型在即兴发挥一场访谈，而不是在运行这一个。直接问 agent 它是否加载了 `grilling` 和 `domain-modeling`，通常能恢复。
 
-## It's working if
+## 它正常工作的标志
 
 - 一个 round 以编号列表的形式到来，每个问题都配有一条单独的 `➡️` 推荐行，而你能按编号回答整个 round。
 - 一个 round 里没有任何问题需要该 round 中另一个问题先被回答。
@@ -82,6 +82,6 @@ round-based 的默认设置确实存在争议。读得慢的实践者、用第�
 - 它在最后停下来，请你确认理解已经共享，而不是开始工作。
 - 问题数量保持在高位，而 round 数量保持在低位。
 
-## Where it fits
+## 它在整体中的位置
 
 `grilling` 是一个 **primitive**，而不是一个你排进日程的步骤：它是访谈技术的 single source of truth，放在一处，好让每个需要访谈的 skill 都去调用它，而不是各自发明一套。[grill-me](https://aihero.dev/skills-grill-me) 和 [grill-with-docs](https://aihero.dev/skills-grill-with-docs) 是它的两个 user-invoked 前门，而 `grill-with-docs` 是主 build chain 开始的地方，在 [to-spec](https://aihero.dev/skills-to-spec) 之前。[wayfinder](https://aihero.dev/skills-wayfinder) 运行它来解析 decision tickets，[triage](https://aihero.dev/skills-triage) 用它把一份含糊的报告 grill 成一份可用的报告，[improve-codebase-architecture](https://aihero.dev/skills-improve-codebase-architecture) 用它来走一遍 tree，一旦你选定了一个要深化的候选。当你不确定哪个入口合适时，[ask-matt](https://aihero.dev/skills-ask-matt) 会为你引路。

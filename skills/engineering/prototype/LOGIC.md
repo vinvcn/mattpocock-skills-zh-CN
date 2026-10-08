@@ -1,10 +1,10 @@
-# Logic Prototype
+# Logic 原型
 
 一个单一、自包含的 HTML 文件（一个 **shareable demo**），让任何人点按 buttons 就能驱动 state model。用于问题围绕 **business logic、state transitions 或 data shape** 的场景，也就是纸面上看起来合理，但只有跑过真实 cases 才会感觉哪里不对的东西。
 
 因为它是一个文件、无需安装任何东西，你可以把它交给非开发人员（designer、PM、domain expert），让他们亲手感受这个 model。它以他们的语言说话，而不是代码的语言。
 
-## When this is the right shape
+## 何时适合这个形状
 
 - "I'm not sure if this state machine handles the edge case where X then Y."
 - "Does this data model actually let me represent the case where..."
@@ -13,13 +13,13 @@
 
 如果问题是 “what should this look like”，这是错误分支。使用 [UI.md](UI.md)。
 
-## Process
+## 流程
 
-### 1. State the question
+### 1. 陈述问题
 
 写代码前，先写下你正在 prototype 哪个 state model、回答什么问题。一段即可，放在 demo 顶部（一个可见的 intro，而不是只写 comment）。回答错问题的 logic prototype 纯属浪费；把问题显式写出来，这样无论用户现在旁观，还是之后 AFK 回来看，都能检查。
 
-### 2. Isolate the logic in a portable module
+### 2. 把 logic 隔离到可搬运的 module 中
 
 把真正的 logic，也就是回答问题的那部分，放在单个 `<script>` block 中，写成一个小而纯粹的 module，之后可以被拿出来放进真实 codebase。包在外面的 page 是 throwaway；这个 module 不应该是。
 
@@ -32,7 +32,7 @@
 
 选择最适合所问问题的形状，*而不是*最容易接到 page 上的形状。保持 pure：不要 DOM、不要 `document`、不要让 button handlers 伸进 module 内部。Page 调用它；没有任何东西反向流动。这让 prototype 在自身生命周期之后仍有价值：问题被回答后，验证过的 reducer / machine / function set 可以自己独立搬进真实 module。
 
-### 3. Build the shareable HTML file
+### 3. 构建可分享的 HTML 文件
 
 一个文件，纯 HTML/CSS/JS：没有 framework、没有 bundler、没有 server，一切内联，因此双击就能打开，经得起被 email 传来传去。任何人都应该能通过打开它来运行。
 
@@ -49,15 +49,15 @@
 
 保持美观但克制：干净的 typography、充裕的 spacing、一个 accent colour。不要动画、不要花招：不要任何与 state 和 buttons 抢注意力的东西。
 
-### 4. Hand it over
+### 4. 交给对方
 
 把文件发给他们，或帮他们打开。他们会找时间点完 walkthroughs 和 free-play；真正有趣的时刻是他们说 “wait, that shouldn't be possible” 或 “huh, I assumed X would be different” 的时候。这些是_想法_里的 bug，也正是 prototype 的目的。如果他们想要新 actions 或新的 scenario，就添加。Prototypes 会演进。
 
-### 5. Capture the answer and the prototype
+### 5. 捕获答案和 prototype
 
 Prototype 回答问题后，capture answer，再按 [SKILL](SKILL.md) 描述的方式 capture prototype。Logic-specific mapping：验证过的 reducer / machine / function set 搬进真实 module（decision 被吸收）；HTML shell 跟随 prototype 一起进入把它作为 primary source 保留的 throwaway branch，而且由于它是单一自包含文件，在那里仍然可以毫不费力地重新运行。
 
-## Anti-patterns
+## 反模式
 
 - **不要加 tests。** 需要 tests 的 prototype 已经不再是 prototype。
 - **不要接真实 database。** 除非问题专门关于 persistence，否则使用 in-memory state。

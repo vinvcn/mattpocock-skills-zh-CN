@@ -1,20 +1,20 @@
-# Phase boundaries
+# Phase 边界
 
 **phase** 是 session 内的一段工作：grilling、implementation、QA。这个定义刻意模糊：当你冒出 "行，这个做完了" 的想法时，一个 phase 就结束了。
 
 **phase boundary** 是两个 phase 之间的间隙，也是这个决定唯一该出现的地方。phase 中途没有决定要做：要么继续，要么把剩余的工作拆成 subagents。在 phase 中途 compact 会让 agent 丢失线索。
 
-## The five options
+## 五个选项
 
-| Option       | What it does                                                    |
+| 选项         | 作用                                                            |
 | ------------ | --------------------------------------------------------------- |
-| **Continue** | Stay in the session. No context switch at all.                    |
-| **`/clear`** | Empty the context window and start from nothing.                  |
-| **`/handoff`** | Write a portable markdown file and seed a session anywhere with it. |
-| **Subagent** | Send the task to its own context window and get a report back.     |
-| **`/compact`** | Compress this context and seed a fresh session with the summary.  |
+| **Continue** | 留在当前 session。完全不做 context 切换。                         |
+| **`/clear`** | 清空 context window，从零开始。                                   |
+| **`/handoff`** | 写出一份可携带的 markdown 文件，用它随时随地 seed 一个新 session。 |
+| **Subagent** | 把任务送进它自己的 context window，拿回一份报告。                  |
+| **`/compact`** | 压缩当前 context，用 summary seed 一个新 session。                |
 
-## The tree
+## 决策树
 
 在 boundary 处从上到下工作。第一个 **yes** 胜出。
 
@@ -39,17 +39,17 @@
 
 `/compact` 是 **default，不是最先伸手可及的选择**。它位于树底，是因为上面四个问题的成本都更低或更精确。人们从这里开始时典型的 failure mode 是：一个 fresh session 对 summary 压扁过的决定自信地给出错误答案。
 
-## Primary and secondary sources
+## 一手来源与二手来源
 
 除了 **Continue**，每个动作都会把 **primary source** 变成 **secondary source**：以 summary 取而代之正在发生的 session。权衡的形状总是一样的：
 
-| Source                            | Information | Noise | Room to move |
+| 来源                              | 信息量 | 噪音 | 回旋余地 |
 | --------------------------------- | ----------- | ----- | ------------ |
-| Primary (Continue)                | Full        | Lots  | Little       |
-| Secondary (`/compact`, `/handoff`) | Lossy       | Less  | Lots         |
+| 一手（Continue）                  | 完整    | 很多  | 很小       |
+| 二手（`/compact`、`/handoff`）     | 有损    | 较少  | 很多       |
 
 这就是为什么问题 1 排在最前。只有留在原地比省下更多时，你才付 lossiness 的代价。
 
-## These are judgement calls
+## 这些是主观判断
 
 这些问题不是客观的：每个都掺着品味，同一个 boundary 昨天和今天可能走两个方向。价值在于**按顺序**、在 boundary 而不是工作中途提出它们。

@@ -1,6 +1,6 @@
-# Good and Bad Tests
+# 好测试与坏测试
 
-## Good Tests
+## 好测试
 
 **Integration-style**：通过真实 interfaces 测试，而不是 mock internal parts。
 
@@ -22,7 +22,7 @@ Characteristics：
 - 描述 WHAT，而不是 HOW
 - 每个 test 一个 logical assertion
 
-## Bad Tests
+## 坏测试
 
 **Implementation-detail tests**：与 internal structure 耦合。
 

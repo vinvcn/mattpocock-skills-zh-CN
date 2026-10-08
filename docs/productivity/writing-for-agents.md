@@ -1,4 +1,4 @@
-## What it does
+## 它做什么
 
 `writing-for-agents` 是你撰写 agent 会读的文档时对照的参考：一个 skill、一份 `AGENTS.md` / `CLAUDE.md`、一份 [spec](https://www.aihero.dev/ai-coding-dictionary/spec)、一个 runtime prompt、一份 README，任何 [agent](https://www.aihero.dev/ai-coding-dictionary/agent) 会读的文档。打包方式不同；写作本身不变：同样的杠杆让每一份都变得可预测，所以 agent 每次运行都走同样的 _process_，而不是产出同样的 output。
 
@@ -6,13 +6,13 @@
 
 它直到 v1.1 还叫 `writing-great-skills`。这次改名追上了它底下一直以来的样子：它几乎没有任何部分是 skill 专属的。那些只有 skill 专属的机制（frontmatter、model- 与 user-invoked 的选择、router skills）被披露到一个链接的 `SKILL-MECHANICS.md`，只有当眼前这份文档是 skill 时你才会去读它。
 
-## When to reach for it
+## 何时使用
 
 输入 `/writing-for-agents`，或者当你在创建或编辑一个 skill、修改 `AGENTS.md` 或 `CLAUDE.md` 时，agent 会自行调用它。
 
 对于 agent 会读的其他一切，你手动去用它：你的 docs、specs 和 [tickets](https://www.aihero.dev/ai-coding-dictionary/ticket)、system 与 [AFK](https://www.aihero.dev/ai-coding-dictionary/afk) prompts。检验标准只有一个问题（agent 会读这个吗？），文档是怎么到它面前的并不重要，无论是一个 pointer 点名了它、一个人把它粘进去，还是它只是躺在 repo 里。要首先搞清楚一个 codebase 实际包含什么，用 [grill-with-docs](https://aihero.dev/skills-grill-with-docs)，这份参考管的是文档读起来如何，而不是它知道什么。
 
-## The two loads
+## 两种 load
 
 整份参考所围绕的核心理念，是每一份 document 和 pointer 都会支出的两个预算：
 
@@ -21,7 +21,7 @@
 
 一旦你用这两种 load 思考，大多数写作决策（拆或不拆、inline 还是 disclose、point 还是 push）都变成同一笔在不同地方做出的交易。
 
-## The levers
+## 杠杆
 
 - **[Context pointers](https://www.aihero.dev/ai-coding-dictionary/context-pointer)**：留在 context 里的 reference，它点名了 context 之外的材料，并编码何时去触达它。一个 skill description 和一行点名的 `AGENTS.md` 是同一个对象；pointer 的_措辞_，而不是它的目标，决定 agent 触达它时有多可靠。
 - **Information hierarchy**：从 in-file step、到 in-file reference、再到 pointer 背后的 disclosed reference 的阶梯。**[Progressive disclosure](https://www.aihero.dev/ai-coding-dictionary/progressive-disclosure)** 是沿这级阶梯下移的动作，好让顶层保持清晰。
@@ -29,7 +29,7 @@
 - **Leading words**：一个已经在 model 预训练里的紧凑概念（_tight_、_red_、_tracer bullet_），agent 在运行 document 时用它思考。它锚定两次：正文中锚定 execution，pointer 中锚定 invocation。
 - **Pruning**：single source of truth、relevance，以及逐句应用的 no-op test，对抗 **duplication**、**sediment** 和 **sprawl**。
 
-## Common questions
+## 常见问题
 
 **`/writing-great-skills` 去哪了？**
 就是这一个 skill，在 v1.1 改的名。实践者们早在名字跟上之前，就已经把它指向 `AGENTS.md`、docs、specs、tickets 和 runtime prompts；结构、leading words 和 pruning 被证明是任何 agent 会读的文本的技艺。没有别名，用新名字重新安装。
@@ -58,13 +58,13 @@
 **英语不是我的母语。我会损失 leading-word 的优势吗？**
 不会：找出那个用最少 [tokens](https://www.aihero.dev/ai-coding-dictionary/token) 塞进最多 behavior 的词，是这份参考替你做的活。这正是它存在的意义之一。
 
-## It's working if
+## 它正常工作的标志
 
 - document 随着变得更好而越来越短，而且你惊讶于剩下的竟然这么少。
 - 你能指着一个 leading word，看着它在不止一个地方干活。
 - 没有任何东西以任何形式被陈述两遍。duplication 是"某份 document 从未被测试过"最可靠的信号。
 - 只有某个 branch 需要的 reference 待在 pointer 背后，而不是主文件里。
 
-## Where it fits
+## 它在整体中的位置
 
 这是一份随时可调的 standalone reference。它位于整个集合之下，而不是任何单个 skill 旁边：这里的每个 skill 都是照着它写出来的，而其他 skills 留下的 documents（一份 `GLOSSARY.md` 及其 ADRs、一份 spec、一张 ticket）正是每当 agent 不得不读它们时它所管辖的文本。它唯一的直接调用者是 [retro](https://aihero.dev/skills-retro)，后者在提出任何 steering file 或 skill 之前会先加载它。当你不确定哪个 skill 或流程适合某项任务时，[ask-matt](https://aihero.dev/skills-ask-matt) 会带你在整个集合上路由。

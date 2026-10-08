@@ -1,8 +1,8 @@
-# RESOURCES.md Format
+# RESOURCES.md 格式
 
 `RESOURCES.md` 是这个 topic 的 trusted sources curated set。Explainers 中的 knowledge 应来自这里，而不是 parametric guesses。Wisdom 来自这里列出的 communities。
 
-## Structure
+## 结构
 
 ```md
 # {Topic} Resources
@@ -22,7 +22,7 @@
   Use for: real-time coaching feedback on lifts.
 ```
 
-## Rules
+## 规则
 
 - **High-trust only.** 优先使用 primary sources、recognized experts、peer-reviewed work，以及 moderation 强的 communities。如果一个 resource 是披着教育外衣的 marketing，就不要放进来。
 - **Annotate every entry.** 只有裸 link，三个月后毫无用处。加一行说明：它覆盖什么，以及什么时候使用它。

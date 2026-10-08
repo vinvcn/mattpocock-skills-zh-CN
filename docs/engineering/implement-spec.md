@@ -1,10 +1,10 @@
-## What it does
+## 它做什么
 
 `implement-spec` 拿一份 [spec](https://www.aihero.dev/ai-coding-dictionary/spec) 和它的 [tickets](https://www.aihero.dev/ai-coding-dictionary/ticket)，在一次运行里把整件事落地。负责编排的 [agent](https://www.aihero.dev/ai-coding-dictionary/agent) 把每个 ticket 交给一个在独立 git worktree 里工作的 implementer [subagent](https://www.aihero.dev/ai-coding-dictionary/subagent)，把每个完成的 branch 合并进一条单一的 **integration branch**，对结果运行 [code-review](https://aihero.dev/skills-code-review)，并 resolve 这些 tickets。
 
 它把 tickets 读成一张 **task graph**，而不是一份列表。Blocking edges 决定什么可以开始，所以在任意时刻都存在一条 **frontier**，由所有 blockers 都已落地的 tickets 组成，而 frontier 上的每个 ticket 都在同时运行。这就是它与把 tickets 一个一个做过去的区别：定节奏的是这张图的形状，而不是它们在 tracker 上的顺序。
 
-## When to reach for it
+## 何时使用
 
 你通过输入 `/implement-spec` 来调用它，agent 不会自行取用它。
 
@@ -15,13 +15,13 @@
 | 一份还没拆成 tickets 的 spec | 先走 [to-tickets](https://aihero.dev/skills-to-tickets) |
 | 一小块没有什么真正图状结构的工作 | 直接 [implement](https://aihero.dev/skills-implement) |
 
-## Prerequisites
+## 前置条件
 
 - **一个 issue tracker。**这个 skill 从 [setup-matt-pocock-skills](https://aihero.dev/skills-setup-matt-pocock-skills) 配置的 tracker 读取 tickets，也在其上 resolve 它们。如果一个都没配置，它会停下来让你先运行那个 skill，而不是靠猜。
 - **带着 blocking edges 的 tickets**，正如 [to-tickets](https://aihero.dev/skills-to-tickets) 写出来的那样。没有 edges，这张图就是平的，每个 ticket 都会同时开始。
 - **一个能在后台运行 subagents、并给每一个一个 git worktree 的 [harness](https://www.aihero.dev/ai-coding-dictionary/harness)。**并发正是重点；一个一次只跑一个 subagent 的 harness 会得到一个更慢的 `implement`。
 
-## The integration branch
+## 集成分支
 
 所有东西都落在一条 branch 上。每个 implementer：
 
@@ -33,7 +33,7 @@
 
 Implementers 通过 [context pointers](https://www.aihero.dev/ai-coding-dictionary/context-pointer)（spec、ticket、共享的探索笔记、更早的 commits）与 orchestrator 沟通，而不是粘贴摘要，这让每个 subagent 的 prompt 保持很小，也让 orchestrator 的 window 空出来留给那张图。
 
-## Common questions
+## 常见问题
 
 **这和我自己对每个 ticket 跑 `/implement` 有什么区别？**
 
@@ -67,7 +67,7 @@ GitHub 上的一个已知粗糙边缘。tracker 的 blocked-by 计数只在 bloc
 
 一个 worktree 只装 git 追踪的东西。读取 gitignored fixtures、本地数据库或凭据的测试，可能会在那里悄悄跳过自己。对一个验证依赖未追踪材料的 ticket，告诉 orchestrator 改在主 checkout 里运行它。
 
-## It's working if
+## 它正常工作的标志
 
 - 只要图允许，就有几个 implementers 在同时运行，而不是一个接一个。
 - 一个 ticket 在它最后一个 blocker 落到 integration branch 上的那一刻就开始，而不是等整次运行结束。
@@ -75,7 +75,7 @@ GitHub 上的一个已知粗糙边缘。tracker 的 blocked-by 计数只在 bloc
 - 合并进 integration branch 的都是 fast-forward，而不是冲突解决。
 - 运行在一条 branch 上收尾，每个 ticket 都被 resolve，而 PR 只在你的 tracker 需要时才存在。
 
-## Where it fits
+## 它在整体中的位置
 
 `implement-spec` 是 main chain 的 build step，是"每个 ticket 跑一次 [implement](https://aihero.dev/skills-implement)"的并行替代方案：
 

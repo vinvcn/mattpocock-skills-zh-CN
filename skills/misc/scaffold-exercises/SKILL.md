@@ -3,18 +3,18 @@ name: scaffold-exercises
 description: 创建包含章节、题目、答案和讲解的练习目录结构，并确保通过 linting。适用于用户想 scaffold exercises、创建 exercise stubs，或设置新的课程章节时。
 ---
 
-# Scaffold Exercises
+# 搭建练习
 
 创建能通过 `pnpm ai-hero-cli internal lint` 的 exercise directory structures，然后用 `git commit` 提交。
 
-## Directory naming
+## 目录命名
 
 - **Sections**：`exercises/` 下的 `XX-section-name/`（例如 `01-retrieval-skill-building`）
 - **Exercises**：section 下的 `XX.YY-exercise-name/`（例如 `01.03-retrieval-with-bm25`）
 - Section number = `XX`，exercise number = `XX.YY`
 - Names 使用 dash-case（小写、连字符）
 
-## Exercise variants
+## Exercise 变体
 
 每个 exercise 至少需要这些 subfolders 中的一个：
 
@@ -24,7 +24,7 @@ description: 创建包含章节、题目、答案和讲解的练习目录结构�
 
 创建 stub 时，除非 plan 指定其他 variant，否则默认使用 `explainer/`。
 
-## Required files
+## 必需文件
 
 每个 subfolder（`problem/`、`solution/`、`explainer/`）都需要一个 `readme.md`，要求：
 
@@ -41,7 +41,7 @@ Description here
 
 如果 subfolder 有 code，还需要 `main.ts`（>1 行）。但对 stubs 来说，readme-only exercise 可以接受。
 
-## Workflow
+## 工作流
 
 1. **Parse the plan** - 提取 section names、exercise names 和 variant types
 2. **Create directories** - 对每个 path 执行 `mkdir -p`
@@ -49,7 +49,7 @@ Description here
 4. **Run lint** - 执行 `pnpm ai-hero-cli internal lint` 验证
 5. **Fix any errors** - 迭代直到 lint 通过
 
-## Lint rules summary
+## Lint 规则摘要
 
 linter（`pnpm ai-hero-cli internal lint`）检查：
 
@@ -62,7 +62,7 @@ linter（`pnpm ai-hero-cli internal lint`）检查：
 - readmes 中没有 `pnpm run exercise` commands
 - 除非是 readme-only，否则每个 subfolder 都需要 `main.ts`
 
-## Moving/renaming exercises
+## 移动/重命名 exercises
 
 重新编号或移动 exercises 时：
 
@@ -76,7 +76,7 @@ Example:
 git mv exercises/01-retrieval/01.03-embeddings exercises/01-retrieval/01.04-embeddings
 ```
 
-## Example: stubbing from a plan
+## 示例：从 plan 生成 stubs
 
 给定这样的 plan：
 

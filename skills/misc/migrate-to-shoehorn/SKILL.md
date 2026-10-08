@@ -3,9 +3,9 @@ name: migrate-to-shoehorn
 description: 将测试文件从 `as` 类型断言迁移到 @total-typescript/shoehorn。适用于用户提到 shoehorn、想替换测试中的 `as`，或需要局部测试数据时。
 ---
 
-# Migrate to Shoehorn
+# 迁移到 Shoehorn
 
-## Why shoehorn?
+## 为什么用 shoehorn？
 
 `shoehorn` 允许你在 tests 中传入 partial data，同时保持 TypeScript 满意。它用 type-safe alternatives 替换 `as` assertions。
 
@@ -17,15 +17,15 @@ Tests 中 `as` 的问题：
 - 必须手动指定 target type
 - 对故意错误的数据需要 double-as（`as unknown as Type`）
 
-## Install
+## 安装
 
 ```bash
 npm i @total-typescript/shoehorn
 ```
 
-## Migration patterns
+## 迁移模式
 
-### Large objects with few needed properties
+### 只需要少数属性的大型 objects
 
 Before:
 
@@ -94,7 +94,7 @@ import { fromAny } from "@total-typescript/shoehorn";
 getUser(fromAny({ body: { id: 123 } }));
 ```
 
-## When to use each
+## 何时使用哪一个
 
 | Function        | Use case                                           |
 | --------------- | -------------------------------------------------- |
@@ -102,7 +102,7 @@ getUser(fromAny({ body: { id: 123 } }));
 | `fromAny()`     | 传入故意错误的数据（保留 autocomplete）             |
 | `fromExact()`   | 强制 full object（之后可换成 fromPartial）          |
 
-## Workflow
+## 工作流
 
 1. **Gather requirements** - 询问用户：
    - 哪些 test files 中的 `as` assertions 造成问题？

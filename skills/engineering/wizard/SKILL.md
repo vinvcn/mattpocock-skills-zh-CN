@@ -11,9 +11,9 @@ description: 生成一个交互式 bash wizard，逐步引导人完成只有他�
 
 Wizard 默认是临时的：为单次运行而构建，保存到 scratch 或 `scripts/` 路径，任务完成后删除。只有当用户想要一条应留在 repo 中的可重复 setup 路径时，才 commit 它。
 
-## Process
+## 流程
 
-### 1. Scope the procedure
+### 1. 界定流程范围
 
 梳理出人必须执行的每一个手动步骤，以及沿途捕获的每一个值。先读 repo，不要凭空发问：
 
@@ -24,19 +24,19 @@ Wizard 默认是临时的：为单次运行而构建，保存到 scratch 或 `sc
 
 **Done when:** 每个 stage 都按顺序命名，并且对于每个捕获的值，你知道 (a) 人从哪里获取它，(b) 它写到哪里（`.env`、一个 GitHub secret、两者，或都不写；有些 stage 是纯操作），以及 (c) 它是 secret（隐藏输入）还是 public。
 
-### 2. Map each stage's journey
+### 2. 描绘每个 stage 的路径
 
 对于每个 stage，写出人遵循的精确路径：打开哪个 URL、在那里做什么、值在哪里显示、它填充哪个变量，例如 "Dashboard → Developers → API keys → Reveal test key → copy"。在你确实不知道当前 UI 或确切命令的地方，如实说明并询问用户或查阅文档：永远不要编造可能不存在的步骤。
 
 **Done when:** 每个 stage 都能追溯到陌生人也能照做的具体指令。
 
-### 3. Author the wizard
+### 3. 编写 wizard
 
 把 `template.sh` 复制到目标路径。用每个步骤一个 `stage` 替换示例 stage，按依赖顺序排列。使用 library helpers（`stage`、`say`/`step`、`open_url`、`ask`/`ask_secret`、`write_env`、`set_secret`/`set_var`、`pause`/`confirm`），并把 `TOTAL_STAGES` 设为你编写的 stage 数量。
 
 守住 template 设定的标准：在索取某个 URL 的值之前先打开它，对任何 secret 使用 `ask_secret`，对每个持久化的值使用 `write_env`，只对 CI 确实需要的值使用 `set_secret`，并在任何不可逆操作之前 `confirm`。每个 `stage` 都会清屏，因此只显示当前步骤：让一个 stage 只聚焦一项任务，这样人需要的内容就不会滚出视野。不要触碰标记之上的 library。
 
-### 4. Verify and hand off
+### 4. 验证并交接
 
 - `bash -n <script>`；如果可用则运行 `shellcheck`。
 - `chmod +x <script>`。

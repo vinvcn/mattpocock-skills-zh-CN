@@ -1,4 +1,4 @@
-# When to Mock
+# 何时使用 Mock
 
 只在 **system boundaries** mock：
 
@@ -13,7 +13,7 @@
 - Internal collaborators
 - 任何你控制的东西
 
-## Designing for Mockability
+## 为可 Mock 性而设计
 
 在 system boundaries 处，设计容易 mock 的 interfaces：
 

@@ -1,8 +1,8 @@
-# HTML Report Format
+# HTML 报告格式
 
 Architecture review 渲染为单个 self-contained HTML file，写到 OS temp directory。Tailwind 和 Mermaid 都来自 CDNs。Mermaid 可靠处理 graph-shaped diagrams；手写 divs 和 inline SVG 更适合 editorial visuals（mass diagrams、cross-sections）。两者混用，不要所有内容都依赖 Mermaid，否则会显得 generic。
 
-## Scaffold
+## 脚手架
 
 ```html
 <!doctype html>
@@ -33,11 +33,11 @@ Architecture review 渲染为单个 self-contained HTML file，写到 OS temp di
 </html>
 ```
 
-## Header
+## 页头
 
 Repo name、date，以及紧凑 legend：solid box = module，dashed line = seam，red arrow = leakage，thick dark box = deep module。不要 introduction paragraph，直接进入 candidates。
 
-## Candidate card
+## 候选项卡片
 
 Diagrams 承担主要信息量。Prose 要稀疏、直白，并自然使用 `/codebase-design` skill 中的 glossary terms。
 
@@ -54,7 +54,7 @@ Diagrams 承担主要信息量。Prose 要稀疏、直白，并自然使用 `/co
 
 不要写大段解释。如果 diagram 需要一段话才能懂，就重画 diagram。
 
-## Diagram patterns
+## 图表模式
 
 选择适合 candidate 的 pattern，可以混用。不要让每个 diagram 都长得一样：多样性本身就是目的的一部分。
 
@@ -75,23 +75,23 @@ Diagrams 承担主要信息量。Prose 要稀疏、直白，并自然使用 `/co
 </div>
 ```
 
-### Hand-built boxes-and-arrows（当 Mermaid 的 layout 妨碍表达时）
+### 手绘方框与箭头（当 Mermaid 的 layout 妨碍表达时）
 
 Modules 用带 border 和 label 的 `<div>`；arrows 用绝对定位在 relative container 上的 inline SVG `<line>` 或 `<path>`。当你希望 "after" diagram 像一个 thick-bordered 的 deep module、internals 灰显时，就用这种方式：Mermaid 无法以合适的视觉分量渲染出那种效果。
 
-### Cross-section（适合 layered shallowness）
+### 横截面（适合 layered shallowness）
 
 用水平 bands（`h-12 border-l-4`）展示一个 call 穿过的 layers。Before：6 个薄 layers，每个几乎不做事。After：1 个厚 band，标注 consolidated responsibility。
 
-### Mass diagram（适合表达 "interface as wide as implementation"）
+### 体量图（适合表达 "interface as wide as implementation"）
 
 每个 module 两个 rectangles：一个代表 interface surface area，一个代表 implementation。Before：interface rectangle 几乎和 implementation rectangle 一样高（shallow）。After：interface rectangle 矮，implementation rectangle 高（deep）。
 
-### Call-graph collapse
+### 调用图收拢
 
 Before：把 function calls tree 渲染为 nested boxes。After：把同一棵 tree collapse 成一个 box，内部 calls 以 faded 状态显示。
 
-## Style guidance
+## 样式指南
 
 - Lean editorial，不要 corporate-dashboard。留足 whitespace。Headings 可选 serif（`font-serif` 与 stone/slate 很搭）。
 - 谨慎用色：一个 accent（emerald 或 indigo），red 用于 leakage，amber 用于 warnings。
@@ -99,11 +99,11 @@ Before：把 function calls tree 渲染为 nested boxes。After：把同一棵 t
 - Diagram 内 module labels 使用 `text-xs uppercase tracking-wider`；它们应像 schematic，不像 UI。
 - 唯一脚本是 Tailwind CDN 和 Mermaid ESM import。除此之外 report 是 static；不要 app code，不要 Mermaid 自身渲染以外的 interactivity。
 
-## Top recommendation section
+## 首选推荐区
 
 一个更大的 card。Candidate name、一句话说明为什么、指向该 card 的 anchor link。仅此而已。
 
-## Tone
+## 语气
 
 平实的语言，简洁；但 architectural nouns 和 verbs 必须来自 `/codebase-design` skill。简洁不是术语漂移的借口。
 

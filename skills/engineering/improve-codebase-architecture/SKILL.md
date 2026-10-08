@@ -4,7 +4,7 @@ description: 扫描代码库中的深化机会，生成可视化 HTML 报告，�
 disable-model-invocation: true
 ---
 
-# Improve Codebase Architecture
+# 改进代码库架构
 
 暴露 architectural friction，并提出 **deepening opportunities**：把 shallow modules 变成 deep modules 的 refactors。目标是 testability 和 AI-navigability。
 
@@ -13,9 +13,9 @@ disable-model-invocation: true
 - 调用 Skill 工具并指定 `codebase-design`，获取 architecture vocabulary（**module**、**interface**、**depth**、**seam**、**adapter**、**leverage**、**locality**）及其 principles（deletion test、"the interface is the test surface"、"one adapter = hypothetical seam, two = real"）。每条建议都准确使用这些术语，不要漂移到 "component"、"service"、"API" 或 "boundary"。
 - `GLOSSARY.md` 中的 domain language 会为好的 seams 命名；`docs/adr/` 中的 ADRs 记录这个命令不应重新争论的 decisions。
 
-## Process
+## 流程
 
-### 1. Explore
+### 1. 探索
 
 **先划定扫描范围：YAGNI。** 深化 module 的收益在于让未来修改更容易，因此要更关注最近仍在变化的 codebase 区域。开始探索前先决定去哪里看：
 
@@ -34,7 +34,7 @@ disable-model-invocation: true
 
 对任何你怀疑 shallow 的东西应用 **deletion test**：删除它会让复杂度集中，还是只把复杂度移动到别处？"yes, concentrates" 才是你要的 signal。
 
-### 2. Present candidates as an HTML report
+### 2. 用 HTML 报告呈现候选项
 
 把 self-contained HTML file 写到 OS temp directory，避免任何内容落进 repo。Temp dir 从 `$TMPDIR` 解析，fallback 到 `/tmp`（Windows 用 `%TEMP%`），写到 `<tmpdir>/architecture-review-<timestamp>.html`，让每次运行都有新文件。为用户打开它：Linux 用 `xdg-open <path>`，macOS 用 `open <path>`，Windows 用 `start <path>`，并告诉用户 absolute path。
 
@@ -49,7 +49,7 @@ Report 使用 **Tailwind via CDN** 做 layout/styling，用 **Mermaid via CDN** 
 - **Before / After diagram** - side-by-side，自绘，说明 shallowness 与 deepening
 - **Recommendation strength** - `Strong`、`Worth exploring`、`Speculative` 之一，渲染为 badge
 
-Report 末尾包含 **Top recommendation** section：你会先处理哪个 candidate，以及为什么。
+Report 末尾包含**首选推荐区**：你会先处理哪个 candidate，以及为什么。
 
 **用 `GLOSSARY.md` vocabulary 表达 domain，用 `/codebase-design` vocabulary 表达 architecture。** 如果 `GLOSSARY.md` 定义了 "Order"，就说 "Order intake module"，不要说 "FooBarHandler"，也不要说 "Order service"。
 
@@ -59,7 +59,7 @@ Report 末尾包含 **Top recommendation** section：你会先处理哪个 candi
 
 现在不要提出 interfaces。写完文件后问用户："Which of these would you like to explore?"
 
-### 3. Grilling loop
+### 3. Grilling 循环
 
 用户选中 candidate 后，调用 Skill 工具并指定 `grilling`，与用户走完 decision tree：constraints、dependencies、deepened module 的形状、seam 后面放什么、哪些 tests 能保留。
 

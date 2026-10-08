@@ -1,10 +1,10 @@
-## What it does
+## 它做什么
 
 `domain-modeling` 在你做设计的同时构建并打磨一个项目的 **ubiquitous language**：挑战一个与 glossary 冲突的术语、在你用了一个含糊词的地方逼出一个精确的词、并用一个具体场景对一段关系做压力测试，直到边界精确为止。
 
 它是**主动**的纪律，不是被动的。读 `GLOSSARY.md` 借用它的词汇，是任何 skill 都能做到的一行习惯；这个 skill 用于你正在*改变*模型的时候。这正是它打断你的原因。它在已敲定的术语得到敲定的那一刻、在对话进行途中把它写进 `GLOSSARY.md`，而不是在结尾产出一份整洁的 glossary，因为批量版本是一场 [session](https://www.aihero.dev/ai-coding-dictionary/session) 的摘要，而内联版本才是 session 的实际输出。
 
-## When to reach for it
+## 何时使用
 
 输入 `/domain-modeling`，或者当任务契合时由 agent 自动调用。实际上，自动调用是 skill 最弱的部分：当 `grill-with-docs` 或 `wayfinder` 说加载它时，[models](https://www.aihero.dev/ai-coding-dictionary/model) 常常加载 `grilling` 而跳过这个。如果一场 [grilling](https://www.aihero.dev/ai-coding-dictionary/grilling) 会话跑完，`GLOSSARY.md` 在结尾却未被动过，那就是发生了什么：按名字和另一个 skill 一起调用它。
 
@@ -19,7 +19,7 @@
 | 你想在构建之前让整个计划被审问 | [grill-with-docs](https://aihero.dev/skills-grill-with-docs)，它在底下驱动这个 skill |
 | 你想查一个词，而不是改它 | 没有。读 `GLOSSARY.md`。它是一个文件。 |
 
-## Prerequisites
+## 前置条件
 
 开头什么都不需要。Skill 写入两个地方，两者都惰性创建：
 
@@ -28,7 +28,7 @@
 
 开始之前什么都不需要存在，也什么都不被投机性地创建。
 
-## Two artifacts, two bars
+## 两份 artifact，两道门槛
 
 Glossary 和 ADR 被以不同标准对待，而把两者混为一谈正是这个 skill 里大部分麻烦的来源。
 
@@ -43,13 +43,13 @@ Glossary 和 ADR 被以不同标准对待，而把两者混为一谈正是这个
 
 `GLOSSARY.md` 规则是真正要握住的，因为它是野外会破的那条。**它是一份 glossary，别无其他。** 不加约束的话，models 会把「write to `GLOSSARY.md`」当作把你给出的每个答案都持久化的许可，文件就变成一份运行中的 spec，这是这个 skill 被报告最多的问题，横跨多个 models。
 
-## Cross-referencing, and where it stops
+## 交叉引用，及其限度
 
 让 skill 生效的那一步：当你陈述某样东西如何运作时，它检查代码并浮现出矛盾。*「你的代码取消整个 Orders，但你刚说部分取消是可能的，哪个是对的？」*语言和代码被要求达成一致，在两者被改变之前，大声地。
 
 那个限度值得知道。它交叉引用**代码**和已提交的 `GLOSSARY.md`/ADRs，别无其他。它不搜索你的 issue tracker，所以一场几个月前在一个已关闭 issue 里被辩清、并被刻意解决的命名冲突，会被当作新事浮现出来。有一个[开放的请求](https://github.com/mattpocock/skills/issues/717)要修复它；在那之前，workaround 是把指令放进你自己的 `docs/agents/domain.md`，skills 已经会读取它。
 
-## Common questions
+## 常见问题
 
 **我的 `GLOSSARY.md` 有 500 行。1000。3000。我该怎么办？**
 这个体量是症状，不是病：文件吸收了一直不是 glossary 材料的 implementation detail 和决策。修复是一条直接指令：`/grill-with-docs make my GLOSSARY.md more concise and remove any implementation details from it`。拿它跑一份臃肿的文件，大部分会消失。只有在文件真正精简、且仍覆盖一个读者不会想同时持有的两个 domain 时，才去够 `GLOSSARY-MAP.md` 的拆分；拆一份臃肿的文件只会给你几份臃肿的文件。Skill 在这里的指导还不足以在第一时间阻止这种增长，而追踪它的 issue 仍然开着。
@@ -72,7 +72,7 @@ Glossary 和 ADR 被以不同标准对待，而把两者混为一谈正是这个
 **它能把我的含糊 prompt 变成领域语言吗？**
 不能，而且没有计划做这样的 skill。一种你自己都不理解的领域语言，一旦写下来就变成无意义的废话。这个 skill 在你有了理解之后强制精确，它不制造你没有的词汇。相关的陷阱是用领域词而不做建模：错误的概念结构上正确的名词，产生读起来正确而实际不是的输出。
 
-## It's working if
+## 它正常工作的标志
 
 - 它在你说到一半时打断你，问你想要两个东西中的哪一个，而不是挑一个继续。
 - `GLOSSARY.md` 在对话**进行中**改变，而不是在结尾一阵爆发。
@@ -81,6 +81,6 @@ Glossary 和 ADR 被以不同标准对待，而把两者混为一谈正是这个
 - 当你的代码和你的句子不一致时，它把你的代码复述回给你。
 - `GLOSSARY.md` 变短的频率和变长的频率一样高。
 
-## Where it fits
+## 它在整体中的位置
 
 `domain-modeling` 是一个 **model-invoked reference**，*位于*其他 skills 底下运行的频率，比它单独运行的频率更高。[grill-with-docs](https://aihero.dev/skills-grill-with-docs) 通过一场 grilling session 驱动它，[wayfinder](https://aihero.dev/skills-wayfinder) 在绘制地图时加载它，[triage](https://aihero.dev/skills-triage) 用它让 [tickets](https://www.aihero.dev/ai-coding-dictionary/ticket) 保持项目自己的措辞，而 [improve-codebase-architecture](https://aihero.dev/skills-improve-codebase-architecture) 在决策结晶时调用它。它最接近的同胞是 [codebase-design](https://aihero.dev/skills-codebase-design)：两者是其他一切底下的词汇层，这一个针对 *domain*，那一个针对 module 的*形状*。它也可以直接够到，当你想得到这套纪律、却不必承诺通常会把它的那个 skill 的步骤时。当你拿不准哪个 skill 契合时，[ask-matt](https://aihero.dev/skills-ask-matt) 会为你路由。

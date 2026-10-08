@@ -1,10 +1,10 @@
-## What it does
+## 它做什么
 
 `research` 通过阅读拥有答案的 sources 来回答一个问题，然后在 repo 里留下一份带引用的 Markdown 文件。它只基于 **[primary sources](https://www.aihero.dev/ai-coding-dictionary/primary-source)**（official docs、source code、specs、first-party APIs）工作，并把每条说法追溯回拥有它的 source，所以在 API 自己的 docs 可达时，它不会复述一篇博客文章对那个 API 的转述。
 
 它不在对话里回答你。输出是一份文件，写在 repo 已经存放此类笔记的地方，每条说法上都带着链接。这正是重点：一份你可以回应、可以交给另一个 agent、也可以扔掉的文件，而不是一个在 [session](https://www.aihero.dev/ai-coding-dictionary/session) 结束时消失的答案。
 
-## When to reach for it
+## 何时使用
 
 输入 `/research`，或者当任务变成阅读类 legwork 时由 [agent](https://www.aihero.dev/ai-coding-dictionary/agent) 自动取用它。
 
@@ -20,7 +20,7 @@
 
 `research` 和 `grill-with-docs` 之间的界线是**带回之物的保质期**。研究产出短寿的 asset：这个库的 auth 机制截至本周表现如何。一份 ADR 记录一个你要保留的决策。如果你产出的是一份决策而不是一个事实，那你是在 [grilling](https://www.aihero.dev/ai-coding-dictionary/grilling)，而不是在研究。
 
-## Delegated legwork
+## 委派出去的跑腿工作
 
 标志性的动作是：阅读以 **background agent** 的形式运行。你继续工作；它离开去把每条说法追溯回其 primary source，写出一份 Markdown 文件，然后回报。Research 是你委派出去的 legwork，而不是你外包出去的思考：你拿回的是一份可供你 grill、plan 或 design 的文档，而做判断的仍然是你。
 
@@ -28,7 +28,7 @@
 
 文件落在哪里由 repo 决定，而不是由 skill 决定：它匹配任何已经存在的笔记约定，如果没有，它就挑一个合理的地方并告诉你位置。每次运行写一份文件。
 
-## Common questions
+## 常见问题
 
 **它衍生出了第二个 research agent：这是该发生的吗？**
 
@@ -60,7 +60,7 @@ skill 里没有停止准则，而这表现为两个看似相反、实为同一�
 
 不用，它现在会替你把它们发射出去。在 v1.1 以来未发布的变更中，一次绘图 session 会为每个 research ticket 衍生一个 `/research` subagent 并并行把它们烧完，把发现捕获在一条 throwaway `research/<name>` branch 上，并带上来自 ticket 的 [context pointer](https://www.aihero.dev/ai-coding-dictionary/context-pointer)。Research tickets 是 wayfinder 的 one-ticket-per-session 规则的唯一例外，因为它们是 [AFK](https://www.aihero.dev/ai-coding-dictionary/afk) 的：没有东西在等你。那些 branch 有两个已知的绊脚石：有人看到 subagent 从一条从不打算合并的 branch 上开了一个 draft PR（[issue #576](https://github.com/mattpocock/skills/issues/576)），以及之后删除 branch 会破坏 tickets 持有的 context pointers。
 
-## It's working if
+## 它正常工作的标志
 
 - 你自己的 session 继续推进。如果你坐在那里看着它阅读，说明委派没有发生。
 - 恰好出现一个新的 background task。第二个名字几乎相同的，就是嵌套 bug。
@@ -68,6 +68,6 @@ skill 里没有停止准则，而这表现为两个看似相反、实为同一�
 - 其中每条说法都带着链接，随机跟两条能落在官方 doc、spec 或实际源文件上，而不是落在某人对它的转述上。
 - 你能仅凭这份文件做出那个你卡住的决策，而无需自己回到 sources。
 
-## Where it fits
+## 它在整体中的位置
 
 一个可随时取用的 standalone，为思考类 skills 供料，而不是坐在 build chain 里。它的文件是某种要*带进* flow 的东西：当事实已经摆在桌面上时，[grilling](https://aihero.dev/skills-grilling) 和 [grill-with-docs](https://aihero.dev/skills-grill-with-docs) 会问出更锐利的问题，而 [to-spec](https://aihero.dev/skills-to-spec) 可以对着它做综合。[wayfinder](https://aihero.dev/skills-wayfinder) 是唯一直接调用它的 skill，用 `/research` subagent 解决其地图上的每个 research ticket。完整地图见 [ask-matt](https://aihero.dev/skills-ask-matt)。

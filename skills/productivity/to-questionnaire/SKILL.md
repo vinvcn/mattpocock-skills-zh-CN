@@ -14,7 +14,7 @@ disable-model-invocation: true
 
 3. **编写 questionnaire。** 根据步骤 1–2 的 gap 起草问题，并遵循下面的 Document structure。把文件写到当前目录的 `to-questionnaire-<slug>.md`（slug 来自主题），然后报告路径。当文件存在，且步骤 2 中用户列出的每项内容都有问题覆盖时完成。
 
-## Document structure
+## 文档结构
 
 把 document 定位为 **discovery questionnaire**：用户缺少 context，而 recipient 掌握它。按重要程度降序排列问题，异步沟通可能只有一次机会；问题超过少量时，按主题放在 `##` headings 下。使用以下 template。
 

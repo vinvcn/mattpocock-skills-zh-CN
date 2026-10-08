@@ -1,12 +1,12 @@
 > **已归档。** 这个 skill 已在 v1.3.0 中从 plugin 移除，不再维护。没有任何东西取代它：agent 会在没有专门 skill 的情况下自行处理完 merge 或 rebase conflict。本页面保留仅供参考。
 
-## What it does
+## 它做什么
 
 `resolving-merge-conflicts` 逐个 hunk 地处理正在进行的 git merge 或 rebase，然后运行项目自己的检查，并以一次 commit 完成整个操作。
 
 它拒绝把 conflict 当成文本问题。在触碰一个 hunk 之前，它会把每一侧追溯回其 **[primary source](https://www.aihero.dev/ai-coding-dictionary/primary-source)**（commit message、PR、原始 issue），因此它是在两个 intent 之间做选择，而不是在两段文本之间做选择，并且在两者兼容的地方同时保留双方。在它们确实互不相容的地方，它选择与 merge 所声明目标相符的那一侧，并明确说出其中的取舍。它绝不发明新的行为来粉饰冲突，`--abort` 也不是它拥有的选项：merge 总是被一路推进到一个完成的 commit。
 
-## When to reach for it
+## 何时使用
 
 输入 `/resolving-merge-conflicts`，或者当任务合适时由 [agent](https://www.aihero.dev/ai-coding-dictionary/agent) 自动触发。
 
@@ -18,13 +18,13 @@
 | merge 已经完成，现在有东西因为你看不出的原因在出问题 | [diagnosing-bugs](https://aihero.dev/skills-diagnosing-bugs) |
 | 规划如何切片工作，让 branches 更少冲突 | 两者都不用，见下面的 parallel-work 问题 |
 
-## Primary sources over `ours` and `theirs`
+## 一手来源优先于 `ours` 和 `theirs`
 
 这个 skill 存在所要消灭的失败模式，是按旗标来合并：`--ours`、`--theirs`，或手工删除看起来不太重要的那个块，于是冲突标记消失、build 能编译通过。这种合并结果在语法上可以完美，却仍然会悄悄丢掉某人刻意做出的改动。
 
 你无法保留一个你还没读过的 intent。所以这项工作从历史开始（commits、PRs、[tickets](https://www.aihero.dev/ai-coding-dictionary/ticket)），然后才移动到 diff。loop 中还存在另一步，出于同样的原因：这个 skill 会找到 repo 自己的 [automated checks](https://www.aihero.dev/ai-coding-dictionary/automated-check)，并在提交前运行它们，因为在 git 中，merge 是最容易产出既满足两个 branch、又都过不了各自测试的代码的地方。
 
-## Common questions
+## 常见问题
 
 **Claude Code 本来就很擅长自行解决 merge conflicts。为什么还需要一个 skill？**
 
@@ -40,7 +40,7 @@
 
 Abort 会丢掉已完成的解决工作，并在你下次尝试时把你送回到同一个、未改变的 conflict。这个 skill 是为 merge 注定要发生的情形而写的。如果你已经决定它不该发生，那是一个在调用之前就该做的决定，而不是 loop 内部的一个分叉。
 
-## It's working if
+## 它正常工作的标志
 
 - agent 在解决时引用 commits、PRs 或 issues 给你看，而不只是 diff hunks。
 - 每个 hunk 最终都保留双方的行为，或者带有一条明确说明丢掉了什么、为什么丢掉的注释。
@@ -48,6 +48,6 @@ Abort 会丢掉已完成的解决工作，并在你下次尝试时把你送回�
 - Typecheck、tests 和 format 被找到，并在提交**之前**、而不是在你注意到有东西坏了之后跑出绿色。
 - 你以一棵干净的树结束，操作已完成，包括 multi-commit rebase 中剩余的每一个 commit。
 
-## Where it fits
+## 它在整体中的位置
 
 一个可随时调用的 standalone，不依赖任何其他 skill：它在 git 卡住时开始，在树干净并已提交时结束。它唯一的真正邻居是 [diagnosing-bugs](https://aihero.dev/skills-diagnosing-bugs)，后者在 merge 干净解决、但合并后的代码行为异常时接管：那是一个诊断问题，而不是 conflict 问题。它完全处在 main idea-to-ship flow 之外，所以 [ask-matt](https://aihero.dev/skills-ask-matt) 是了解它前后该运行什么的 map。

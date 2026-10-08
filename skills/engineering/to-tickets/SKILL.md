@@ -4,25 +4,25 @@ description: 把 plan、spec 或当前对话拆成一组 tracer-bullet tickets�
 disable-model-invocation: true
 ---
 
-# To Tickets
+# 拆成 tickets
 
 把 plan、spec 或 conversation 拆成一组 **tickets**：tracer-bullet vertical slices，每个 ticket 都声明 **block** 它的 tickets。
 
 Issue tracker 和 triage label vocabulary 应该已经提供；如果没有，请让用户运行 `/setup-matt-pocock-skills`。
 
-## Process
+## 流程
 
-### 1. Gather context
+### 1. 收集 context
 
 使用 conversation context 中已经存在的内容。如果用户把 reference（spec path、issue number 或 URL）作为参数传入，获取并完整读取其 body 和 comments。
 
-### 2. Explore the codebase (optional)
+### 2. 探索 codebase（可选）
 
 如果还没有探索 codebase，先了解 code 当前状态。Ticket title 和 description 应使用项目 domain glossary vocabulary，并遵守相关 ADRs。
 
 寻找 prefactor code、让 implementation 更容易的机会。“Make the change easy, then make the easy change.”
 
-### 3. Draft vertical slices
+### 3. 起草 vertical slices
 
 把工作拆成 **tracer bullet** tickets。
 
@@ -39,7 +39,7 @@ Issue tracker 和 triage label vocabulary 应该已经提供；如果没有，�
 
 **Wide refactors 是 vertical slicing 的例外。** **Wide refactor** 是一个影响整个 codebase 的 mechanical change，例如 rename column 或 retype shared symbol；一次 edit 会破坏成千上万 call sites，无法让任何 vertical slice 独立保持 green。不要强行做成 tracer bullet；应按 **expand–contract** 排序。先 expand：在旧形式旁加入新形式，保持一切正常。再按 blast radius 分批迁移 call sites（按 package、directory 等），每批一个 ticket，并被 expand block；旧形式仍存在，因此 CI 每批都保持 green。最后 contract：一旦没有 caller 残留，就在被所有 migrate batches block 的 ticket 中删除旧形式。如果连单独 batches 也不能保持 green，仍保留这个 sequence，但让它们共享 integration branch，并全部 block 最后的 integrate-and-verify ticket；只在最后承诺 green。
 
-### 4. Quiz the user
+### 4. 向用户快速确认
 
 把建议的拆分作为 numbered list 展示。每个 ticket 包含：
 
@@ -55,7 +55,7 @@ Issue tracker 和 triage label vocabulary 应该已经提供；如果没有，�
 
 迭代到用户批准拆分。
 
-### 5. Publish the tickets to the configured tracker
+### 5. 把 tickets 发布到已配置的 tracker
 
 发布已批准的 tickets。具体方式取决于 `/setup-matt-pocock-skills` 配置的 tracker；tickets 相同，只有 blocking edges 的形状不同：
 

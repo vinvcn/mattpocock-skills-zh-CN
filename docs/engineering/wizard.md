@@ -1,10 +1,10 @@
-## What it does
+## 它做什么
 
 `wizard` 生成一个交互式 bash 脚本，一步步引导人完成一项手动流程：接好第三方服务、运行一次性 migration、把项目从状态 A 迁到状态 B。它打开每个 URL，说明该点什么、该复制什么，捕获返回的值，并把它们写进 `.env` 文件和 GitHub Actions secrets。
 
 [agent](https://www.aihero.dev/ai-coding-dictionary/agent) 负责写脚本，从不运行它。运行它的是你，在你自己的机器上。所以 wizard 不是一份你照着执行的指令清单：它是一个驱动流程并持有状态的程序，而你的部分是点击、粘贴、按回车。
 
-## When to reach for it
+## 何时使用
 
 你可以输入 `/wizard`，agent 也可以自行触发它。当它撞上一个必须由你完成的步骤（一个它无法铸造的 key、一个它无法点击的 dashboard），它就会为你构建一个 wizard，而不是把指令写进聊天里，让它们滚出视野。
 
@@ -19,11 +19,11 @@
 
 不要用它来决定*构建什么*；那是 [grill-with-docs](https://aihero.dev/skills-grill-with-docs) 和 [to-spec](https://aihero.dev/skills-to-spec) 的工具。
 
-## Prerequisites
+## 前置条件
 
 生成一个没有前置条件。它写出的 wizard 运行在 bash 上，当某个 stage 设置 GitHub secret 或 variable 时使用 `gh`。如果 `gh` 缺失或未认证，那个 stage 会变成一个 warning，收尾 summary 会告诉你该手动设置什么，而不是让运行失败。
 
-## Stages
+## 阶段
 
 **stage** 是单个屏幕上的一项聚焦任务。脚本会在 stage 之间清屏，因此一个溢出屏幕的 stage 会丢掉已经滚出视野的部分。你按依赖顺序编排 stages，并设置 `TOTAL_STAGES`，它驱动进度显示。
 
@@ -39,20 +39,20 @@ Scoping 发生在写出任何一行之前。[skill](https://www.aihero.dev/ai-co
 | `.env` 和 secret 都要 | 本地开发与 CI 都需要 |
 | 哪里都不写 | 该 stage 是纯操作：拨一下开关、升级一个 plan |
 
-## The template already solves the UX
+## 模板已经解决了 UX
 
 [template](https://github.com/mattpocock/skills/blob/main/skills/engineering/wizard/template.sh) 已经交付了整套体验：带剩余时间的进度、confirmation gates、跨平台 URL 打开（含 WSL）、secret 的隐藏输入、幂等的 `.env` upserts、`gh secret` / `gh variable` 写入，以及一份收尾 summary，列出它不得不跳过的所有东西。`STAGES` 标记之上的所有内容都是一个固定的 library，在每个 wizard 中都完全相同，绝不小手编辑。一致性正是重点。你的工作只是划定流程范围并编写它的 stages。
 
 写 wizard 的 agent 永远不会端到端运行它，因为它会打开浏览器并等待人类输入。它改为静态验证：`bash -n`、可用时的 `shellcheck`，以及一次追踪：确保每个值都落到 scoping 所说的位置，每个 `set_secret` 名称都与 CI 中真实的 `secrets.*` 引用匹配。相应地调整你的预期：第一次运行是属于你的，而那一次运行就是测试。
 
-## Ephemeral by default
+## 默认用完即弃
 
 | 你拥有什么 | 怎么处理脚本 |
 | --- | --- |
 | 一次性 migration、个人 setup、你永远不会重复的一次迁移 | 存到 scratch 或 `scripts/` 路径，运行它，删除它 |
 | repo 上下一个人也会需要的 setup 路径 | 提交它并从 README 链接过去，让他们运行脚本，而不是重新问 agent |
 
-## Common questions
+## 常见问题
 
 **我的 API keys 会进入 model 的 context 吗？**
 
@@ -84,7 +84,7 @@ artifact 可以，无任何条件：它是一个普通 bash 脚本，不关心�
 
 从 v1.2 起在 `engineering/`。它从 beta bucket 毕业，现在随 plugin 一起发布，所以它和其余转正的一套一起到达，而不需要单独安装。它的行为在毕业时没有改变。
 
-## It's working if
+## 它正常工作的标志
 
 - 在任何脚本存在之前，你会看到一份有序的 stages 列表、每个 stage 产出的值，并被要求确认。
 - 每个 URL 都在索取该页面的值之前被打开。你永远不会被要求粘贴一个没被派去取回的东西。
@@ -93,6 +93,6 @@ artifact 可以，无任何条件：它是一个普通 bash 脚本，不关心�
 - Ctrl-C 后重跑会从你停下的地方接续，把已保存的值作为默认值提供出来。
 - 最后一块屏幕列出它写了什么，并单独列出它做不到、需要你手动完成的部分。
 
-## Where it fits
+## 它在整体中的位置
 
 `wizard` 是一个随时可用的 standalone，坐在自动化停止、人类必须点击的那条线上。它最近的邻居是 [setup-matt-pocock-skills](https://aihero.dev/skills-setup-matt-pocock-skills)，因为两者都是为了把 repo 弄到可工作状态：那一个配置的是这套 skills，而 `wizard` 为其他一切生成 setup 路径。它还与 [implement](https://aihero.dev/skills-implement) 配对：当一次 build 落地一个需要凭据或手动切换的 feature 时，wizard 就是完成人类那一半的方式。当你不确定哪个 skill 适合当下时刻时，[ask-matt](https://aihero.dev/skills-ask-matt) 为你引路。

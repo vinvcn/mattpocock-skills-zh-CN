@@ -12,9 +12,9 @@ description: "从固定点（commit、branch、tag 或 merge-base）开始，按
 
 Issue tracker 应该已经提供给你；如果缺少 `docs/agents/issue-tracker.md`，请让用户运行 `/setup-matt-pocock-skills`。
 
-## Process
+## 流程
 
-### 1. Pin the fixed point
+### 1. 确定 fixed point
 
 用户说的任何内容都是 fixed point：commit SHA、branch name、tag、`main`、`HEAD~5` 等。如果用户没有指定，就询问。
 
@@ -22,7 +22,7 @@ Issue tracker 应该已经提供给你；如果缺少 `docs/agents/issue-tracker
 
 继续前，确认 fixed point 能解析（`git rev-parse <fixed-point>`），并且 diff 非空。错误 ref 或空 diff 应该在这里失败，而不是进入两个并行 sub-agents 后才失败。
 
-### 2. Identify the spec source
+### 2. 找到 spec 来源
 
 按以下顺序寻找来源 spec：
 
@@ -31,7 +31,7 @@ Issue tracker 应该已经提供给你；如果缺少 `docs/agents/issue-tracker
 3. `docs/`、`specs/` 或 `.scratch/` 下与 branch name 或 feature 匹配的 spec 文件。
 4. 如果什么都找不到，询问用户 spec 在哪里。如果用户说没有 spec，**Spec** sub-agent 跳过并报告 “no spec available”。
 
-### 3. Identify the standards sources
+### 3. 找到 standards 来源
 
 Repo 中任何记录代码应该如何写的内容，例如 `CODING_STANDARDS.md` 或 `CONTRIBUTING.md`。
 
@@ -55,7 +55,7 @@ Repo 中任何记录代码应该如何写的内容，例如 `CODING_STANDARDS.md
 - **Middle Man**：class 或 function 基本只是在继续委托。-> 删掉它，直接调用真实目标。
 - **Refused Bequest**：subclass 或 implementer 忽略或 override 了继承来的大部分内容。-> 去掉 inheritance，使用 composition。
 
-### 4. Spawn both sub-agents in parallel
+### 4. 并行启动两个 sub-agents
 
 **Standards sub-agent prompt** 包含：
 
@@ -71,13 +71,13 @@ Repo 中任何记录代码应该如何写的内容，例如 `CODING_STANDARDS.md
 
 如果缺少 spec，跳过 Spec sub-agent，并在最终报告中说明。
 
-### 5. Aggregate
+### 5. 汇总
 
-在 `## Standards` 和 `## Spec` headings 下展示两个 reports，可原样或轻微清理。**不要**合并或重新排序 findings；这两个轴线刻意保持分离（见 _Why two axes_）。
+在 `## Standards` 和 `## Spec` headings 下展示两个 reports，可原样或轻微清理。**不要**合并或重新排序 findings；这两个轴线刻意保持分离（见 _为什么是两条轴线_）。
 
 最后用一行总结：每个轴线的 findings 总数，以及每个轴线内最严重的问题（如果有）。不要跨轴线选一个总冠军；分离就是为了避免这种 reranking。
 
-## Why two axes
+## 为什么是两条轴线
 
 一个变更可能通过其中一个轴线，但失败在另一个轴线：
 

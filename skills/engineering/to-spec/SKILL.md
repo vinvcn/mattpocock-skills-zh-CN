@@ -8,7 +8,7 @@ disable-model-invocation: true
 
 Issue tracker 和 triage label vocabulary 应该已经提供给你；如果没有，请让用户运行 `/setup-matt-pocock-skills`。
 
-## Process
+## 流程
 
 1. 如果还没有探索 repo，先探索它以理解 codebase 当前状态。在 spec 中始终使用项目 domain glossary vocabulary，并遵守相关 ADRs。
 

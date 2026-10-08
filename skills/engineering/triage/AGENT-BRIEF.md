@@ -1,12 +1,12 @@
-# Writing Agent Briefs
+# 编写 Agent Briefs
 
 Agent brief 是 GitHub issue 或 PR 移动到 `ready-for-agent` 时发布在其上的结构化 comment。它是 AFK agent 后续工作的权威 spec。原始 body 和讨论是 context；agent brief 是 contract。
 
 Brief 说明 **agent 应该做什么**，这延伸到两种 surface：对 issue，是从零构建 change；对 PR，是*在现有 diff 上*还剩什么要做：完成它、补齐缺口、处理 review 意见。两种情况原则相同；下面的 PR 示例展示了差异。
 
-## Principles
+## 原则
 
-### Durability over precision
+### 持久优于精确
 
 Issue 可能会在 `ready-for-agent` 中停留数天或数周。期间 codebase 会变化。写 brief 时要让它在文件被重命名、移动或 refactor 后仍然有用。
 
@@ -16,7 +16,7 @@ Issue 可能会在 `ready-for-agent` 中停留数天或数周。期间 codebase 
 - **Don't** 引用 line numbers
 - **Don't** 假设当前 implementation structure 会保持不变
 
-### Behavioral, not procedural
+### 行为而非过程
 
 描述系统应该做**什么**，而不是**如何**实现。Agent 会重新探索 codebase，并做出自己的 implementation decisions。
 
@@ -25,18 +25,18 @@ Issue 可能会在 `ready-for-agent` 中停留数天或数周。期间 codebase 
 - **Good:** "When a user runs `/triage` with no arguments, they should see a summary of issues needing attention"
 - **Bad:** "Add a switch statement in the main handler function"
 
-### Complete acceptance criteria
+### 完整的 acceptance criteria
 
 Agent 需要知道什么时候算完成。每个 agent brief 都必须有具体、可测试的 acceptance criteria。每条 criterion 都应该能独立验证。
 
 - **Good:** "Running `gh issue list --label needs-triage` returns issues that have been through initial classification"
 - **Bad:** "Triage should work correctly"
 
-### Explicit scope boundaries
+### 明确的 scope 边界
 
 说明什么不在范围内。这可以防止 agent gold-plating 或对相邻功能做假设。
 
-## Template
+## 模板
 
 ```markdown
 ## Agent Brief
@@ -67,9 +67,9 @@ Be specific about edge cases and error conditions.
 - Adjacent feature that might seem related but is separate
 ```
 
-## Examples
+## 示例
 
-### Good agent brief (bug)
+### 好的 agent brief（bug）
 
 ```markdown
 ## Agent Brief
@@ -104,7 +104,7 @@ and append "..." to indicate truncation.
 - Multi-line description support
 ```
 
-### Good agent brief (enhancement)
+### 好的 agent brief（enhancement）
 
 ```markdown
 ## Agent Brief
@@ -145,7 +145,7 @@ checked for matches.
 - Bug reports (only enhancement rejections go to `.out-of-scope/`)
 ```
 
-### Good agent brief (PR)
+### 好的 agent brief（PR）
 
 对 PR 而言，“Current behavior” 描述的是 diff 的状态，brief 要求 agent 完成或修复它，而不是从零构建。
 
@@ -182,7 +182,7 @@ is untouched when the flag is absent.
 - Changing the JSON shape of the success payload the PR already defined
 ```
 
-### Bad agent brief
+### 坏的 agent brief
 
 ```markdown
 ## Agent Brief
