@@ -1,22 +1,10 @@
-# Matt Pocock Agent Skills 中文版
+# 给真正工程师用的 Skills（简体中文版）
 
-## 为什么需要这个中文版？
+[![skills.sh](https://skills.sh/b/vinvcn/mattpocock-skills-zh-CN)](https://skills.sh/vinvcn/mattpocock-skills-zh-CN)
 
-- 更好适配中文大语言模型
-- 方便中文母语开发者
-- 方便接入中文开发流程
+[Matt Pocock](https://github.com/mattpocock) 的 [`mattpocock/skills`](https://github.com/mattpocock/skills)：第三方简体中文本地化，非官方仓库。这些 agent skills 是他每天用于真实工程工作的，不是 vibe coding：小、易改、可组合，适用于任何模型。
 
-## 关于这个中文版
-
-这是 [`mattpocock/skills`](https://github.com/mattpocock/skills) 的简体中文本地化版本。文档和技能说明已翻译；目录名、技能名、命令、代码块、路径和工具标识保持不变，以免破坏安装和运行行为。
-
-中文版本不只是为了阅读方便。对中文母语用户来说，中文说明能减少概念转换成本；对以中文为主要交互语言或中文语料优化的模型来说，中文 prompt 和 skill instructions 也更容易贴合中文上下文，减少中英混杂带来的歧义。
-
-本仓库按内容刷新方式同步上游，不同步上游 Git 历史或仓库管理状态。维护规则见 [`.skills/translate-skill/SKILL.md`](./.skills/translate-skill/SKILL.md)。
-
-本仓库的同步翻译由 Codex 执行，并由仓库维护者通过 PR 纳入 `main`。翻译策略是 **skill-guided content localization**：把上游 `mattpocock/skills` 当作英文内容来源，只翻译自然语言说明，保留目录名、skill name、frontmatter key、命令、代码块、路径、URL、package/tool/API identifiers 和行为关键 labels。用户可见的安装路径统一保持为 `vinvcn/mattpocock-skills-zh-CN`。
-
-想请求翻译仓库里的英文术语，或认领翻译 PR？先读[贡献指南](./CONTRIBUTING.md)；已请求与已决定的译法记录在[翻译术语表](./TRANSLATION-GLOSSARY.md)。
+本仓库**定期同步上游**，并额外支持 DeepSeek Harness（dsh）插件安装，安装后以 `/zh-<name>` 调用任意技能（上游没有的能力，详见 [`dsh-plugin/README.md`](./dsh-plugin/README.md)）。
 
 ## 30 秒安装
 
@@ -37,7 +25,7 @@ npx skills@latest add vinvcn/mattpocock-skills-zh-CN
 /plugin install mattpocock-skills@mattpocock
 ```
 
-或者在 **DeepSeek Harness（dsh）** 中安装为插件：
+或者在 **DeepSeek Harness（dsh）** 中安装为插件（上游没有的安装路线）：
 
 ```sh
 dsh plugin --profile web add @vinvcn/dsh-mattpocock-skills-zh
@@ -45,7 +33,17 @@ dsh plugin --profile web add @vinvcn/dsh-mattpocock-skills-zh
 
 安装后以 `/zh-<name>` 调用任意技能，例如 `/zh-grilling`。详见 [`dsh-plugin/README.md`](./dsh-plugin/README.md)。
 
-[![skills.sh](https://skills.sh/b/vinvcn/mattpocock-skills-zh-CN)](https://skills.sh/vinvcn/mattpocock-skills-zh-CN)
+## 关于这个中文版
+
+文档和技能说明已翻译；目录名、技能名、命令、代码块、路径和工具标识保持不变，以免破坏安装和运行行为。
+
+中文版本不只是为了阅读方便。对中文母语用户来说，中文说明能减少概念转换成本；对以中文为主要交互语言或中文语料优化的模型来说，中文 prompt 和 skill instructions 也更容易贴合中文上下文，减少中英混杂带来的歧义。
+
+本仓库按内容刷新方式同步上游，不同步上游 Git 历史或仓库管理状态。同步翻译由 Codex 执行，人工审核每一次更新后由维护者通过 PR 纳入 `main`；维护规则见 [`.skills/translate-skill/SKILL.md`](./.skills/translate-skill/SKILL.md)。
+
+翻译策略是 **skill-guided content localization**：把上游 `mattpocock/skills` 当作英文内容来源，只翻译自然语言说明，保留目录名、skill name、frontmatter key、命令、代码块、路径、URL、package/tool/API identifiers 和行为关键 labels。用户可见的安装路径统一保持为 `vinvcn/mattpocock-skills-zh-CN`。
+
+想请求翻译仓库里的英文术语，或认领翻译 PR？先读[贡献指南](./CONTRIBUTING.md)；已请求与已决定的译法记录在[翻译术语表](./TRANSLATION-GLOSSARY.md)。
 
 <p>
   <a href="https://www.aihero.dev/s/skills-newsletter">
