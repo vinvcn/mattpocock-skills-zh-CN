@@ -12,4 +12,4 @@ Skills 使用五个 canonical triage roles。这个文件把这些 roles 映射�
 
 当某个 skill 提到 role（例如 “apply the AFK-ready triage label”）时，使用此表中对应的 label 字符串。
 
-编辑右侧列，使其匹配你实际使用的 vocabulary。
+编辑 “Label in our tracker” 列，使其匹配你实际使用的 vocabulary。

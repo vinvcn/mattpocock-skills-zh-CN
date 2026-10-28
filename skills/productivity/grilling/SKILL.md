@@ -21,6 +21,8 @@ description: 围绕计划、decision 或 idea 持续追问用户。适用于用�
 ➡️ <你的推荐答案>
 ```
 
+每个问题的措辞都要让回答 “yes” 就是接受你的推荐答案。
+
 每一轮用户给出的回答都会重塑这棵树：敲定的 decisions 会把 frontier 向外推，并解锁依赖它们的问题。重新计算 frontier，然后问下一轮。其答案依赖本轮中另一个仍未解决的问题，属于 _更晚的_ 一轮，而不是本轮。
 
 寻找 _facts_ 是你的工作，绝不是用户的。当一个 frontier 问题需要来自 environment（filesystem、tools 等）的 fact 时，派一个 sub-agent 去查，不要问用户任何你自己能查到的东西。不要被它阻塞：一次正在进行的探索是一个尚未敲定的 prerequisite，所以只有它下游的问题才需要等 sub-agent 回报，现在先问 frontier 的其余部分。_decisions_ 属于用户：逐个交给他，并等待。

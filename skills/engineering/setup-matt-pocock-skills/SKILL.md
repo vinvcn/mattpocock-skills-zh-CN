@@ -22,7 +22,7 @@ disable-model-invocation: true
 
 - `git remote -v` 和 `.git/config` - 这是 GitHub repo 吗？是哪一个？
 - repo root 的 `AGENTS.md` 和 `CLAUDE.md` - 是否存在？其中是否已有 `## Agent skills` section？
-- repo root 的 `GLOSSARY.md` 和 `GLOSSARY-MAP.md`
+- repo root 的 `GLOSSARY.md` 和 `GLOSSARY-MAP.md`，以及 legacy 的 `CONTEXT.md` / `CONTEXT-MAP.md`。如果存在 legacy 文件，提议用 `git mv` 把它改名为对应的 `GLOSSARY` 名称，并改写 `docs/agents/domain.md` 中的这些名称。
 - `docs/adr/` 以及任何 `src/*/docs/adr/` directories
 - `docs/agents/` - 这个 skill 之前是否已经输出过内容？
 - `.scratch/` - 表明已经在使用 local-markdown issue tracker 约定
@@ -47,6 +47,8 @@ disable-model-invocation: true
 - **Other**（Jira、Linear 等）- 让用户用一段话描述工作流；skill 会把它记录为 freeform prose
 
 把选择记录到 `docs/agents/issue-tracker.md`。GitHub 和 GitLab templates 带有 “PRs as a request surface” flag，默认 **off**；保持关闭且不要提问。想把 external PRs 放入 triage queue 的用户可以之后直接修改文件。
+
+GitHub 或 GitLab tracker 需要一个 reachable 的 repo。当用户选择了其中一个，而没有任何 `git remote` 指向该 host 时，先向用户取得 repo URL 并接好（必要时 `git init`，然后 `git remote add origin <url>`），再继续后续步骤。在本目录内运行 `gh repo view` / `glab repo view` 能打印出该项目就算完成；如果不能，停下来并告诉用户缺少什么。
 
 **Section B - Triage label vocabulary.** 如果未安装 `triage`，完全跳过本 section；未安装的 skill 不需要 labels。
 
@@ -100,6 +102,8 @@ Block：
 ```
 
 只有安装了 `triage` 且 Section B 实际运行时，才包含 `### Triage labels` sub-block 并写入 `docs/agents/triage-labels.md`；否则两者都省略。
+
+当 Section B 在 GitHub 或 GitLab 上运行后，创建 tracker 缺失的每个已配置 label（`gh label create` / `glab label create`）。
 
 然后使用本 skill folder 中的 seed templates 作为起点写 docs files：
 

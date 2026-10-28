@@ -18,6 +18,8 @@ npx skills@latest add vinvcn/mattpocock-skills-zh-CN
 
 选择你想安装的 skills，以及要安装到哪些 coding agents。首次安装时请确保选择 [`/setup-matt-pocock-skills`](./skills/engineering/setup-matt-pocock-skills/SKILL.md)，然后在 agent 中运行它来完成 issue tracker、labels 和 docs 目录配置。
 
+skills.sh 与 plugin 方式每个 agent 只选其一：两种都装会让每个 skill 被安装两次。
+
 或者在 Claude Code 中运行：
 
 ```
@@ -67,49 +69,90 @@ dsh plugin --profile web add @vinvcn/dsh-mattpocock-skills-zh
 
 [订阅 Newsletter](https://www.aihero.dev/s/skills-newsletter)
 
-### 快速开始（30 秒 setup）
+### 安装（30 秒 setup）
 
-1. 运行 skills.sh installer：
+Plugin 会自我更新；[skills.sh](https://skills.sh/vinvcn/mattpocock-skills-zh-CN) 把可编辑文件复制进你的项目，更新由你手动完成。每个 agent 只选一种方式：两种都装会让每个 skill 被安装两次。
 
-```bash
-npx skills@latest add vinvcn/mattpocock-skills-zh-CN
-```
+#### 1. 获取 skills
 
-2. 选择你想安装的 skills，以及要安装到哪些 coding agents。**确保选择 `/setup-matt-pocock-skills`**。
-
-3. 在你的 agent 中运行 `/setup-matt-pocock-skills`。它会：
-   - 询问你要使用哪个 issue tracker（GitHub、Linear 或 local files）
-   - 询问你 triage issues 时使用哪些 labels（`/triage` 会使用这些 labels）
-   - 询问要把创建的 docs 保存到哪里
-
-4. 完成后即可开始使用。
-
-### 作为 Claude Code plugin 安装
-
-如果你更喜欢无需手动维护的即装即用方式，这些 skills 也以原生 [Claude Code plugin](https://code.claude.com/docs/en/plugins) 发布。与把可编辑文件复制进 repo 不同，plugin 会把整套 skills 安装为受管理的 bundle；新版本发布后可以统一更新。
-
-在 Claude Code 中运行：
-
-```
-/plugin marketplace add vinvcn/mattpocock-skills-zh-CN
-/plugin install mattpocock-skills@mattpocock
-```
-
-或在 shell 中运行：
+<details>
+<summary><strong>Claude Code</strong></summary>
 
 ```bash
 claude plugin marketplace add vinvcn/mattpocock-skills-zh-CN
 claude plugin install mattpocock-skills@mattpocock
 ```
 
-然后像上面的 quickstart 一样，在每个 repo 中运行一次 `/setup-matt-pocock-skills`。
+默认自动更新。上游英文原版位于官方 marketplace（`claude plugin install mattpocock-skills@claude-plugins-official`）；中文版通过本仓库自己的 marketplace 安装。
 
-两种安装方式代表两种使用取向，只选其一；两个都装会让每个 skill 被安装两次：
+</details>
 
-- **[skills.sh](https://skills.sh/vinvcn/mattpocock-skills-zh-CN)** 会把 skills 复制进项目，方便你修改、定制，把它们变成自己的东西。
-- **Plugin** 把它们作为受管理的只读 bundle 安装，随新版本发布统一更新：是订阅而不是 fork，适合只想直接使用并持续跟进更新的用户。
+<details>
+<summary><strong>Codex</strong></summary>
 
-> 使用 Codex 或其他 agent？[skills.sh installer](https://skills.sh/vinvcn/mattpocock-skills-zh-CN) 已经可以把这些 skills 安装到 Codex 和其他兼容 Agent Skills 的 harnesses；目前尚未提供原生 Codex plugin。
+```bash
+codex plugin marketplace add vinvcn/mattpocock-skills-zh-CN
+codex plugin add mattpocock-skills@mattpocock
+```
+
+启动时自动更新。
+
+</details>
+
+<details>
+<summary><strong>GitHub Copilot</strong>（CLI 与 VS Code）</summary>
+
+```bash
+copilot plugin marketplace add vinvcn/mattpocock-skills-zh-CN
+copilot plugin install mattpocock-skills@mattpocock
+```
+
+然后一次性地把下面内容加进 `~/.copilot/settings.json`：
+
+```json
+{
+  "extraKnownMarketplaces": {
+    "mattpocock": { "source": { "source": "github", "repo": "vinvcn/mattpocock-skills-zh-CN" }, "autoUpdate": true }
+  }
+}
+```
+
+在 VS Code 中运行 **Chat: Install Plugin From Source**，输入 `https://github.com/vinvcn/mattpocock-skills-zh-CN`。它会每日更新。
+
+</details>
+
+<details>
+<summary><strong>Gemini CLI</strong>（手动更新）</summary>
+
+```bash
+gemini skills install https://github.com/vinvcn/mattpocock-skills-zh-CN.git --path skills/engineering
+gemini skills install https://github.com/vinvcn/mattpocock-skills-zh-CN.git --path skills/productivity
+```
+
+更新时重新运行这两条命令。
+
+</details>
+
+<details>
+<summary><strong>其他任何 agent，或想要可编辑文件</strong>（手动更新）</summary>
+
+```bash
+npx skills@latest add vinvcn/mattpocock-skills-zh-CN -a <agent>  # cursor, opencode, devin, windsurf, amp, pi; omit -a to choose
+```
+
+安装器询问要取哪些 skills 时，确保包含 `setup-matt-pocock-skills`。更新：运行 `npx skills@latest update`，并重新运行 `add` 以获取新增的 skills。
+
+</details>
+
+#### 2. 运行 `/setup-matt-pocock-skills`
+
+在你的 agent 中，每个 repo 运行一次。它会：
+
+- 询问你要使用哪个 issue tracker（GitHub、GitLab、local files，或任何你描述的其他方式）
+- 询问你 triage issues 时使用哪些 labels（`/triage` 会使用这些 labels）
+- 询问要把创建的 docs 保存到哪里
+
+#### 3. 完成，即可开始使用。
 
 ### 为什么这些 Skills 存在
 
