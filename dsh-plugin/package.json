@@ -1,7 +1,7 @@
 {
   "name": "@vinvcn/dsh-mattpocock-skills-zh",
   "version": "1.3.1",
-  "description": "Matt Pocock skills 中文本地化的 DeepSeek Harness 插件包：以 zh- 前缀暴露全部 37 个可用技能。",
+  "description": "Matt Pocock skills 中文本地化的 DeepSeek Harness 插件包：以 zh- 前缀暴露全部 38 个可用技能。",
   "private": false,
   "publishConfig": { "access": "public" },
   "type": "module",

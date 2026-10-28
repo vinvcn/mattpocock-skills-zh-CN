@@ -13,7 +13,7 @@ import { SKILL_NAMES, findUnrewrittenReferences } from './rewrite-references.mjs
 const SCRIPT_DIR = dirname(fileURLToPath(import.meta.url))
 const PLUGIN_DIR = dirname(SCRIPT_DIR)
 
-const EXPECTED_SKILLS = 37
+const EXPECTED_SKILLS = 38
 const FORBIDDEN_DIRS = ['deprecated', 'translate-skill']
 
 /**

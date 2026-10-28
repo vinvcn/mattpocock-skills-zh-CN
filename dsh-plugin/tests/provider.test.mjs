@@ -24,10 +24,10 @@ test('createProvider returns a named provider whose list and get are thenable', 
   assert.equal(typeof provider.get({}).then, 'function')
 })
 
-test('list resolves to 37 well-formed zh- candidates owned by the provider', async () => {
+test('list resolves to 38 well-formed zh- candidates owned by the provider', async () => {
   const candidates = await m.createProvider().list({})
-  assert.equal(candidates.length, 37)
-  assert.equal(new Set(candidates.map((candidate) => candidate.name)).size, 37)
+  assert.equal(candidates.length, 38)
+  assert.equal(new Set(candidates.map((candidate) => candidate.name)).size, 38)
   for (const candidate of candidates) {
     assert.equal(candidate.provider, PROVIDER_NAME)
     assert.equal(candidate.source, 'bundled')
@@ -76,7 +76,7 @@ test('apply registers a provider that lists the same catalog', async () => {
   m.apply({ skills: { registerProvider: (create) => { captured = create() } } })
   assert.equal(captured.name, PROVIDER_NAME)
   const candidates = await captured.list({})
-  assert.equal(candidates.length, 37)
+  assert.equal(candidates.length, 38)
   for (const candidate of candidates) {
     assert.equal(candidate.provider, m.name)
   }
