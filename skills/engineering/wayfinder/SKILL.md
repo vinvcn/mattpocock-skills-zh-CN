@@ -62,7 +62,7 @@ Map 是低分辨率的全局视图，每个 session 加载一次。Open tickets 
 <the decision or investigation this ticket resolves>
 ```
 
-每个 ticket 带一个 `wayfinder:<type>` label，取值为 `research`、`prototype`、`grilling`、`task`（见 [Ticket Types](#ticket-类型)）。
+每个 ticket 带一个 `wayfinder:<type>` label，取值为 `research`、`prototype`、`grilling`、`task`（见 [Ticket Types](#ticket-类型)）。`wayfinder:` labels 是 map 及其 tickets 携带的唯一 labels，绝不携带 `ready-for-agent` 这类 triage label：它们是 decisions，不是 implementation work。
 
 Session **claim** ticket 的方式，是在任何工作开始前**先**把 ticket assign 给 driving map 的 dev，这样并发的 sessions 就会跳过它。这个 assignee 就是 claim：open 且 unassigned 的 ticket 才是 unclaimed。
 
@@ -111,8 +111,8 @@ Out-of-scope work 永远不会 graduate；frontier 会停在 destination。只�
 1. **Name the destination.** 调用两次 Skill 工具，分别指定 `grilling` 和 `domain-modeling`，确定 map 要找到的 spec、decision 或 change。Destination 固定 scope，所以先解决它。
 2. **Map the frontier.** 再 grill 一次，这次采用 **breadth-first**：覆盖整个空间，而不是深入一条 thread，浮现 open decisions 和现在可开始的 first steps。**如果没有 fog**，说明路径已经清晰，整个 journey 一个 session 就能完成，你不需要 map。停止并询问用户如何继续。
 3. **Create the map**（label `wayfinder:map`）：填好 Destination 和 Notes，Decisions-so-far 为空，把 fog 勾勒进 **Not yet specified**。
-4. **Create the tickets you can specify now** 作为 map 的 child issues，然后第二遍再 wire blocking edges（issues 需要 ids 后才能互相引用）。Wiring 会把它们分成 frontier 和 blocked；现在还说不清的都留在 **Not yet specified**。
-5. **启动 research subagents。** 对刚创建的每个 `research` ticket，并行启动一个调用 Skill 工具并指定 `research` 的 subagent 解决它；findings 保存在一次性的 `research/<name>` branch，并从 ticket 留下 context pointer。
+4. **Create the tickets you can specify now** 作为 map 的 child issues，然后第二遍再 wire blocking edges（issues 需要 ids 后才能互相引用）。交叉引用也要在这一遍写好，使用真实 ids：占位符 `#<n>` 会自动链接到无关的 issue。Wiring 会把它们分成 frontier 和 blocked；现在还说不清的都留在 **Not yet specified**。
+5. **启动 research subagents。** 对刚创建的每个 `research` ticket，并行启动一个调用 Skill 工具并指定 `research` 的 subagent 解决它；findings 保存在一次性的 `research/<name>` branch，并从 ticket 留下 context pointer。推送 branch 但不开 PR：它永远不会被 merge。
 6. 停止。Charting 是一个 session 的工作；不要在这个 session 中手动 resolve tickets。
 
 ### 沿着地图推进
@@ -121,7 +121,7 @@ Out-of-scope work 永远不会 graduate；frontier 会停在 destination。只�
 
 1. 加载 **map**：低分辨率视图，而不是每个 ticket body。
 2. 选择 ticket。用户点名就用它；否则按顺序拿第一个 frontier ticket。**Claim it**：任何工作开始前先 assign 给自己。
-3. Resolve it：按需 **zoom**，只在需要时获取相关或已关闭 ticket 的完整 body；调用 `## Notes` block 提到的 skills。不确定时调用两次 Skill 工具，分别指定 `grilling` 和 `domain-modeling`。
+3. 按它的 `wayfinder:<type>` label 所命名的类型 resolve 它（见 [Ticket Types](#ticket-类型)）。读 label，而不只是 body：body 从不写明类型。按需 **zoom**，只在需要时获取相关或已关闭 ticket 的完整 body；调用 `## Notes` block 提到的 skills。不确定时调用两次 Skill 工具，分别指定 `grilling` 和 `domain-modeling`。
 4. 记录 resolution：把答案作为 **resolution comment** 发布，**close** issue，并向 map 的 Decisions-so-far 追加 context pointer。
 5. 添加新浮现的 tickets（create-then-wire）；把答案已经说清的 fog graduate 成 ticket，并从 **Not yet specified** 清掉每个已升级 patch，让它只作为新 ticket 存在。如果答案表明这个或其他 ticket 位于 destination 之外，将其 **rule out of scope**，而不是当作路线的一部分解决。如果这个 decision 使 map 其他部分失效，更新或删除那些 tickets。
 

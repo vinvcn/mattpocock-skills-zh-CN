@@ -21,7 +21,7 @@ Tests 应通过 public interfaces 验证 behavior，而不是 implementation det
 
 **只测试预先认可的 seams。** 写任何 test 前，先写下要测试的 seams 并与用户确认。未经确认的 seam 不写 test。你无法测试所有东西；提前认可 seams，才能把测试精力放在 critical paths 和复杂 logic 上，而不是每个 edge case。
 
-询问："What's the public interface, and which seams should we test?"
+询问："What's the public interface, and which seams should we test?" 给每个提议的 seam 加一行说明：它能捕获什么，又会漏掉什么。
 
 当 interface 的形状本身就是问题所在时（module 该多深、seam 该放在哪里、interface 应该暴露什么），调用 Skill 工具并指定 `codebase-design` 获取词汇。它是 module、interface、depth、seam、adapter、leverage 和 locality 这些术语的共享来源，是供查阅的 reference，而不是要运行的 session。
 

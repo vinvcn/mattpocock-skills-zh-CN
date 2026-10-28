@@ -122,7 +122,7 @@ Correct seam 是 test 能以 call site 中真实发生的方式触发 **real bug
 如果存在 correct seam：
 
 1. 把 minimised repro 变成该 seam 上的 failing test。
-2. 看它 fail。
+2. 看它 fail。如果这个 red 是你通过 mutate 代码或 fixture 强制出来的，先与干净副本做 `diff`，证明 mutation 确实生效，再信任它。
 3. 应用 fix。
 4. 看它 pass。
 5. 重新针对原始（未 minimised）场景运行 Phase 1 feedback loop。

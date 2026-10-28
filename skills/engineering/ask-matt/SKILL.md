@@ -8,6 +8,8 @@ disable-model-invocation: true
 
 你不需要记住每个 skill，所以直接问。
 
+在断言某个 skill 做什么、或建议跳过某个步骤之前，先读那个 skill 的 SKILL.md：这里的摘要只用于定向。
+
 **Flow** 是穿过 skills 的一条路径。大多数路径沿着一条 **main flow** 前进，两个 **on-ramps** 会并入它。其他内容要么是 standalone，要么是在下层运行的 vocabulary layer。
 
 ## 主流程：idea -> ship

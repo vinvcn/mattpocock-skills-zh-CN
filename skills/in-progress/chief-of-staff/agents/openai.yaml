@@ -1,0 +1,5 @@
+interface:
+  display_name: "Chief Of Staff"
+  short_description: "在单个 session 中通过协调 subagents 推进一个长期目标"
+policy:
+  allow_implicit_invocation: false

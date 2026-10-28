@@ -1,25 +1,23 @@
-# Issue tracker 集成仅限主流工具
+# Issue tracker 集成：仅限 GitHub、GitLab 和 local markdown
 
-`setup-matt-pocock-skills` 只对**主流** issue tracker 提供一等支持。为小众、新兴或单一厂商的实验性 tracker 增加支持不在范围内。
+`setup-matt-pocock-skills` 为恰好三个 issue tracker 提供一等支持，每个对应 `skills/engineering/setup-matt-pocock-skills/` 中的一个 seed template：
+
+- **GitHub**（`issue-tracker-github.md`，使用 `gh`）
+- **GitLab**（`issue-tracker-gitlab.md`，使用 `glab`）
+- **Local markdown**（`issue-tracker-local.md`，`.scratch/` 下的文件）
+
+把任何其他 tracker 增设为一等后端的请求不在范围内，包括 Jira、Linear、Azure DevOps、Trello、YouTrack，以及新出现的面向 agent 的 trackers。
 
 ## 为什么这不在范围内
 
-每个 issue-tracker 后端都会把一种 CLI 形态硬编码进 skills（命令、flag、输出解析）。每新增一个后端，都是永久维护面：它必须随着工具 CLI 的演进继续可用，也必须持续针对 `/to-spec`、`/to-tickets`、`/triage` 等工作流测试。只有当相当一部分用户确实使用某个 tracker 时，这个成本才值得付。
+每个 issue-tracker 后端都会把一种 CLI 形态硬编码进 skills（命令、flag、输出解析）。每新增一个后端，都是永久维护面：它必须随着工具 CLI 的演进继续可用，也必须持续针对 `/to-spec`、`/to-tickets`、`/triage` 等工作流测试。我自己用 GitHub，所以那是唯一一个我能真正保持正确的后端。GitLab 的形态足够接近，可以顺带支持；local markdown 则完全不需要 CLI。
 
-“主流”是判断，不是数字门槛：
+流行程度改变不了这一点。Jira 使用广泛，也有官方 CLI（`acli`），但它仍然不会得到一个 template：它是一个我不运行的后端，有自己的一套链接语义、workflow states 和 CLI quirks 需要持续测试。不管工具本身是否主流，成本都落在我身上。
 
-- GitHub、GitLab 和 Backlog.md 属于我们会考虑的主流工具：知名、广泛使用，并且早已过了实验阶段。
-- 一个刚出现、面向 agent、只有几百个 GitHub stars 的工具，即使设计很有意思，也不算。
-
-Stars、存在时间和下载量都是判断时有用的信号，但都不是规则。真正的规则是：一个典型工程师会认得这个工具，并且可能已经为团队选择它吗？
-
-非主流 tracker 已经有逃生口：
-
-- `local markdown`，用于轻量的 repo 内跟踪。
-- `other/custom`，用于想自己接入工作流的用户。
-
-两者都不要求核心 skills 理解具体工具。
+所有其他 tracker 都走 `/setup-matt-pocock-skills` 的 **Other** 选项：你用一段话描述自己的工作流，skill 把它以文字形式记录进 `docs/agents/issue-tracker.md`。那个文件归你所有。如果你打磨出了一套可用的 Jira 或 Linear 工作流，把它留在你自己的仓库里或发布出来，再让 setup 指向它。
 
 ## Prior requests
 
-- #99 — "Add dex as an issue tracker backend"（dex 当时约 3 个月大，约 300 stars）
+- #99: "Add dex as an issue tracker backend"（dex 当时约 3 个月大，约 300 stars）
+- #258: "Add Jira as first-class issue tracker via Rovo MCP"
+- #1137: "Add Jira as a first-class issue tracker, via Atlassian's official CLI (`acli`)"

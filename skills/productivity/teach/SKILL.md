@@ -9,7 +9,7 @@ argument-hint: "你想学习什么？"
 
 ## 教学工作区
 
-把当前目录视为 teaching workspace。他们的学习状态保存在这个目录中的几个文件里：
+把当前目录视为 teaching workspace。Workspace 路径（`./lessons/` 及其余路径）都以运行 `/teach` 时所在的目录为基准解析；只有 `*-FORMAT.md` 链接以这个 skill 所在的 folder 为基准解析。他们的学习状态保存在这个目录中的几个文件里：
 
 - `MISSION.md`：记录用户为什么对这个 topic 感兴趣。所有教学都应以它为 grounding。使用 [MISSION-FORMAT.md](./MISSION-FORMAT.md) 中的格式。
 - `./reference/*.html`：reference materials 目录。这些是从 lessons 中压缩出的 learnings：cheat sheets、reference algorithms、syntax、yoga poses、glossaries。它们是原始学习单元。它们应该是漂亮的 documents，适合打印，并为 quick reference 设计。
@@ -107,7 +107,7 @@ Knowledge 应先从 trusted resources 中获取。使用 `RESOURCES.md` 跟踪�
 
 每一种都应基于一个 **feedback loop**，让用户收到关于自己表现的反馈。这个 feedback loop 应尽可能紧，立即给出反馈，理想情况下自动完成。
 
-对 quizzes 来说，每个答案都应有完全相同的词数（如果可能，字符数也相同）。不要通过 formatting 给用户任何答案线索。
+对 quizzes 来说，每个答案都应有完全相同的词数（如果可能，字符数也相同）。正确答案所在的位置要在不同题目之间轮换。不要通过 formatting 或顺序给用户任何答案线索。
 
 ## 获取 Wisdom
 
