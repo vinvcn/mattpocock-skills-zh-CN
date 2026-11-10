@@ -18,7 +18,7 @@
 
 ### 2. 启动 sub-agents
 
-并行启动 3+ 个 sub-agents。每个都必须为 deepened module 产出一个 **radically different** interface。
+并行启动 3+ 个 sub-agents，每个都使用全新的 context window。每个都必须为 deepened module 产出一个 **radically different** interface。
 
 给每个 sub-agent 单独的 technical brief（file paths、coupling details、来自 [DEEPENING.md](DEEPENING.md) 的 dependency category、seam 后面是什么）。这个 brief 独立于 Step 1 的用户-facing problem-space explanation。给每个 agent 不同的 design constraint：
 

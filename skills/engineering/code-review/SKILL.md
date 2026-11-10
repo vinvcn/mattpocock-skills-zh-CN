@@ -8,7 +8,7 @@ description: "从固定点（commit、branch、tag 或 merge-base）开始，按
 - **Standards**：代码是否符合这个 repo 记录下来的 coding standards？
 - **Spec**：代码是否忠实实现来源 issue / spec？
 
-两个轴线都作为**并行 sub-agents**运行，避免互相污染 context；然后这个 skill 聚合它们的 findings。
+两个轴线都作为**并行 sub-agents**运行，避免互相污染 context；然后这个 skill 聚合它们的 findings。每个 sub-agent 都要使用全新的 context window 启动。
 
 Issue tracker 应该已经提供给你；如果没有，请让用户运行 `/setup-matt-pocock-skills`。
 

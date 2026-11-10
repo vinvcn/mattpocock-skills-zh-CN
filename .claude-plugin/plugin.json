@@ -1,6 +1,6 @@
 {
   "name": "mattpocock-skills",
-  "version": "1.3.1",
+  "version": "1.3.2",
   "description": "Matt Pocock 面向真实工程工作的 agent skills：持续追问、spec/ticket flows、TDD、代码审查、领域建模等。即装即用，不是 vibe coding。",
   "author": {
     "name": "Matt Pocock",

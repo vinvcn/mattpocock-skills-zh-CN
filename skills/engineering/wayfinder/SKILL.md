@@ -112,7 +112,7 @@ Out-of-scope work 永远不会 graduate；frontier 会停在 destination。只�
 2. **Map the frontier.** 再 grill 一次，这次采用 **breadth-first**：覆盖整个空间，而不是深入一条 thread，浮现 open decisions 和现在可开始的 first steps。**如果没有 fog**，说明路径已经清晰，整个 journey 一个 session 就能完成，你不需要 map。停止并询问用户如何继续。
 3. **Create the map**（label `wayfinder:map`）：填好 Destination 和 Notes，Decisions-so-far 为空，把 fog 勾勒进 **Not yet specified**。
 4. **Create the tickets you can specify now** 作为 map 的 child issues，然后第二遍再 wire blocking edges（issues 需要 ids 后才能互相引用）。交叉引用也要在这一遍写好，使用真实 ids：占位符 `#<n>` 会自动链接到无关的 issue。Wiring 会把它们分成 frontier 和 blocked；现在还说不清的都留在 **Not yet specified**。
-5. **启动 research subagents。** 对刚创建的每个 `research` ticket，并行启动一个调用 Skill 工具并指定 `research` 的 subagent 解决它；findings 保存在一次性的 `research/<name>` branch，并从 ticket 留下 context pointer。推送 branch 但不开 PR：它永远不会被 merge。
+5. **启动 research subagents。** 对刚创建的每个 `research` ticket，并行启动一个使用全新 context window 的 subagent，调用 Skill 工具并指定 `research` 来解决它；findings 保存在一次性的 `research/<name>` branch，并从 ticket 留下 context pointer。推送 branch 但不开 PR：它永远不会被 merge。
 6. 停止。Charting 是一个 session 的工作；不要在这个 session 中手动 resolve tickets。
 
 ### 沿着地图推进

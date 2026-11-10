@@ -24,7 +24,7 @@ disable-model-invocation: true
 
 先读取项目 domain glossary（`GLOSSARY.md`）以及你将触碰区域的 ADRs。
 
-然后 spawn 一个 sub-agent 来遍历 codebase。不要套死板 heuristics；自然探索，并记录你感到 friction 的地方：
+然后 spawn 一个使用全新 context window 的 sub-agent 来遍历 codebase。不要套死板 heuristics；自然探索，并记录你感到 friction 的地方：
 
 - 理解一个概念是否需要在许多小 modules 之间来回跳？
 - 哪些 modules 是 **shallow** 的，即 interface 几乎和 implementation 一样复杂？

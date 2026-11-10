@@ -19,7 +19,7 @@ disable-model-invocation: true
 
 所有工作都应在 subagents 中完成。保护你的 context window。
 
-使用 background agents，这样你可以与用户保持活跃的对话。
+使用 background agents，这样你可以与用户保持活跃的对话。每个 subagent 都要在全新的 context window 中启动。
 
 与 subagents 的通信应当简洁。主要通过 **context pointers** 通信：research notes、之前的 commits、wiki pages 等。不要重复 pointers 已经提供的信息。
 

@@ -45,6 +45,15 @@ dsh plugin --profile web add @vinvcn/dsh-mattpocock-skills-zh
 
 翻译策略是 **skill-guided content localization**：把上游 `mattpocock/skills` 当作英文内容来源，只翻译自然语言说明，保留目录名、skill name、frontmatter key、命令、代码块、路径、URL、package/tool/API identifiers 和行为关键 labels。用户可见的安装路径统一保持为 `vinvcn/mattpocock-skills-zh-CN`。
 
+### 最新同步与验证
+
+- [x] 2026-11-10 由 Codex 按 skill-guided content localization 同步 `mattpocock/skills@d1478fc`（v1.3.2）：8 个 skill 与维护指南新增 subagent fresh-context-window 指引，Claude plugin 与 dsh plugin 版本统一为 `1.3.2`。
+- [x] `node scripts/check-translation.mjs`、公开 skill 索引、上游适用文件覆盖、Markdown 行为不变量与安装路径检查通过。
+- [ ] `claude plugin validate . --strict` 已执行但受既存 warning 阻塞：根 `CLAUDE.md` context 提示与缺少 listing icon；普通 manifest 校验无错误。
+- [x] dsh plugin `npm ci` 与 `npm run prepack` 通过（version sync、build、20 项 tests、38 skills verify）。
+- [x] `git diff --check` 通过；`node scripts/audit-english.mjs` 仅作人工复核队列。`git diff --cached --check` 待提交前执行。
+- [ ] 发布前人工审核；PR、GitHub Release 和 npm 发布结果待审核后处理。
+
 想请求翻译仓库里的英文术语，或认领翻译 PR？先读[贡献指南](./CONTRIBUTING.md)；已请求与已决定的译法记录在[翻译术语表](./TRANSLATION-GLOSSARY.md)。
 
 <p>
