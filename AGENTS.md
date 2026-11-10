@@ -24,6 +24,8 @@ Skills 按 bucket folder 组织在 `skills/` 下：
 
 行文不使用破折号（中文「——」与英文 em-dash `—`），与上游 v1.3.1 的 em-dash 清理一致：改用逗号、冒号、分号、括号或拆句，不要在后续翻译中重新引入。领域文档约定沿用上游 v1.3.1 的重命名：文件名为 `GLOSSARY.md` / `GLOSSARY-MAP.md`（文件名保留英文，不本地化）。
 
+每个派发 subagent 的 skill 都必须明确要求使用全新的 context window 启动它。有些 harness（例如 Codex）默认 fork 父对话，而 fork 会继承父对话的 context，这违背了 subagent 本应隔离 context 的目的。
+
 ## 同步记录
 
 在SYNC.md中记录同步记录

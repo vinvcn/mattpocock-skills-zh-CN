@@ -12,6 +12,8 @@ Issue tracker 应当已经提供给你。如果没有，就告诉用户运行 `/
 
 tickets 不是步骤清单，而是一个 **task graph**，其中包含 blocking relationships。这意味着始终存在一个由可领取 tickets 组成的 **frontier**。
 
+每个 subagent 都必须使用全新的 context window 启动。
+
 与 subagents 的通信应当简洁。主要通过 **context pointers** 通信：指向 spec、tickets、research notes 和之前的 commits。不要重复 pointers 已经提供的信息。
 
 在可能的情况下，**implementer subagents** 应当在 background 中运行，以获得最大并发度。
