@@ -7,6 +7,18 @@
 
 const DEFAULT_PREFIX = 'zh-'
 
+/**
+ * Claude Code-only slash commands that need a dsh-facing equivalent.
+ *
+ * The generated dsh plugin copies the localized skill text as-is, but dsh
+ * rejects unknown slash commands instead of treating them as prompts. Every
+ * entry here is replaced during the build so readers see an action dsh
+ * actually supports.
+ */
+export const DSH_COMMAND_REPLACEMENTS = new Map([
+  ['/clear', '新建会话']
+])
+
 /** Characters that, immediately before a `/`, mean the slash is part of a path. */
 const BEFORE_BLOCKED = 'A-Za-z0-9_/.-'
 
@@ -82,6 +94,65 @@ function buildPattern(names) {
   return new RegExp(
     `(?<![${BEFORE_BLOCKED}])/(?:${alternatives})(?![${AFTER_BLOCKED}])`,
     'g'
+  )
+}
+
+/**
+ * Escape a slash command for use inside a regular expression.
+ *
+ * @param {string} command - Command without the leading slash.
+ * @returns {string} Escaped command.
+ */
+function escapeCommand(command) {
+  return command.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+}
+
+/**
+ * Build a global regular expression matching the Claude Code-only commands.
+ *
+ * Candidate commands are alternated longest-first so a shorter command is not
+ * matched inside a longer one's occurrence.
+ *
+ * @param {Iterable<string>} commands - Slash commands, including the leading slash.
+ * @returns {RegExp} Global regular expression.
+ */
+function buildCommandPattern(commands) {
+  const alternatives = [...commands]
+    .sort((a, b) => b.length - a.length)
+    .map((command) => escapeCommand(command.slice(1)))
+    .join('|')
+  return new RegExp(
+    `(?<![${BEFORE_BLOCKED}])/(?:${alternatives})(?![${AFTER_BLOCKED}])`,
+    'g'
+  )
+}
+
+/**
+ * Rewrite Claude Code-only slash commands to their dsh equivalents.
+ *
+ * Uses the same path and URL boundary rule as {@link rewriteReferences}, so
+ * values such as `src/clear/handler.ts` or `https://example.com/clear` are
+ * left untouched.
+ *
+ * @param {string} text - Text to rewrite.
+ * @returns {string} Rewritten text.
+ */
+export function rewriteDshCommands(text) {
+  return text.replace(
+    buildCommandPattern(DSH_COMMAND_REPLACEMENTS.keys()),
+    (match) => DSH_COMMAND_REPLACEMENTS.get(match)
+  )
+}
+
+/**
+ * List Claude Code-only command occurrences that still need a dsh mapping.
+ *
+ * @param {string} text - Text to inspect.
+ * @returns {string[]} Matching command occurrences, including the leading slash.
+ */
+export function findClaudeOnlyCommands(text) {
+  return [...text.matchAll(buildCommandPattern(DSH_COMMAND_REPLACEMENTS.keys()))].map(
+    (match) => match[0]
   )
 }
 

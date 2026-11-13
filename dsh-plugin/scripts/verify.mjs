@@ -8,7 +8,11 @@ import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs'
 import { basename, dirname, join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
-import { SKILL_NAMES, findUnrewrittenReferences } from './rewrite-references.mjs'
+import {
+  SKILL_NAMES,
+  findClaudeOnlyCommands,
+  findUnrewrittenReferences
+} from './rewrite-references.mjs'
 
 const SCRIPT_DIR = dirname(fileURLToPath(import.meta.url))
 const PLUGIN_DIR = dirname(SCRIPT_DIR)
@@ -88,9 +92,14 @@ for (const entry of walk(skillsDir)) {
     fail(`forbidden directory present: ${entry.path}`)
   }
   if (!entry.isDirectory && entry.path.endsWith('.md')) {
-    const found = findUnrewrittenReferences(readFileSync(entry.path, 'utf8'), SKILL_NAMES)
+    const text = readFileSync(entry.path, 'utf8')
+    const found = findUnrewrittenReferences(text, SKILL_NAMES)
     if (found.length > 0) {
       fail(`unrewritten skill reference(s) in ${entry.path}: ${[...new Set(found)].join(', ')}`)
+    }
+    const claudeOnly = findClaudeOnlyCommands(text)
+    if (claudeOnly.length > 0) {
+      fail(`dsh-unsupported command(s) in ${entry.path}: ${[...new Set(claudeOnly)].join(', ')}`)
     }
   }
 }

@@ -41,6 +41,10 @@ dsh --profile web --dump-config | grep 'id: mattpocock-skills-zh'
 
 构建期会重写 skill 正文里的内部引用：`/grilling` 会变成 `/zh-grilling`。
 
+dsh 会拒绝未知斜杠命令，而不会把它当作提示词。因此 Claude Code 专有的
+`/clear` 会在构建期映射为 dsh 的「新建会话」动作；`/compact` 在 dsh 中可用，
+保持原样。
+
 非 `.md` 资源文件与 `argument-hint` frontmatter 原样复制，dsh 不消费它们。
 
 仓库根目录内容不会被改动。
@@ -78,6 +82,8 @@ dsh plugin --profile web add @vinvcn/dsh-mattpocock-skills-zh
 ## 局限
 
 正文中裸写的技能名不会被重写。
+
+当前只映射 `/clear`；其他 Claude Code 专有命令不做改写。
 
 `in-progress` 技能仍为 beta。
 
