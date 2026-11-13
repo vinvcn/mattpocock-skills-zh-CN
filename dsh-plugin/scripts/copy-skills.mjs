@@ -9,7 +9,7 @@ import { cpSync } from 'node:fs'
 import { dirname, join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
-import { SKILL_NAMES, rewriteReferences } from './rewrite-references.mjs'
+import { SKILL_NAMES, rewriteReferences, rewriteDshCommands } from './rewrite-references.mjs'
 
 const SCRIPT_DIR = dirname(fileURLToPath(import.meta.url))
 const PLUGIN_DIR = dirname(SCRIPT_DIR)
@@ -108,7 +108,7 @@ for (const file of walkFiles(outputRoot)) {
   const original = readFileSync(file, 'utf8')
   let text = original
   if (file.endsWith('SKILL.md')) text = prefixFrontmatterName(text)
-  const rewritten = rewriteReferences(text, SKILL_NAMES, prefix)
+  const rewritten = rewriteDshCommands(rewriteReferences(text, SKILL_NAMES, prefix))
   if (rewritten !== original) writeFileSync(file, rewritten)
 }
 
