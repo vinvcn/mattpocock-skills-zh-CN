@@ -37,6 +37,19 @@
 dsh --profile web --dump-config | grep 'id: mattpocock-skills-zh'
 ```
 
+## npm 版本说明（2026-11）
+
+npm 上的 1.3.2 发布于 2026-11-10，早于 PR #49 的 `/clear` 映射修复，而 npm
+不允许覆盖已发布的版本号，所以 npm 源的 1.3.2 始终是修复前的内容。需要该修复时，
+从 GitHub Release v1.3.2 附件安装：
+
+```sh
+curl -LO https://github.com/vinvcn/mattpocock-skills-zh-CN/releases/download/v1.3.2/vinvcn-dsh-mattpocock-skills-zh-1.3.2.tgz
+dsh plugin --profile web add "$PWD/vinvcn-dsh-mattpocock-skills-zh-1.3.2.tgz"
+```
+
+下次按常规路径发布新版本号后，即可恢复直接用包名安装。
+
 ## 构建期改写
 
 构建期会重写 skill 正文里的内部引用：`/grilling` 会变成 `/zh-grilling`。
