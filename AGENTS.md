@@ -20,7 +20,7 @@ Skills 按 bucket folder 组织在 `skills/` 下：
 
 ## 贡献规则
 
-新增或修改 Skills 的外部贡献遵循 [收录范围](./SCOPE.md) 和 [贡献指南](./CONTRIBUTING.md)。本仓库原创且上游尚不存在的 Skill，合入时同步加入顶层 README 的「本仓库新增 Skills」区域；从上游翻译或同步得到的 Skills 不进入该区域。
+新增或修改 Skills 的外部贡献遵循 [收录范围](./SCOPE.md) 和 [贡献指南](./CONTRIBUTING.md)。推荐流程为 Discussion / Issue → 本仓库 PR → 评审与合并 → 真实使用验证 → 可选的上游贡献评估；上游阶段必须重新核对当时政策。本仓库原创且上游尚不存在的 Skill，合入时同步加入顶层 README 的「本仓库新增 Skills」区域；从上游翻译或同步得到的 Skills 不进入该区域。
 
 ## 翻译刷新
 

@@ -59,6 +59,8 @@ PR 由维护者评审，通过后合并到 `main`。提交 PR、参与讨论或�
 
 本仓库独立接受贡献，合入不代表上游 `mattpocock/skills` 会收录。上游允许通过 Discussions 交流新 Skill 想法，但当前不接受外部新增 Skill 的贡献。无论在本仓库还是上游，Discussion 交流都不等于承诺收录。
 
+完整流程是：Discussion / Issue → 本仓库 PR → 评审与合并 → 真实使用验证 → 可选的上游贡献评估。上游阶段必须重新核对其当时政策；当前通常是分享实践，而不是直接提交新 Skill PR。
+
 ## 本仓库新增 Skills
 
 这些 Skills 由本仓库独立新增，不代表已经收录到上游 [`mattpocock/skills`](https://github.com/mattpocock/skills)。
