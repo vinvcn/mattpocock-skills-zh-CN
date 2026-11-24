@@ -1,21 +1,33 @@
-# 新 skill 提案与贡献
+# 新 Skill 提案与贡献：历史政策与当前例外
 
-本仓库不接受新 skill 的提案或贡献，包括那些自带现成 branch 或 fork 的。
+本文件保留上游 `mattpocock/skills` 的历史政策记录，避免把上游规则误读为本仓库当前的投稿规则。
 
-## 为什么这不在范围内
+## 上游历史政策
 
-这份 catalog 是我自己每天都在用的 skills 集合，而且刻意保持得很小。每个 skill 都是永久的维护面：它必须与其他 skills、docs 页面、`ask-matt` 的路由 map 和 plugin manifest 保持同步。skills 越短、越少，维持正确的成本就越低。
+上游目前不接受新 Skill 的提案或贡献，包括那些自带现成 branch 或 fork 的内容。上游认为 catalog 应刻意保持小型，每个 Skill 都会增加与其他 Skills、docs 页面、`ask-matt` 路由和 plugin manifest 同步的永久维护成本。如果行为可以由现有 Skills 组合出来，上游不会为它新增 Skill。
 
-我对待自己想法时用的规则，在这里同样适用：如果这个行为可以由现有 skills 组合出来，就不会为它新增 skill。大多数提案都是用 grilling、`to-spec`、`to-tickets`、`implement` 等搭出来的某个具体工作流，而这种组合应该属于你自己的 prompts 或你自己的 skills。
+上游的原文政策见 [`.out-of-scope/new-skills.md`](https://github.com/mattpocock/skills/blob/main/.out-of-scope/new-skills.md)，贡献入口见上游 [贡献指南](https://github.com/mattpocock/skills/blob/main/CONTRIBUTING.md)。
 
-非常欢迎你自己发布 skill。skills.sh 让这件事很简单，也不需要惊动这里的任何内容。
+## 本仓库当前例外
 
-本条只针对*新* skills。既有 skill 的具体失败，与其他 issue 一样，按 [`SCOPE.md`](../SCOPE.md) 的门槛评判。
+本仓库独立接受新的软件工程 Skill PR，但必须通过 [SCOPE.md](../SCOPE.md) 的评审门槛：真实问题、可复用、职责清晰、适合独立存在且可维护。
 
-## Prior requests
+本仓库不把「新 Skill」本身作为拒绝理由，也不要求先获得 Discussion 批准。以下情况仍不属于收录范围：
 
-- #101: "Any skill to iteratively build CONTEXT.md (and ADRs) for a brownfield codebase?"
-- #414: "Add a `handoff-to-pro` skill for generating one-shot prompts for external frontier chat models"
-- #727: "new skill - teach pr"
-- #1051: "Contribution ready: /red-team, the optional pre-implementation spec review from #633"
-- #1166: "Skill proposal: agent-chat-ux for productivity (branch ready on fork)"
+- 只更换名称或重复现有能力。
+- 可以用现有 Skills 简单组合，且没有独立维护价值。
+- 只适用于单一项目、私有服务或个人工作流。
+- 缺少真实使用场景、完成条件或验证证据。
+- 通过 `in-progress/` 绕过评审。
+
+上游是否收录由上游独立决定。本仓库合入不代表上游认可或收录。
+
+## 上游历史拒绝案例
+
+以下来自上游的 issue 用于说明其政策实践，不是本仓库的投稿记录：
+
+- [#101](https://github.com/mattpocock/skills/issues/101): "Any skill to iteratively build CONTEXT.md (and ADRs) for a brownfield codebase?"
+- [#414](https://github.com/mattpocock/skills/issues/414): "Add a `handoff-to-pro` skill for generating one-shot prompts for external frontier chat models"
+- [#727](https://github.com/mattpocock/skills/issues/727): "new skill - teach pr"
+- [#1051](https://github.com/mattpocock/skills/issues/1051): "Contribution ready: /red-team, the optional pre-implementation spec review from #633"
+- [#1166](https://github.com/mattpocock/skills/issues/1166): "Skill proposal: agent-chat-ux for productivity (branch ready on fork)"
