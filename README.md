@@ -53,19 +53,9 @@ dsh plugin --profile web add @vinvcn/dsh-mattpocock-skills-zh
 
 推荐流程：
 
-```mermaid
-flowchart TD
-    A["Discussion / Issue<br/>明确真实问题与使用场景"] --> B["本仓库 PR<br/>完整实现、文档与验证"]
-    B --> C{"维护者评审通过？"}
-    C -->|补充或修改| B
-    C -->|通过| D["合并到 main<br/>继续真实使用验证"]
-    D --> E{"有上游分享价值？"}
-    E -->|暂不| F["本仓库独立维护"]
-    E -->|是| G["重新核对上游当时政策"]
-    G --> H["通过上游允许的渠道贡献"]
-```
+![软件工程 Skills 贡献流程](./assets/contribution-flow.png)
 
-Discussion 和 Issue 不构成预先批准；本仓库合并不构成上游收录承诺。当前上游不接受外部新增 Skill 的贡献，因此上游阶段通常是分享实践，而不是直接提交新 Skill PR。
+Discussion 和 Issue 不构成预先批准；本仓库合并不构成上游收录承诺。合并到 `main` 后继续在真实使用中验证；有上游分享价值时，先重新核对上游当时政策。当前上游不接受外部新增 Skill 的贡献，因此上游阶段通常是分享实践，而不是直接提交新 Skill PR。
 
 提交前请阅读[贡献指南](./CONTRIBUTING.md)和[收录范围](./SCOPE.md)。贡献应解决一个清楚、可复用的问题，并遵循本仓库的结构、调用方式、中文写作、插件注册与验证规范。一个 PR 聚焦一个 Skill 或一个问题。
 
