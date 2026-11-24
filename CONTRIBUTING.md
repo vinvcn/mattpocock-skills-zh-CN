@@ -8,13 +8,14 @@
 
 | 贡献类型 | 入口 |
 | --- | --- |
-| 新 Skill | 直接提交完整 PR；对方向没有把握时可先开 Discussion |
+| 新 Skill，已有真实场景和完整实现 | 直接提交完整 PR |
+| 新 Skill，只有想法或方向不确定 | [Discussion Ideas](https://github.com/vinvcn/mattpocock-skills-zh-CN/discussions/categories/ideas) |
 | 现有 Skill 的小型修复 | 直接提交 PR |
 | 现有 Skill 的行为大改 | 先开 issue 描述真实问题和修改方向 |
 | 使用问题 | [Discussion Q&A](https://github.com/vinvcn/mattpocock-skills-zh-CN/discussions/categories/q-a) |
 | 术语翻译 | 见下方「翻译术语：请求与认领」 |
 
-Discussion 是交流渠道，不是预先批准。一个 PR 聚焦一个 Skill 或一个问题，避免把多个无关改动捆在一起。
+Discussion 是交流渠道，不是预先批准，也不是提交 PR 的前置条件。Ideas 用于讨论真实案例、适用范围和与现有 Skills 的关系；形成明确方向后，PR 可以链接该 Discussion 作为背景。一个 PR 聚焦一个 Skill 或一个问题，避免把多个无关改动捆在一起。
 
 ### 新增 Skill 的 PR
 
@@ -78,7 +79,7 @@ claude plugin validate . --strict
 
 本仓库合并贡献，不代表上游认可或收录。上游 `mattpocock/skills` 当前**不接受外部新增 Skill 的贡献，包括已经准备好的 fork 或分支**；其 PR 也仅协作者可创建。贡献者不需要自行向上游提交 PR。
 
-维护者可以关注上游政策变化，并通过其允许的交流渠道分享实践。针对上游现有 Skill 的具体问题，应按其规则提交 issue。上游是否采纳由上游独立决定。
+上游允许通过 Discussions 交流新 Skill 想法，但这不等于接受纳入。维护者可以关注上游政策变化，并通过其允许的交流渠道分享实践。针对上游现有 Skill 的具体问题，应按其规则提交 issue。上游是否采纳由上游独立决定。
 
 当前上游规则以 [SCOPE.md](https://github.com/mattpocock/skills/blob/main/SCOPE.md)、[新 Skill 政策](https://github.com/mattpocock/skills/blob/main/.out-of-scope/new-skills.md)和 [贡献指南](https://github.com/mattpocock/skills/blob/main/CONTRIBUTING.md)为准。2026-11-24 的核对记录见[上游贡献规则调研](./docs/research/upstream-contribution-rules.md)。
 

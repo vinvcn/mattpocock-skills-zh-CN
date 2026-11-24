@@ -53,9 +53,11 @@ dsh plugin --profile web add @vinvcn/dsh-mattpocock-skills-zh
 
 提交前请阅读[贡献指南](./CONTRIBUTING.md)和[收录范围](./SCOPE.md)。贡献应解决一个清楚、可复用的问题，并遵循本仓库的结构、调用方式、中文写作、插件注册与验证规范。一个 PR 聚焦一个 Skill 或一个问题。
 
+只有想法或方向尚未确定？可以先到 [Discussions](https://github.com/vinvcn/mattpocock-skills-zh-CN/discussions) 交流真实使用场景；也可以直接提交完整 PR。Discussion 用于交流，不代表预先批准收录。
+
 PR 由维护者评审，通过后合并到 `main`。提交 PR、参与讨论或获得点赞都不构成收录承诺。
 
-本仓库独立接受贡献，合入不代表上游 `mattpocock/skills` 会收录。上游当前不接受外部新增 Skill 的贡献；后续如需交流，应遵循其最新政策与渠道。
+本仓库独立接受贡献，合入不代表上游 `mattpocock/skills` 会收录。上游允许通过 Discussions 交流新 Skill 想法，但当前不接受外部新增 Skill 的贡献。无论在本仓库还是上游，Discussion 交流都不等于承诺收录。
 
 ## 本仓库新增 Skills
 

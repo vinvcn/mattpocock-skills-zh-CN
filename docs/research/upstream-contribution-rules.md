@@ -10,6 +10,7 @@
 2. 上游 PR 仅协作者可创建。外部贡献者对现有 Skill 的修复，应通过 issue 描述。
 3. `CONTRIBUTING.md` 将新 Skill 想法导向 Discussions Ideas，但更具体的 `SCOPE.md`、`.out-of-scope/new-skills.md` 和 issue 表单明确关闭新 Skill 提案与贡献。可以交流想法不等于接受纳入。
 4. 本仓库保留外部新 Skill PR 入口，采用上游的真实问题证据、范围评审和提交者负责原则，但不复制「PR 仅协作者可创建」的限制。
+5. 本仓库也提供 Discussions Ideas 和 Q&A：只有想法时可先交流，已有真实场景和完整实现时可直接提交 PR。Discussion 不是前置审批，本仓库和上游的交流都不构成收录承诺。
 
 ## 明文贡献入口
 
@@ -118,6 +119,7 @@
 ## 对本仓库的政策影响
 
 - 本仓库开放外部新 Skill PR，不复制上游的 collaborators-only 限制。
+- 本仓库开启 Discussions，提供 Ideas 和 Q&A 分类；只有想法时可先交流，也可以直接提交完整 PR，讨论不构成收录承诺。
 - 沿用真实问题、可复用性、独立职责、维护成本和提交者负责等评审原则。
 - 不要求贡献者先向上游提交 PR，也不承诺本仓库合并后上游会收录。
 - 上游政策变化时，更新本文件与 [贡献指南](../../CONTRIBUTING.md) 中的摘要；链接上游 live 文档供贡献者核对最新规则。
