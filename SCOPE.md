@@ -1,35 +1,52 @@
 # 范围
 
-这个仓库是我自己每天在用的一套 skills，内容经过刻意筛选：欢迎提出想法，每个想法都会对照下面的门槛来评判。Issues 用来跟踪对 skills 的改动。提问与讨论请移步 [GitHub Discussions](https://github.com/mattpocock/skills/discussions)。
+本仓库是 `mattpocock/skills` 的第三方简体中文本地化，也独立接受可复用的软件工程 Skills。目标不是积累数量，而是维护一组经过真实工程实践检验、彼此可组合的 Skills。
 
-## 门槛
+提交流程见 [贡献指南](./CONTRIBUTING.md)。Issues 用来跟踪对 Skills 的改动，提问与讨论请移步 [GitHub Discussions](https://github.com/vinvcn/mattpocock-skills-zh-CN/discussions)。
 
-一个想法或反馈类 issue，只有同时通过以下**两个**部分，才会保持 open：
+## 评审门槛
 
-1. **实际观察到的失败。** 它描述的是一次真实 session 里出错的事：你运行了什么、skill 做了什么、你原本期望的是什么。假设性的改进（“要是能……就好了”）过不了这一条。
-2. **符合项目理念。** 它不匹配 [`.out-of-scope/`](./.out-of-scope/) 里的任何条目，也不属于过去的任何一次拒绝；并且它不是配置选项、不是 harness 专属分支、也不是为迎合某个人工作流而做的微调。这些应该放进你自己的 `CLAUDE.md` / `AGENTS.md`，或者放进一个 fork（skills.sh 会给你一份可编辑的副本）。
+贡献应同时满足以下条件：
 
-规模无关紧要：一个词的修复和一次整体重写面对同样的门槛。Reactions 和 +1 评论不计入其中。
+1. **真实问题。** 来自实际项目或 agent session，说明遇到了什么问题、期望得到什么帮助。只有「这样也许更好」的设想不足以证明需要新增或修改 Skill。
+2. **可复用。** 对其他项目、使用者或支持的 harness 也有价值，不只是某个项目的配置或个人工作流。
+3. **职责清晰。** 一个 Skill 解决一个边界清楚的问题，能说明何时调用、何时停止。
+4. **适合独立存在。** 新增 Skill 需要说明为什么不能通过现有 Skills 的组合或小改实现。
+5. **可维护。** 文档、注册、引用和验证完整，后续维护成本与收益相称。
+
+修改幅度不决定通过率，点赞和 `+1` 也不构成收录依据。Discussion 中的正面反馈、提交完整 PR 或曾经合并相关 PR，都不构成收录承诺。
+
+## 接受的内容
+
+- 解决实际软件工程问题的新 Skills。
+- 现有 Skills 的 bug 修复和可验证的行为改进。
+- 与软件工程工作流有关的翻译、文档和安装体验修正。
+
+新增软件工程 Skills 通常放在 `skills/engineering/`。`in-progress/` 是维护者管理 beta 内容的位置，不是绕过评审的投稿入口。
+
+## 不属于收录范围
+
+- 仅适用于单一项目、单一私有服务或个人偏好的流程。
+- 未说明真实问题、使用场景和完成条件的占位 Skill。
+- 只更换名称、重复现有能力或把多个无关流程打包成合集。
+- 需要提交凭据、私有数据或未经授权第三方内容才能使用的贡献。
+- 与软件工程无关的内容。
+
+项目专用规则更适合放在使用者自己的 `AGENTS.md`、`CLAUDE.md` 或独立 Skill 仓库。独立发布不影响本仓库的收录判断，也不代表本仓库会提供推广或维护。
 
 ## 按 bucket 划分
 
-- **`engineering/`、`productivity/`、`in-progress/`**：上面的门槛。
-- **`misc/`**：已冻结、无人维护。所有 issue 都会被关闭。见 [`frozen-misc-skills.md`](./.out-of-scope/frozen-misc-skills.md)。
-- **新 skills**：提案与贡献一律会被关闭。如果这个行为可以由现有 skills 组合出来，就不会新增 skill。见 [`new-skills.md`](./.out-of-scope/new-skills.md)。
+- **`engineering/`、`productivity/`**：适用上面的评审门槛，并接受符合范围的新 Skill。
+- **`in-progress/`**：维护者管理 beta 内容的位置，不作为绕过评审的投稿入口。
+- **`misc/`**：保留但很少使用，新增内容优先评估是否属于 `engineering/` 或 `productivity/`。
+- **`deprecated/`**：不再使用，不接受新的贡献。
 
-## 已有定论
+## 已有定论与历史记录
 
-[`.out-of-scope/`](./.out-of-scope/) 里的每个文件都记录了一个已被拒绝的概念及其原因。提交 issue 之前先读一遍：
+[`.out-of-scope/`](./.out-of-scope/) 中的文件记录上游或本仓库已经拒绝的概念及原因。提交前应先阅读，尤其是 [`new-skills.md`](./.out-of-scope/new-skills.md)：其中保留了上游「不接受新 Skill」的历史政策，本仓库当前的开放贡献规则以本文件和 [贡献指南](./CONTRIBUTING.md) 为准。
 
-- [`frozen-misc-skills.md`](./.out-of-scope/frozen-misc-skills.md)
-- [`harness-name-collisions.md`](./.out-of-scope/harness-name-collisions.md)
-- [`mainstream-issue-trackers-only.md`](./.out-of-scope/mainstream-issue-trackers-only.md)
-- [`native-question-tool.md`](./.out-of-scope/native-question-tool.md)
-- [`new-skills.md`](./.out-of-scope/new-skills.md)
-- [`question-limits.md`](./.out-of-scope/question-limits.md)
-- [`setup-skill-verify-mode.md`](./.out-of-scope/setup-skill-verify-mode.md)
-- [`subagent-recursion.md`](./.out-of-scope/subagent-recursion.md)
+## 信息不足与关闭
 
-## 无法评判的 issues
+无法按上述门槛评审的贡献，维护者可以提出一轮补充问题。没有足够真实场景、复用依据或验证结果时，PR 可能保持开放等待补充，也可能以暂不收录关闭。
 
-无法对照门槛评判的 issue，会得到一轮提问，并打上 `needs-info` 标签。报告者 14 天内没有回复，issue 就会被关闭。被拒绝的 issue 会以 “not planned” 状态关闭。
+贡献者可以基于新证据重新讨论。拒绝收录不是对贡献者或其独立发布价值的否定。

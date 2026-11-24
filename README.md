@@ -47,6 +47,24 @@ dsh plugin --profile web add @vinvcn/dsh-mattpocock-skills-zh
 
 想请求翻译仓库里的英文术语，或认领翻译 PR？先读[贡献指南](./CONTRIBUTING.md)；已请求与已决定的译法记录在[翻译术语表](./TRANSLATION-GLOSSARY.md)。
 
+## 贡献软件工程 Skills
+
+欢迎分享经过真实工程实践检验的 Skills。无论是新的软件工程 Skill，还是对现有 Skill 的修复与改进，都可以通过 Pull Request 提交。
+
+推荐流程为：先通过 Discussion 或 Issue 明确问题，再提交本仓库 PR；评审合并后继续在真实使用中验证，有上游分享价值时再评估贡献渠道。
+
+Discussion 和 Issue 不构成预先批准；本仓库合并不构成上游收录承诺。当前上游不接受外部新增 Skill 的贡献，因此上游阶段通常是分享实践，而不是直接提交新 Skill PR。
+
+流程图、提交要求、验证命令和上游边界详见[贡献指南](./CONTRIBUTING.md#完整贡献流程)与[收录范围](./SCOPE.md)。
+
+## 本仓库新增 Skills
+
+这些 Skills 由本仓库独立新增，不代表已经收录到上游 [`mattpocock/skills`](https://github.com/mattpocock/skills)。
+
+| Skill | 来源 | 简介 |
+| --- | --- | --- |
+| 暂无条目 |  | 新 Skill 通过评审并合入后，将在这里列出。 |
+
 <p>
   <a href="https://www.aihero.dev/s/skills-newsletter">
     <picture>

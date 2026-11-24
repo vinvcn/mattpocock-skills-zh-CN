@@ -18,6 +18,10 @@ Skills 按 bucket folder 组织在 `skills/` 下：
 
 本仓库也是一个单 plugin 的 Claude Code marketplace：`.claude-plugin/marketplace.json` 列出唯一的 `mattpocock-skills` plugin。修改 `.claude-plugin/plugin.json` 或 marketplace manifest 后，运行 `claude plugin validate . --strict`。Plugin 的公开 skill 集合继续遵循本仓库 bucket 规则。
 
+## 贡献规则
+
+新增或修改 Skills 的外部贡献遵循 [收录范围](./SCOPE.md) 和 [贡献指南](./CONTRIBUTING.md)。推荐流程为 Discussion / Issue → 本仓库 PR → 评审与合并 → 真实使用验证 → 可选的上游贡献评估；上游阶段必须重新核对当时政策。本仓库原创且上游尚不存在的 Skill，合入时同步加入顶层 README 的「本仓库新增 Skills」区域；从上游翻译或同步得到的 Skills 不进入该区域。
+
 ## 翻译刷新
 
 从 `mattpocock/skills` 刷新上游内容时，改文件前先使用 `.skills/translate-skill/SKILL.md`。本仓库采用 skill-guided content localization，不做 Git fork-sync：保留简体中文本地化身份，安装命令保持指向 `vinvcn/mattpocock-skills-zh-CN`，不要导入上游 repository-management state。翻译术语以 [翻译术语表](./TRANSLATION-GLOSSARY.md) 为准：刷新与本地化时优先采用已决定的译法；未决定的术语先按 [贡献指南](./CONTRIBUTING.md) 的流程提出请求，决定后再落地。
