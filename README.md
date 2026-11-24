@@ -51,6 +51,22 @@ dsh plugin --profile web add @vinvcn/dsh-mattpocock-skills-zh
 
 欢迎分享经过真实工程实践检验的 Skills。无论是新的软件工程 Skill，还是对现有 Skill 的修复与改进，都可以通过 Pull Request 提交。
 
+推荐流程：
+
+```mermaid
+flowchart TD
+    A["Discussion / Issue<br/>明确真实问题与使用场景"] --> B["本仓库 PR<br/>完整实现、文档与验证"]
+    B --> C{"维护者评审通过？"}
+    C -->|补充或修改| B
+    C -->|通过| D["合并到 main<br/>继续真实使用验证"]
+    D --> E{"有上游分享价值？"}
+    E -->|暂不| F["本仓库独立维护"]
+    E -->|是| G["重新核对上游当时政策"]
+    G --> H["通过上游允许的渠道贡献"]
+```
+
+Discussion 和 Issue 不构成预先批准；本仓库合并不构成上游收录承诺。当前上游不接受外部新增 Skill 的贡献，因此上游阶段通常是分享实践，而不是直接提交新 Skill PR。
+
 提交前请阅读[贡献指南](./CONTRIBUTING.md)和[收录范围](./SCOPE.md)。贡献应解决一个清楚、可复用的问题，并遵循本仓库的结构、调用方式、中文写作、插件注册与验证规范。一个 PR 聚焦一个 Skill 或一个问题。
 
 只有想法或方向尚未确定？可以先到 [Discussions](https://github.com/vinvcn/mattpocock-skills-zh-CN/discussions) 交流真实使用场景；也可以直接提交完整 PR。Discussion 用于交流，不代表预先批准收录。
@@ -58,8 +74,6 @@ dsh plugin --profile web add @vinvcn/dsh-mattpocock-skills-zh
 PR 由维护者评审，通过后合并到 `main`。提交 PR、参与讨论或获得点赞都不构成收录承诺。
 
 本仓库独立接受贡献，合入不代表上游 `mattpocock/skills` 会收录。上游允许通过 Discussions 交流新 Skill 想法，但当前不接受外部新增 Skill 的贡献。无论在本仓库还是上游，Discussion 交流都不等于承诺收录。
-
-完整流程是：Discussion / Issue → 本仓库 PR → 评审与合并 → 真实使用验证 → 可选的上游贡献评估。上游阶段必须重新核对其当时政策；当前通常是分享实践，而不是直接提交新 Skill PR。
 
 ## 本仓库新增 Skills
 

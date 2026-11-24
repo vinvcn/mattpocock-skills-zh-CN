@@ -131,7 +131,7 @@ claude plugin validate . --strict
 
 上游允许通过 Discussions 交流新 Skill 想法，但这不等于接受纳入。维护者可以关注上游政策变化，并通过其允许的交流渠道分享实践。针对上游现有 Skill 的具体问题，应按其规则提交 issue。上游是否采纳由上游独立决定。
 
-当前上游规则以 [SCOPE.md](https://github.com/mattpocock/skills/blob/main/SCOPE.md)、[新 Skill 政策](https://github.com/mattpocock/skills/blob/main/.out-of-scope/new-skills.md)和 [贡献指南](https://github.com/mattpocock/skills/blob/main/CONTRIBUTING.md)为准。2026-11-24 的核对记录见[上游贡献规则调研](./docs/research/upstream-contribution-rules.md)。
+当前上游规则以 [SCOPE.md](https://github.com/mattpocock/skills/blob/main/SCOPE.md)、[新 Skill 政策](https://github.com/mattpocock/skills/blob/main/.out-of-scope/new-skills.md)和 [贡献指南](https://github.com/mattpocock/skills/blob/main/CONTRIBUTING.md)为准。提交上游贡献前，请重新核对这些最新文档。
 
 ## 翻译术语：请求与认领
 
