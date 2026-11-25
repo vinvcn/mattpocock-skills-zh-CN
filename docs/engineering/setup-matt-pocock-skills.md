@@ -1,8 +1,8 @@
 ## 它做什么
 
-`setup-matt-pocock-skills` 就一个 repo 回答三个问题（issues 放在哪里、triage labels 叫什么名字、以及 domain docs 放在哪里），并把答案记录为 `docs/agents/` 下的 markdown 文件。
+`setup-matt-pocock-skills` 就一个 repo 回答三个问题（issues 放在哪里、triage labels 叫什么名字、以及 domain docs 放在哪里），把答案记录为 `docs/agents/` 下的 Markdown 文件，并在项目的 agent 配置中加入中文输出约定。
 
-这些文件是 repo 之间唯一会变化的东西。Skills 本身在任何地方都相同。它们在运行时读取 `docs/agents/issue-tracker.md`，并按它说的去做。这就是为什么这套工具不绑定 GitHub，也为什么你永远不需要编辑任何 skill 文件来指向另一个 tracker。用 "link the skills to a custom issue tracker" 来调用它，可以用任何你能以编程方式连接的东西，对 skills 不做任何改动。
+这些文件是 repo 之间唯一会变化的 tracker 与领域文档配置。Skills 本身在任何地方都相同。它们在运行时读取 `docs/agents/issue-tracker.md`，并按它说的去做。这就是为什么这套工具不绑定 GitHub，也为什么你永远不需要编辑任何 skill 文件来指向另一个 tracker。用 "link the skills to a custom issue tracker" 来调用它，可以用任何你能以编程方式连接的东西，对 skills 不做任何改动。
 
 它是一个 prompt 驱动的 skill，而不是一个确定性的脚本。它读取你的 `git remote`、`CLAUDE.md` 和 `GLOSSARY.md`，提出它发现的内容，并在写入任何东西之前等你确认。
 
@@ -21,7 +21,7 @@
 | `issue-tracker.md` | `docs/agents/` |
 | `domain.md` | `docs/agents/` |
 | `triage-labels.md` | `docs/agents/`，仅在安装了 `triage` skill 时 |
-| 一个 `## Agent skills` 块 | 已存在的 `CLAUDE.md` 或 `AGENTS.md` 二者之一 |
+| `## Agent skills` 块中的中文输出约定 | 已存在的 `CLAUDE.md` 或 `AGENTS.md` 二者之一 |
 
 你要把全部内容作为 markdown 提交。没有 user-level 或 global 模式。config 就在 repo 里，所以每个 repo 都有自己的副本。
 
@@ -34,6 +34,8 @@
 | **Issue tracker** | 与你的 `git remote` 匹配的那个 | 总是，因为这是唯一一个真正的选择 |
 | **Triage labels** | 保留五个 canonical 名称（`needs-triage`、`needs-info`、`ready-for-agent`、`ready-for-human`、`wontfix`） | 仅在安装了 `triage` skill 时 |
 | **Domain docs** | single-context：根目录一个 `GLOSSARY.md` 加 `docs/adr/` | 仅当它发现 monorepo 信号时，然后它提供 multi-context 的 `GLOSSARY-MAP.md` |
+
+中文输出约定不需要额外选择：使用简体中文交流时，AI 应采用自然、直接的表达，保留命令和代码标识符，并准确说明状态、条件和操作。它写在 `## Agent skills` 块中，随项目配置一起生效；用户使用其他语言时，仍以用户选择的语言为准。
 
 tracker 选项：
 
@@ -56,7 +58,7 @@ tracker 选项：
 
 **更新 skills 之后我需要重新运行它吗？**
 
-v1.1 之后被直接问到时，回答是要。这个 skill 自己的收尾消息更温和。它告诉你，只有切换 tracker 或从头来过时才需要重新运行。两种说法都说得通。Seed templates 会随版本变化，所以一个来自旧版本的 `docs/agents/issue-tracker.md`，对着现在正在读取它的 skills 会过时。如果某个下游 skill 做的事与 docs 描述的不同，就重新运行 setup，成本很低。
+v1.1 之后被直接问到时，回答是要。这个 skill 自己的收尾消息更温和。它告诉你，只有切换 tracker 或从头来过时才需要重新运行。两种说法都说得通。Seed templates 会随版本变化，所以一个来自旧版本的 `docs/agents/issue-tracker.md`，对着现在正在读取它的 skills 会过时。如果某个下游 skill 做的事与 docs 描述的不同，或旧项目的 `## Agent skills` 块中缺少新增的中文输出约定，就重新运行 setup，成本很低。它会原地更新这个块，保留周围的用户编辑。
 
 **它写进了 `CLAUDE.md`，但我用的是 Codex。**
 
@@ -71,7 +73,7 @@ v1.1 之后被直接问到时，回答是要。这个 skill 自己的收尾消�
 
 **我能在这里配置其他 skills 的行为吗（[grilling](https://www.aihero.dev/ai-coding-dictionary/grilling) 节奏、问题格式、语气）？**
 
-不能。它配置三件事：tracker、labels、doc 布局。有用户要求把它变成存放 per-user preferences 的地方。回答是：skills 保持 opinionated，不接受任何 per-user config。Preferences 属于你的 `CLAUDE.md`，作为普通指令，每个 skill 都已经会读取它。
+它只配置 tracker、labels、doc 布局和统一的中文输出约定，不提供逐项调整 skill 行为的设置。本地化约定只规定中文应自然、准确，不改变工作流；你的个人偏好仍写在 `CLAUDE.md` 或 `AGENTS.md` 中，作为普通指令。
 
 **我能把 config 放在 `~/.claude` 而不是提交到每个 repo 吗？**
 
@@ -84,7 +86,7 @@ v1.1 之后被直接问到时，回答是要。这个 skill 自己的收尾消�
 ## 它正常工作的标志
 
 - `docs/agents/issue-tracker.md` 和 `docs/agents/domain.md` 存在，如果安装了 `triage` 还有 `triage-labels.md`。
-- 你的 harness 读取的那个指令文件中出现了一个 `## Agent skills` 小节，其中每个文件都有一条指向它的单行摘要。
+- 你的 harness 读取的那个指令文件中出现了一个 `## Agent skills` 小节，其中每个配置文件都有一条指向它的单行摘要，并包含中文输出约定。
 - 它提议的 tracker 与你使用的 remote 匹配，label 字符串与你的 tracker 中存在的 labels 匹配。
 - 之后，`/to-tickets` 发布时不再询问 issues 放在哪里，`/triage` 套用 labels 而不是发明它们。
 - skill 文件本身没有任何变化。如果 setup 编辑了一个 `SKILL.md`，那一定出错了。

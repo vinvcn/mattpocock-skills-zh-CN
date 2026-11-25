@@ -16,7 +16,7 @@
 npx skills@latest add vinvcn/mattpocock-skills-zh-CN
 ```
 
-选择你想安装的 skills，以及要安装到哪些 coding agents。首次安装时请确保选择 [`/setup-matt-pocock-skills`](./skills/engineering/setup-matt-pocock-skills/SKILL.md)，然后在 agent 中运行它来完成 issue tracker、labels 和 docs 目录配置。
+选择你想安装的 skills，以及要安装到哪些 coding agents。首次安装时请确保选择 [`/setup-matt-pocock-skills`](./skills/engineering/setup-matt-pocock-skills/SKILL.md)，然后在 agent 中运行它来完成 issue tracker、labels、docs 目录和中文输出约定的配置。
 
 skills.sh 与 plugin 方式每个 agent 只选其一：两种都装会让每个 skill 被安装两次。
 
@@ -43,9 +43,9 @@ dsh plugin --profile web add @vinvcn/dsh-mattpocock-skills-zh
 
 本仓库按内容刷新方式同步上游，不同步上游 Git 历史或仓库管理状态。同步翻译由 Codex 执行，人工审核每一次更新后由维护者通过 PR 纳入 `main`；维护规则见 [`.skills/translate-skill/SKILL.md`](./.skills/translate-skill/SKILL.md)。
 
-翻译策略是 **skill-guided content localization**：把上游 `mattpocock/skills` 当作英文内容来源，只翻译自然语言说明，保留目录名、skill name、frontmatter key、命令、代码块、路径、URL、package/tool/API identifiers 和行为关键 labels。用户可见的安装路径统一保持为 `vinvcn/mattpocock-skills-zh-CN`。
+翻译策略是 **skill-guided content localization**：把上游 `mattpocock/skills` 当作英文内容来源，只翻译自然语言说明，保留目录名、skill name、frontmatter key、命令、代码块、路径、URL、package/tool/API identifiers 和行为关键 labels。中文以自然、准确、一致、可执行为标准，不逐字直译，也不为了口语化而省略工作流约束。用户可见的安装路径统一保持为 `vinvcn/mattpocock-skills-zh-CN`。
 
-想请求翻译仓库里的英文术语，或认领翻译 PR？先读[贡献指南](./CONTRIBUTING.md)；已请求与已决定的译法记录在[翻译术语表](./TRANSLATION-GLOSSARY.md)。
+遇到生硬直译、中英混杂或难懂的 AI 输出，欢迎直接开 issue 给出原文和使用场景，不需要先提出完整译法。想请求翻译术语或认领翻译 PR，先读[贡献指南](./CONTRIBUTING.md)；已请求与已决定的译法记录在[翻译术语表](./TRANSLATION-GLOSSARY.md)。
 
 ## 贡献软件工程 Skills
 
@@ -288,7 +288,7 @@ AI 时代也是一样。你和 agent 之间存在沟通缺口。修复方式是�
 - **[improve-codebase-architecture](./skills/engineering/improve-codebase-architecture/SKILL.md)** - 扫描 codebase 中的 deepening opportunities，生成可视化 HTML report，然后围绕你选中的候选项继续 grilling。
 - **[setup-matt-pocock-skills](./skills/engineering/setup-matt-pocock-skills/SKILL.md)** - 配置 issue tracker、triage labels 和 domain docs 布局。每个 repo 运行一次。
 - **[to-spec](./skills/engineering/to-spec/SKILL.md)** - 把当前对话整理成 spec 并发布到 issue tracker。不做访谈，只综合已经讨论过的内容。
-- **[to-tickets](./skills/engineering/to-tickets/SKILL.md)** - 把 plan、spec 或 conversation 拆成 tracer-bullet tickets，每个 ticket 声明 blocking edges，在 local file 中写成文本，或在真实 tracker 上写成 native blocking links。
+- **[to-tickets](./skills/engineering/to-tickets/SKILL.md)** - 把计划、规格说明或当前对话拆成可独立交付和验证的实现任务，标明前置依赖，在本地文件或真实 tracker 上发布。
 - **[implement](./skills/engineering/implement/SKILL.md)** - 基于 spec 或 ticket 集合实现一段工作，在预先约定的 seams 处驱动 `/tdd`，并在提交前以 `/code-review` 收尾。
 - **[implement-spec](./skills/engineering/implement-spec/SKILL.md)** - 在单一 integration branch 上实现整份 spec。把 tickets 当作 task graph 来推进，在 ready frontier 上并行运行 implementer subagents 以最大化并发，最后以 `/code-review` 收尾。
 - **[wayfinder](./skills/engineering/wayfinder/SKILL.md)** - 把超出单个 agent session 的大块工作规划成 issue tracker 上的 decision tickets 共享 map，逐一解决直到通往 destination 的路清晰。
@@ -302,6 +302,7 @@ AI 时代也是一样。你和 agent 之间存在沟通缺口。修复方式是�
 - **[tdd](./skills/engineering/tdd/SKILL.md)** - 使用 red-green-refactor 循环做 test-driven development；一次一个 vertical slice 地构建功能或修复 bug。
 - **[domain-modeling](./skills/engineering/domain-modeling/SKILL.md)** - 主动构建和打磨项目 domain model：挑战术语、用 edge-case scenarios 做压力测试，并内联更新 `GLOSSARY.md` 与 ADRs。
 - **[codebase-design](./skills/engineering/codebase-design/SKILL.md)** - 设计 deep modules 的共享纪律和词汇：小 interface、clean seam、通过 interface 测试。
+- **[talk-in-uml](./skills/engineering/talk-in-uml/SKILL.md)** - 用 UML 2.5.1 沟通软件设计：选择最小图种，输出准确语义的 PlantUML 文本，讨论结构、交互、状态与部署。
 - **[code-review](./skills/engineering/code-review/SKILL.md)** - 对 fixed point 以来的 diff 做双轴 review：Standards 与 Spec 分开检查，并用并行 sub-agents 运行。
 - **[pr](./skills/engineering/pr/SKILL.md)** - PR 正文应有的形态：用最小的可视化 summary 讲清变更，附上证明它有效的 before/after 证据，再做一次合并风险判断（单向门还是双向门，外加 blast radius）。
 - **[wizard](./skills/engineering/wizard/SKILL.md)** - 生成一个交互式 bash wizard，带人走过只有人才能完成的步骤：provisioning infrastructure、设置 credentials 或 CI secrets、操作陌生的第三方 dashboard，或执行一次性 migration/cutover。

@@ -121,6 +121,12 @@ claude plugin validate . --strict
 
 当前上游规则以 [SCOPE.md](https://github.com/mattpocock/skills/blob/main/SCOPE.md)、[新 Skill 政策](https://github.com/mattpocock/skills/blob/main/.out-of-scope/new-skills.md)和 [贡献指南](https://github.com/mattpocock/skills/blob/main/CONTRIBUTING.md)为准。提交上游贡献前，请重新核对这些最新文档。
 
+## 中文表达反馈
+
+发现生硬直译、中英混杂或难懂的 AI 输出时，欢迎开 issue，附上原文、出现位置或使用的 skill，以及你期望看到的效果。不需要先提出完整译法，也不需要会改代码。
+
+术语讨论先以自然、准确、一致、可执行为标准，不追求逐字对应。可以认领单个文件或一个段落的小范围改进；多个文件需要采用同一种译法时，先按下面的流程确定术语，避免每个文件各写一套。
+
 ## 翻译术语：请求与认领
 
 1. 任何人都可以为仓库里发现的英文术语开 issue 请求翻译。请求包含：术语、出现位置（`文件:行`，可列多处）、可选建议译法、可选理由。参考示例：[#34](https://github.com/vinvcn/mattpocock-skills-zh-CN/issues/34)。

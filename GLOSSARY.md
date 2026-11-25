@@ -10,10 +10,10 @@ _Avoid_: backlog manager, backlog backend, issue host
 
 **Issue**:
 **Issue tracker** 中的一项被跟踪工作单元：bug、task、spec，或由 `to-tickets` 产出的 slice。
-_Avoid_: ticket（仅在引用外部系统称其为 ticket，或指下面的 **Decision ticket** 时使用）
+_避免_: 普通中文叙述直接使用 ticket；引用外部系统原称、命令或下面的 **决策任务** 时可以保留英文。普通中文叙述把 `to-tickets` 生成的工作单元称为「实现任务」。
 
-**Decision ticket**:
-`wayfinder` 的工作单元：`wayfinder:map` 的一个 child **Issue**，承载的问题需要通过 decision 解决，而不是要执行的 build slice。**Decision** qualifier 把它与 implementation ticket 区分开来；`wayfinder` 会先引入完整术语，之后再简称 ticket。
+**决策任务（Decision ticket）**:
+`wayfinder` 的工作单元：`wayfinder:map` 的一个子 **Issue**，承载的问题需要通过决策解决，而不是直接实现功能。「决策」用于把它与实现任务区分开来；`wayfinder` 首次写出完整术语，后文简称「决策任务」。
 
 **Triage role**:
 在 triage 期间应用到 **Issue** 上的规范 state-machine label（例如 `needs-triage`、`ready-for-agent`）。每个 role 都会通过 `skills/engineering/setup-matt-pocock-skills/triage-labels.md` 映射到 **Issue tracker** 中真实的 label 字符串。
@@ -22,7 +22,7 @@ _Avoid_: ticket（仅在引用外部系统称其为 ticket，或指下面的 **D
 
 - 一个 **Issue tracker** 包含多个 **Issues**
 - 一个 **Issue** 同一时间携带一个 **Triage role**
-- 一个 **Decision ticket** 是 **Issue**（`wayfinder:map` 的 child）
+- 一个 **决策任务** 是 **Issue**（`wayfinder:map` 的 child）
 
 ## 已标记的歧义
 

@@ -1,80 +1,82 @@
 ---
 name: to-tickets
-description: 把 plan、spec 或当前对话拆成一组 tracer-bullet tickets，每个 ticket 声明 blocking edges，并发布到已配置的 tracker；本地用每 ticket 一个文件中的文本 edge，真实 tracker 用 native blocking links。
+description: "把计划、规格说明（spec）或当前对话拆成可独立交付和验证的实现任务，标明任务之间的前置依赖，并发布到已配置的 issue tracker；本地文件用文本记录依赖，真实 tracker 使用原生依赖链接。"
 disable-model-invocation: true
 ---
 
-# 拆成 tickets
+# 拆成实现任务
 
-把 plan、spec 或 conversation 拆成一组 **tickets**：tracer-bullet vertical slices，每个 ticket 都声明 **block** 它的 tickets。
+把计划、规格说明（spec）或当前对话拆成一组 **实现任务**（英文原文为 ticket）。每项任务都是一个可独立交付和验证的垂直切片，并标明开始之前必须完成的前置任务。
 
-Issue tracker 和 triage label vocabulary 应该已经提供；如果没有，请让用户运行 `/setup-matt-pocock-skills`。
+项目应已配置 issue tracker 和 triage 标签；如果还没有，请让用户运行 `/setup-matt-pocock-skills`。
 
 ## 流程
 
-### 1. 收集 context
+### 1. 收集上下文
 
-使用 conversation context 中已经存在的内容。如果用户把 reference（spec path、issue number 或 URL）作为参数传入，获取并完整读取其 body 和 comments。
+使用当前对话中已有的信息。如果用户传入参考资料（规格说明路径、issue 编号或 URL），获取并完整阅读其正文和评论。
 
-### 2. 探索 codebase（可选）
+### 2. 探索代码库（可选）
 
-如果还没有探索 codebase，先了解 code 当前状态。Ticket title 和 description 应使用项目 domain glossary vocabulary，并遵守相关 ADRs。
+如果还没有探索代码库，先了解代码的当前状态。任务标题和描述应使用项目领域术语表中的词汇，并遵守相关 ADR。
 
-寻找 prefactor code、让 implementation 更容易的机会。“Make the change easy, then make the easy change.”
+寻找能通过前置重构简化后续实现的机会。“先把改动变简单，再完成这个简单的改动。”
 
-### 3. 起草 vertical slices
+### 3. 起草垂直切片
 
-把工作拆成 **tracer bullet** tickets。
+把工作拆成 **可独立交付和验证的实现任务**。
 
 <vertical-slice-rules>
 
-- 每个 slice 都要贯穿每一层（schema、API、UI、tests）形成窄而完整的路径；必须是 vertical slice，不是某一层的 horizontal slice
-- 完成的 slice 可独立 demo 或 verify
-- 每个 slice 的大小必须能放进一个 fresh context window
-- 任何 prefactoring 都应先完成
+- 每个切片都要贯穿本次变更涉及的各层（schema、API、UI、tests），形成窄而完整的路径；采用垂直切片，不要按技术分层拆任务
+- 每个切片完成后都能独立演示或验证
+- 每项任务的工作量都应适合一个拥有全新上下文窗口的会话
+- 需要先做的重构排在功能任务之前
 
 </vertical-slice-rules>
 
-为每个 ticket 给出 **blocking edges**：它开始前必须完成的其他 tickets。没有 blockers 的 ticket 可以立即开始。
+为每项任务标明 **前置任务**：开始本项任务之前必须完成哪些任务。没有前置任务的任务可以立即开始。
 
-**Wide refactors 是 vertical slicing 的例外。** **Wide refactor** 是一个影响整个 codebase 的 mechanical change，例如 rename column 或 retype shared symbol；一次 edit 会破坏成千上万 call sites，无法让任何 vertical slice 独立保持 green。不要强行做成 tracer bullet；应按 **expand–contract** 排序。先 expand：在旧形式旁加入新形式，保持一切正常。再按 blast radius 分批迁移 call sites（按 package、directory 等），每批一个 ticket，并被 expand block；旧形式仍存在，因此 CI 每批都保持 green。最后 contract：一旦没有 caller 残留，就在被所有 migrate batches block 的 ticket 中删除旧形式。如果连单独 batches 也不能保持 green，仍保留这个 sequence，但让它们共享 integration branch，并全部 block 最后的 integrate-and-verify ticket；只在最后承诺 green。
+**大范围重构是垂直切片的例外。** 大范围重构是影响整个代码库的机械性变更，例如重命名数据库列或修改共享符号的类型。一次编辑可能同时破坏数千个调用位置，任何垂直切片都无法独立保持 CI 通过。不要强行拆成垂直切片，应按 **扩展、迁移、收缩（expand–contract）** 的顺序处理。先扩展：在旧形式旁加入新形式，保持现有功能正常。再按影响范围（如 package、directory）分批迁移调用位置，每批一项任务，并依赖扩展任务；旧形式仍然存在，因此每批 CI 都应通过。最后收缩：确认没有调用方残留后，用最后一项任务删除旧形式，并让它依赖所有迁移任务。如果单独批次也无法保证 CI 通过，仍按这个顺序处理，但让它们共享集成分支，并增加最后的集成验证任务，依赖前面所有任务；只要求最终任务完成后 CI 通过。
 
 ### 4. 向用户快速确认
 
-把建议的拆分作为 numbered list 展示。每个 ticket 包含：
+把建议的拆分列成编号清单。每项任务包含：
 
-- **Title**：简短的描述性名称
-- **Blocked by**：必须先完成的其他 tickets（如有）
-- **What it delivers**：这个 ticket 打通的 end-to-end behaviour
+- **标题**：简短的描述性名称
+- **前置任务**：必须先完成的其他任务（如有）
+- **交付结果**：完成后，从用户角度能看到什么端到端行为
 
 询问用户：
 
-- Granularity 是否合适（太粗或太细）？
-- Blocking edges 是否正确，每个 ticket 是否只依赖真正 gate 它的 tickets？
-- 是否应继续合并或拆分 tickets？
+- 任务粒度是否合适，太粗还是太细？
+- 前置依赖是否正确，每项任务是否只依赖真正会阻止它开始的任务？
+- 是否还应合并或拆分任务？
 
-迭代到用户批准拆分。
+根据用户反馈调整拆分，直到用户批准。
 
-### 5. 把 tickets 发布到已配置的 tracker
+### 5. 把任务发布到已配置的 tracker
 
-发布已批准的 tickets。具体方式取决于 `/setup-matt-pocock-skills` 配置的 tracker；tickets 相同，只有 blocking edges 的形状不同：
+发布已批准的任务。具体方式取决于 `/setup-matt-pocock-skills` 配置的 tracker；任务内容相同，只有前置依赖的记录方式不同：
 
-- **Local files** → 在 `.scratch/<feature-slug>/issues/<NN>-<slug>.md` 下每 ticket 写一个文件，按 dependency order（blockers 优先）从 `01` 编号。每个文件的 “Blocked by” 列出它依赖的 number/title。使用下面的 per-ticket template；每个文件只放一个 ticket，绝不要写成一个 combined file。
-- **真实 issue tracker（GitHub、Linear 等）** → 按 dependency order（blockers 优先）每 ticket 发布一个 issue，让 blocking edges 能引用真实 identifiers。平台支持时使用 native blocking relationship，否则把 blocking issues 写进每个 ticket 的 “Blocked by”。如果来源是一个已存在的 issue，把每个 ticket 挂为它的 sub-issue（操作见 tracker doc）。除非另有指示，应用 `ready-for-agent` triage label；这些 tickets 天生可被 agent 领取。
+- **本地文件** → 在 `.scratch/<feature-slug>/issues/<NN>-<slug>.md` 下每项任务写一个文件，按依赖顺序（前置任务优先）从 `01` 编号。在 “Blocked by” 中列出前置任务的编号和标题。使用下面的单任务模板；每个文件只放一项任务，绝不合并成一个文件。
+- **真实 issue tracker（GitHub、Linear 等）** → 按依赖顺序（前置任务优先）为每项任务发布一个 issue，让依赖关系能引用真实标识符。平台支持时使用原生依赖关系，否则把前置 issue 写进该任务的 “Blocked by”。如果来源是一个已存在的 issue，把每项任务挂为它的 sub-issue（操作见 tracker 文档）。除非另有指示，应用 `ready-for-agent` triage 标签，表示 agent 可以认领这些任务。
 
-处理 **frontier**：所有 blockers 都完成的 tickets。纯 linear chain 就是从上到下。
+发布顺序：先发布没有前置依赖的任务，再发布其前置任务已经发布的任务。完全线性的依赖链按编号从上到下发布。本步骤只发布任务，不开始实现。
 
-不要 close 或 modify 任何 parent issue。
+不要关闭或修改父 issue。
 
 <local-ticket-template>
 
 # <NN>: <Ticket title>
 
-**What to build:** 这个 ticket 从用户视角打通的 end-to-end behaviour，而不是逐层 implementation list。
+**What to build:** 从用户视角说明这项任务完成后可以演示或验证的端到端行为，不要罗列技术分层或实现步骤。
 
-**Blocked by:** gate 这个 ticket 的 numbers/titles，或 “None（can start immediately）”。
+**Blocked by:** 前置任务的编号和标题，或 “无（可立即开始）”。
 
 **Status:** ready-for-agent
+
+验收标准：
 
 - [ ] Acceptance criterion 1
 - [ ] Acceptance criterion 2
@@ -85,11 +87,11 @@ Issue tracker 和 triage label vocabulary 应该已经提供；如果没有，�
 
 ## Parent
 
-Tracker 上 parent issue 的 reference（如果来源是 existing issue；否则省略本 section）。
+Tracker 上父 issue 的引用（如果来源是现有 issue；否则省略本节）。
 
 ## What to build
 
-这个 ticket 从用户视角打通的 end-to-end behaviour，而不是逐层 implementation。
+从用户视角说明这项任务完成后可以演示或验证的端到端行为，不要罗列技术分层或实现步骤。
 
 ## Acceptance criteria
 
@@ -98,8 +100,8 @@ Tracker 上 parent issue 的 reference（如果来源是 existing issue；否则
 
 ## Blocked by
 
-- 每个 blocking ticket 的 reference，或 “None（can start immediately）”。blockers 已设置为 native edges 时，省略本 section。
+- 每项前置任务的引用，或 “无（可立即开始）”。前置依赖已设置为原生关系时，省略本节。
 
 </issue-template>
 
-无论哪种形式，都避免具体 file paths 或 code snippets；它们很快会过时。例外：如果 prototype 产出的 snippet 比 prose 更精确地编码了 decision（state machine、reducer、schema、type shape），可以内联，并简短说明来自 prototype。只保留 decision-rich parts，不要放 working demo。
+无论哪种形式，都避免写入具体文件路径或代码片段，它们很快会过时。例外：如果 prototype 产出的片段比文字更精确地表达了决策（状态机、reducer、schema、类型结构），可以内联，并简短说明它来自 prototype。只保留承载决策的部分，不要放入可运行的演示代码。
