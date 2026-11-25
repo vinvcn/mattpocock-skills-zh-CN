@@ -1,6 +1,6 @@
 ---
 name: setup-matt-pocock-skills
-description: "为此仓库配置 engineering skills：设置其 issue tracker、triage labels 词汇与 domain docs 布局。在首次使用其他 engineering skills 前运行一次。"
+description: "为此仓库配置 engineering skills：设置 issue tracker、triage labels 词汇与 domain docs 布局，并写入中文输出约定。在首次使用其他 engineering skills 前运行一次。"
 disable-model-invocation: true
 ---
 
@@ -11,6 +11,7 @@ disable-model-invocation: true
 - **Issue tracker** - issues 存放在哪里（默认 GitHub；也原生支持 local markdown）
 - **Triage labels** - 五个 canonical triage roles 使用的字符串
 - **Domain docs** - `GLOSSARY.md` 与 ADRs 的位置，以及读取它们的 consumer rules
+- **中文输出约定** - 使用自然、准确的简体中文，保留必要的命令、标识符和专用术语
 
 这是 prompt-driven skill，不是确定性脚本。先探索，展示发现，与用户确认，然后写入。
 
@@ -62,11 +63,13 @@ GitHub 或 GitLab tracker 需要一个 reachable 的 repo。当用户选择了�
 
 只有 exploration 找到 monorepo signals 时，才提供 **multi-context**（root 下 `GLOSSARY-MAP.md` 指向每个 context 的 `GLOSSARY.md` files），并确认用户想要哪种 layout。
 
+**Section D - 中文输出约定。** 默认加入简体中文输出约定，直接写入，无需提问。用户使用其他语言与 agent 交流时，以用户选择的语言为准；这条约定只约束简体中文表达。
+
 ### 3. 确认并编辑
 
 向用户展示草稿：
 
-- 要添加到 `CLAUDE.md` / `AGENTS.md` 的 `## Agent skills` block（选择规则见 step 4）
+- 要添加到 `CLAUDE.md` / `AGENTS.md` 的 `## Agent skills` block（选择规则见 step 4），包括中文输出约定
 - `docs/agents/issue-tracker.md`、`docs/agents/domain.md`，以及仅在安装了 `triage` 时才有的 `docs/agents/triage-labels.md` 内容
 
 写入前允许用户修改。
@@ -99,6 +102,10 @@ Block：
 ### Domain docs
 
 [one-line summary of layout - "single-context" or "multi-context"]. See `docs/agents/domain.md`.
+
+### 中文输出
+
+使用简体中文交流时，表达应自然、直接。普通叙述使用完整中文；专用概念首次出现时可附英文，后文沿用一致的中文称呼。产品名、命令、代码标识符和配置值保持原样。提问、任务和状态汇报应清楚说明实际行动与结果，不逐字直译英文，不堆砌术语。涉及状态、条件和操作时，保持含义准确。
 ```
 
 只有安装了 `triage` 且 Section B 实际运行时，才包含 `### Triage labels` sub-block 并写入 `docs/agents/triage-labels.md`；否则两者都省略。
@@ -117,4 +124,4 @@ Block：
 
 ### 5. 完成
 
-告诉用户 setup 已完成，以及哪些 engineering skills 现在会读取这些文件。说明他们之后可以直接编辑 `docs/agents/*.md`；只有当他们想切换 issue trackers 或从头开始时，才需要重新运行此 skill。
+告诉用户 setup 已完成，以及哪些 engineering skills 现在会读取这些文件。说明他们之后可以直接编辑 `docs/agents/*.md`；只有当他们想切换 issue trackers 或从头开始时，才需要重新运行此 skill。中文输出约定写在项目的 agent 配置中，可以直接编辑；更新 skills 后可重新运行 setup，把新增约定补入现有 `## Agent skills` block，同时保留周围的用户编辑。

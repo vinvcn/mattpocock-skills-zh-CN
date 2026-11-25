@@ -7,6 +7,15 @@ const files = execSync("git ls-files", { encoding: "utf8" })
   .split("\n")
   .filter((file) => file && fs.existsSync(file));
 
+const forbiddenPhrases = [
+  { text: "这一票", reason: "ticket 应译为“任务”，不译为“票”" },
+  { text: "每张票", reason: "ticket 应译为“任务”，不译为“票”" },
+  { text: "这票", reason: "ticket 应译为“任务”，不译为“票”" },
+  { text: "一票", reason: "ticket 应译为“任务”，不译为“票”" },
+  { text: "不关单", reason: "按语境使用“不要关闭 issue”或“不要关闭任务”" },
+  { text: "关单", reason: "按语境使用“关闭 issue”或“关闭任务”" },
+];
+
 let failed = false;
 function fail(file, msg) {
   failed = true;
@@ -22,6 +31,17 @@ for (const file of files) {
   const fences = text.match(/```/g) || [];
   if (fences.length % 2 !== 0) {
     fail(file, "unbalanced fenced code blocks");
+  }
+  const textWithoutFences = text.replace(/```[\s\S]*?```/g, "");
+  const lines = textWithoutFences.split("\n");
+  for (let index = 0; index < lines.length; index++) {
+    if (file === "TRANSLATION-GLOSSARY.md") continue;
+    const phrase = forbiddenPhrases.find(({ text }) =>
+      lines[index].includes(text),
+    );
+    if (phrase) {
+      fail(file, `line ${index + 1}: ${phrase.reason}（命中“${phrase.text}”）`);
+    }
   }
   if (path.basename(file) === "SKILL.md") {
     const fm = text.match(/^---\s*\n([\s\S]*?)\n---/);
